@@ -384,6 +384,11 @@
                   <span className="w-1.5 h-1.5 rounded-full bg-[#6E6E73]"></span>
                   {modelInfo.model_name}
                 </span>
+              ) : modelInfo.provider === 'groq' ? (
+                <span className="inline-flex items-center gap-1.5 text-xs text-[#F55036] bg-[#FFF5F2] px-2.5 py-1 rounded-full border border-[#FFD9D0] font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F55036] animate-pulse"></span>
+                  {modelInfo.model_name} (Groq LPU)
+                </span>
               ) : (
                 <span className="inline-flex items-center gap-1.5 text-xs text-[#1F8A5F] bg-[#ECFDF3] px-2.5 py-1 rounded-full border border-[#A6F4C5] font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1F8A5F] animate-pulse"></span>

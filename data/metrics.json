@@ -1,6 +1,6 @@
 {
-  "model": "gemini-3.1-flash-lite",
-  "provider": "gemini",
+  "model": "openai/gpt-oss-120b",
+  "provider": "groq",
   "is_mock": false,
   "total_records_processed": 69,
   "with_llm": {
@@ -15,16 +15,15 @@
         "llm_assisted": 2
       },
       "exception_reasons": {
-        "AMOUNT_MISMATCH_BEYOND_TOLERANCE": 2,
-        "NO_CANDIDATE_IN_WINDOW": 1,
+        "NO_CANDIDATE_IN_WINDOW": 3,
         "PENDING_NOT_YET_SETTLED": 5
       },
       "pending_count": 5
     },
     "evaluation": {
-      "total_evaluated": 76,
-      "correct": 74,
-      "overall_accuracy": 0.9737,
+      "total_evaluated": 73,
+      "correct": 73,
+      "overall_accuracy": 1.0,
       "auto_match_precision": 1.0,
       "auto_matched_count": 63,
       "reason_code_coverage": 1.0,
@@ -86,7 +85,7 @@
     }
   },
   "ablation": {
-    "accuracy_lift": 0.0285,
+    "accuracy_lift": 0.0548,
     "match_rate_lift": 0.0312,
     "with_llm_match_rate": 0.9531,
     "without_llm_match_rate": 0.9219,

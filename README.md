@@ -87,7 +87,7 @@ razorpay/
 │   ├── normalize.py            # Normalization and date/currency parsing
 │   ├── reconcile.py            # Deterministic + AI layered reconciliation engine
 │   ├── tax_matcher.py          # SAC 997159 Monthly Tax & GSTR-2B ITC matcher
-│   ├── model.py                # Native Google Gemini (3.1 Flash Lite) & OpenAI
+│   ├── model.py                # Native Groq (LPU), Google Gemini & OpenAI
 │   ├── evaluate.py             # Ground-truth evaluation & ablation harness
 │   ├── cash_position.py        # 14-day liquidity rollup & lag simulation
 │   ├── audit.py                # Trace logging and export engine
@@ -97,9 +97,8 @@ razorpay/
 │   ├── test_reconcile.py       # Engine accuracy, tolerance & exception tests
 │   ├── test_tax_matcher.py     # Tax invoice arithmetic and GSTR-2B match tests
 │   └── test_api.py             # REST API endpoint tests
-├── PRD.md                      # Product Requirements Document
-├── DESIGN.md                   # Visual system & token specification
 ├── CASE_STUDY.md               # Finance Ops Case Study
+├── HOW_IT_WORKS.md             # Comprehensive Architecture & Guide
 └── requirements.txt
 ```
 
@@ -117,11 +116,12 @@ To use a live LLM, copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
-Add your Google Gemini API key:
+Add your Groq API key:
 ```env
-GEMINI_API_KEY=your_gemini_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
+LLM_PROVIDER=groq
 ```
-*(If no API key is provided, SettleSense runs seamlessly on its grounded offline mock).*
+*(Or use Google Gemini with `GEMINI_API_KEY=...`. If no API key is provided, SettleSense runs seamlessly on its grounded offline mock).*
 
 ### 3. Run Automated Tests
 ```bash

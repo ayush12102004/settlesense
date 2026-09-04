@@ -35,12 +35,18 @@ load_dotenv()
 
 _FORCE_MOCK = os.getenv("APP_USE_MOCK", "0") == "1"
 
+GROQ_API_KEY = os.getenv("GROQ_API_KEY") or ""
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or ""
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or ""
+
+LLM_PROVIDER_OVERRIDE = (os.getenv("LLM_PROVIDER") or "").lower()
 
 if _FORCE_MOCK:
     ACTIVE_PROVIDER = "mock"
     ACTIVE_MODEL_NAME = "mock (offline baseline)"
+elif LLM_PROVIDER_OVERRIDE == "groq" or (GROQ_API_KEY and LLM_PROVIDER_OVERRIDE not in ("gemini", "openai")):
+    ACTIVE_PROVIDER = "groq"
+    ACTIVE_MODEL_NAME = os.getenv("APP_GROQ_MODEL", "openai/gpt-oss-120b")
 elif GEMINI_API_KEY:
     ACTIVE_PROVIDER = "gemini"
     ACTIVE_MODEL_NAME = os.getenv("APP_GEMINI_MODEL", "gemini-3.1-flash-lite")
@@ -72,6 +78,54 @@ def get_active_model_info() -> dict[str, Any]:
         "model_name": ACTIVE_MODEL_NAME,
         "is_mock": USING_MOCK,
     }
+
+
+# --- Generic LLM Callers (Groq / Gemini / OpenAI / Mock) ---------------------
+
+def _call_groq_api(system_prompt: str, user_prompt: str, json_mode: bool = False) -> str:
+    """Call Groq API using standard urllib with custom User-Agent and automatic backoff on 429."""
+    import time
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    payload: dict[str, Any] = {
+        "model": ACTIVE_MODEL_NAME,
+        "temperature": 0.1,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+    }
+    if json_mode:
+        payload["response_format"] = {"type": "json_object"}
+
+    data = json.dumps(payload).encode("utf-8")
+    for attempt in range(3):
+        req = urllib.request.Request(
+            url,
+            data=data,
+            headers={
+                "Authorization": f"Bearer {GROQ_API_KEY}",
+                "Content-Type": "application/json",
+                "User-Agent": "SettleSense/1.0",
+            },
+            method="POST"
+        )
+
+        try:
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                res_data = json.loads(resp.read().decode("utf-8"))
+                choices = res_data.get("choices", [])
+                if choices:
+                    return choices[0].get("message", {}).get("content", "")
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < 2:
+                time.sleep(1.5 * (attempt + 1))
+                continue
+            print(f"[Warning] Groq API call failed: {e}. Falling back to heuristic mock.")
+            break
+        except Exception as e:
+            print(f"[Warning] Groq API call failed: {e}. Falling back to heuristic mock.")
+            break
+    return ""
 
 
 # --- Generic LLM Caller (Gemini / OpenAI / Mock) -----------------------------
@@ -192,7 +246,9 @@ def propose_match(narration: str, bank_amount: float, bank_date: str,
         )
 
     raw_response = ""
-    if ACTIVE_PROVIDER == "gemini":
+    if ACTIVE_PROVIDER == "groq":
+        raw_response = _call_groq_api(_MATCH_SYSTEM_PROMPT, user_msg, json_mode=True)
+    elif ACTIVE_PROVIDER == "gemini":
         raw_response = _call_gemini_api(_MATCH_SYSTEM_PROMPT, user_msg, json_mode=True)
     elif ACTIVE_PROVIDER == "openai":
         raw_response = _call_openai_api(_MATCH_SYSTEM_PROMPT, user_msg, json_mode=True)
@@ -341,7 +397,11 @@ ACTIVE EXCEPTIONS & PENDING ITEMS:
 
     user_query = f"{context_summary}\n\nRecent Conversation:\n{formatted_history}\nUser: {message}\nAssistant:"
 
-    if ACTIVE_PROVIDER == "gemini":
+    if ACTIVE_PROVIDER == "groq":
+        ans = _call_groq_api(_CONTROLLER_SYSTEM_PROMPT, user_query)
+        if ans:
+            return ans
+    elif ACTIVE_PROVIDER == "gemini":
         ans = _call_gemini_api(_CONTROLLER_SYSTEM_PROMPT, user_query)
         if ans:
             return ans
@@ -463,7 +523,11 @@ EXCEPTION RECORD:
 - Suggested Step: {record.get('suggested_step')}
 """
 
-    if ACTIVE_PROVIDER == "gemini":
+    if ACTIVE_PROVIDER == "groq":
+        diag = _call_groq_api(_DIAGNOSE_SYSTEM_PROMPT, user_prompt)
+        if diag:
+            return diag
+    elif ACTIVE_PROVIDER == "gemini":
         diag = _call_gemini_api(_DIAGNOSE_SYSTEM_PROMPT, user_prompt)
         if diag:
             return diag
