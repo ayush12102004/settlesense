@@ -1,13 +1,19 @@
 .env
+.env.*
 __pycache__/
 *.pyc
+.pytest_cache/
 .venv/
 venv/
 .cache/
 .streamlit/
 .DS_Store
 
-# Ignore only regenerable binaries and logs; keep the data and knowledge base visible
+# Internal specs excluded from submission repo
+PRD.md
+DESIGN.md
+
+# Ignore only regenerable binaries and logs; keep the data visible
 data/*.npy
 data/*.log
 data/real/

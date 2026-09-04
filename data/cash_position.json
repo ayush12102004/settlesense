@@ -1,0 +1,118 @@
+{
+  "reference_date": "2025-07-12",
+  "reconciled_inflow": 1168000.2,
+  "pending_total": 77802.95,
+  "projection_7d": 60650.02,
+  "projection_14d": 77802.95,
+  "projected_position_7d": 1228650.22,
+  "projected_position_14d": 1245803.15,
+  "daily_projection": [
+    {
+      "date": "2025-07-12",
+      "day_label": "Today",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1168000.2,
+      "is_projected": false
+    },
+    {
+      "date": "2025-07-13",
+      "day_label": "Day 1",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1168000.2,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-14",
+      "day_label": "Day 2",
+      "expected_inflow": 27281.25,
+      "cumulative_position": 1195281.45,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-15",
+      "day_label": "Day 3",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1195281.45,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-16",
+      "day_label": "Day 4",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1195281.45,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-17",
+      "day_label": "Day 5",
+      "expected_inflow": 22041.06,
+      "cumulative_position": 1217322.51,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-18",
+      "day_label": "Day 6",
+      "expected_inflow": 11327.71,
+      "cumulative_position": 1228650.22,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-19",
+      "day_label": "Day 7",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1228650.22,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-20",
+      "day_label": "Day 8",
+      "expected_inflow": 17152.93,
+      "cumulative_position": 1245803.15,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-21",
+      "day_label": "Day 9",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1245803.15,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-22",
+      "day_label": "Day 10",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1245803.15,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-23",
+      "day_label": "Day 11",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1245803.15,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-24",
+      "day_label": "Day 12",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1245803.15,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-25",
+      "day_label": "Day 13",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1245803.15,
+      "is_projected": true
+    },
+    {
+      "date": "2025-07-26",
+      "day_label": "Day 14",
+      "expected_inflow": 0.0,
+      "cumulative_position": 1245803.15,
+      "is_projected": true
+    }
+  ],
+  "simulated_lag_days": 0,
+  "note": "Projection is a deterministic rollup of known pending settlements, not a statistical forecast."
+}

@@ -1,0 +1,50 @@
+{
+  "period": "June 2025",
+  "tax_status": "MATCHED_ITC_ELIGIBLE",
+  "itc_claimable": 4498.8,
+  "taxable_fee_base": 24993.1,
+  "gst_rate": "18% IGST",
+  "vendor_gstin": "29AAGCR2502M1ZR",
+  "sac_code": "997159",
+  "sac_description": "Payment processing and settlement services",
+  "invoice": {
+    "invoice_number": "RPL/25-26/06/00918",
+    "period": "June 2025",
+    "invoice_date": "2025-07-02",
+    "vendor_name": "Razorpay Software Private Limited",
+    "vendor_gstin": "29AAGCR2502M1ZR",
+    "recipient_gstin": "27AAACS1234F1Z5",
+    "sac_code": "997159",
+    "taxable_value": 24993.1,
+    "igst_rate": 0.18,
+    "igst_amount": 4498.8,
+    "total_invoice_amount": 29491.9
+  },
+  "gstr2b": {
+    "vendor_gstin": "29AAGCR2502M1ZR",
+    "vendor_name": "RAZORPAY SOFTWARE PRIVATE LIMITED",
+    "invoice_number": "RPL/25-26/06/00918",
+    "invoice_date": "2025-07-02",
+    "taxable_value": 24993.1,
+    "igst_amount": 4498.8,
+    "filing_period": "06/2025",
+    "filing_status": "FILED_ON_TIME",
+    "itc_available": true
+  },
+  "reconciliation": {
+    "period": "June 2025",
+    "invoice_number": "RPL/25-26/06/00918",
+    "ledger_fee_total": 24993.1,
+    "ledger_gst_total": 4498.8,
+    "invoice_taxable": 24993.1,
+    "invoice_gst": 4498.8,
+    "gstr2b_taxable": 24993.1,
+    "gstr2b_gst": 4498.8,
+    "variance_taxable": 0.0,
+    "variance_gst": 0.0,
+    "status": "MATCHED_ITC_ELIGIBLE",
+    "itc_eligible": true,
+    "itc_claimable_amount": 4498.8,
+    "notes": "100% 3-way match: Daily fee deductions align with Razorpay Tax Invoice and GSTR-2B. ITC is claimable under Section 16(2)(aa)."
+  }
+}

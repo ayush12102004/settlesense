@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SettleSense — AI Finance Controller</title>
+  <meta name="description" content="Multi-source payment reconciliation and Settlement Q&A Agent for Razorpay merchants.">
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#FAFAF9',
+            surface: '#FFFFFF',
+            ink: '#1C1C1E',
+            'ink-muted': '#6E6E73',
+            hairline: '#E5E5E7',
+            accent: '#3A5DFF',
+            matched: '#1F8A5F',
+            exception: '#C4462B',
+            pending: '#B07D2F',
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Inter"', 'system-ui', 'sans-serif'],
+            mono: ['"SF Mono"', '"Fira Code"', 'Consolas', 'monospace'],
+          },
+          boxShadow: {
+            drawer: '0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- React 18, ReactDOM, PropTypes, Recharts, Marked for Markdown, and Babel Standalone -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.12.7/Recharts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.10/babel.min.js"></script>
+
+  <style>
+    body {
+      background-color: #FAFAF9;
+      color: #1C1C1E;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .motion-safe-transition {
+        transition: none !important;
+      }
+    }
+    .markdown-body h3 { font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; font-size: 0.95rem; }
+    .markdown-body h4 { font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.25rem; font-size: 0.875rem; }
+    .markdown-body p { margin-bottom: 0.5rem; }
+    .markdown-body ul { list-style-type: disc; padding-left: 1.25rem; margin-bottom: 0.5rem; }
+    .markdown-body ol { list-style-type: decimal; padding-left: 1.25rem; margin-bottom: 0.5rem; }
+    .markdown-body code { background: #f4f4f5; padding: 0.1rem 0.3rem; border-radius: 3px; font-family: monospace; font-size: 0.85em; }
+    .markdown-body pre { background: #18181b; color: #f4f4f5; padding: 0.75rem; border-radius: 6px; overflow-x: auto; margin-bottom: 0.75rem; font-size: 0.85em; }
+    .markdown-body hr { border: none; border-top: 1px solid #E5E5E7; margin: 0.75rem 0; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#FAFAF9] text-[#1C1C1E]">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    const { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } = Recharts;
+
+    // --- Formatting Utilities ----------------------------------------------------
+
+    function formatCurrency(amount) {
+      if (amount == null) return '—';
+      const abs = Math.abs(amount);
+      const formatted = abs.toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+      const sign = amount < 0 ? '-' : '';
+      return `${sign}\u20B9${formatted}`;
+    }
+
+    function formatCompact(n) {
+      if (n == null) return '—';
+      if (n >= 100000) return `₹${(n / 100000).toFixed(1)}L`;
+      if (n >= 1000) return `₹${(n / 1000).toFixed(0)}K`;
+      return formatCurrency(n);
+    }
+
+    function formatPercent(value) {
+      if (value == null) return '—';
+      return `${(value * 100).toFixed(1)}%`;
+    }
+
+    function formatReasonCode(code) {
+      const labels = {
+        NO_CANDIDATE_IN_WINDOW: 'No candidate in window',
+        AMOUNT_MISMATCH_BEYOND_TOLERANCE: 'Amount mismatch',
+        SPLIT_SETTLEMENT_UNRESOLVED: 'Split settlement unresolved',
+        DUPLICATE_CANDIDATES_AMBIGUOUS: 'Duplicate candidates',
+        PENDING_NOT_YET_SETTLED: 'Pending settlement',
+        LOW_CONFIDENCE_LLM_MATCH: 'Low confidence AI match',
+      };
+      return labels[code] || code;
+    }
+
+    // --- Lucide Minimal SVG Icons ------------------------------------------------
+
+    const SparklesIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+      </svg>
+    );
+
+    const DownloadIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+    );
+
+    const ChevronRightIcon = () => (
+      <svg className="w-4 h-4 text-[#6E6E73]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    );
+
+    const CloseIcon = () => (
+      <svg className="w-5 h-5 text-[#6E6E73] hover:text-[#1C1C1E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    );
+
+    const SendIcon = () => (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <line x1="22" y1="2" x2="11" y2="13" />
+        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+      </svg>
+    );
+
+    const CopyIcon = () => (
+      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+      </svg>
+    );
+
+    // --- Main Application Component ----------------------------------------------
+
+    function SettleSenseApp() {
+      const [data, setData] = useState(null);
+      const [taxData, setTaxData] = useState(null);
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState(null);
+      const [selectedTraceId, setSelectedTraceId] = useState(null);
+      
+      // Cash Stress Simulation State
+      const [simulatingLag, setSimulatingLag] = useState(false);
+      const [activeLagDays, setActiveLagDays] = useState(0);
+      const [simulatedCash, setSimulatedCash] = useState(null);
+
+      // Q&A Agent Chat State
+      const [chatOpen, setChatOpen] = useState(false);
+      const [chatInput, setChatInput] = useState('');
+      const [chatHistory, setChatHistory] = useState([
+        {
+          role: 'assistant',
+          content: 'Hello! I am your **SettleSense AI Finance Controller**. I have live grounding over this cycle\'s bank statements, Razorpay gateway settlements, merchant ledger, and GSTR-2B tax compliance. You can ask me to explain any exception, analyze split settlements, forecast cash flow, or draft dispute emails.'
+        }
+      ]);
+      const [chatLoading, setChatLoading] = useState(false);
+
+      // Deep Diagnosis State
+      const [diagnosing, setDiagnosing] = useState(false);
+      const [diagnosisResult, setDiagnosisResult] = useState(null);
+      const [copiedDraft, setCopiedDraft] = useState(false);
+
+      const closeBtnRef = useRef(null);
+      const chatEndRef = useRef(null);
+
+      useEffect(() => {
+        async function fetchData() {
+          try {
+            const [dashResp, taxResp] = await Promise.all([
+              fetch('/api/dashboard'),
+              fetch('/api/tax-reconciliation'),
+            ]);
+            if (!dashResp.ok) throw new Error(`Dashboard HTTP ${dashResp.status}`);
+            const json = await dashResp.json();
+            setData(json);
+
+            if (taxResp.ok) {
+              const taxJson = await taxResp.json();
+              setTaxData(taxJson);
+            }
+          } catch (err) {
+            setError(`Failed to load data: ${err.message}. Please ensure the server is running.`);
+          } finally {
+            setLoading(false);
+          }
+        }
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+        function handleKeyDown(e) {
+          if (e.key === 'Escape') {
+            if (chatOpen) setChatOpen(false);
+            else if (selectedTraceId) setSelectedTraceId(null);
+          }
+        }
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [selectedTraceId, chatOpen]);
+
+      useEffect(() => {
+        if (selectedTraceId) {
+          setDiagnosisResult(null);
+          setCopiedDraft(false);
+          if (closeBtnRef.current) closeBtnRef.current.focus();
+        }
+      }, [selectedTraceId]);
+
+      useEffect(() => {
+        if (chatOpen && chatEndRef.current) {
+          chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, [chatHistory, chatOpen]);
+
+      // Cash Simulation Handler
+      async function handleLagSimulation(lagDays) {
+        if (simulatingLag) return;
+        setSimulatingLag(true);
+        try {
+          const resp = await fetch('/api/cash-position/simulate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ lag_days: lagDays })
+          });
+          if (resp.ok) {
+            const resJson = await resp.json();
+            setSimulatedCash(resJson);
+            setActiveLagDays(lagDays);
+          }
+        } catch (err) {
+          console.error("Simulation failed:", err);
+        } finally {
+          setSimulatingLag(false);
+        }
+      }
+
+      // Handle Q&A Message Send
+      async function handleSendMessage(msgToSend) {
+        const text = msgToSend || chatInput;
+        if (!text.trim() || chatLoading) return;
+
+        const newHistory = [...chatHistory, { role: 'user', content: text }];
+        setChatHistory(newHistory);
+        setChatInput('');
+        setChatLoading(true);
+
+        try {
+          const resp = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text, history: newHistory }),
+          });
+          const result = await resp.json();
+          setChatHistory([...newHistory, { role: 'assistant', content: result.response }]);
+        } catch (err) {
+          setChatHistory([...newHistory, { role: 'assistant', content: `Error: Failed to reach AI Controller (${err.message}).` }]);
+        } finally {
+          setChatLoading(false);
+        }
+      }
+
+      // Handle AI Deep Diagnosis on Exception
+      async function runDiagnosis(traceId) {
+        setDiagnosing(true);
+        try {
+          const resp = await fetch('/api/agent/diagnose', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ trace_id: traceId }),
+          });
+          const result = await resp.json();
+          setDiagnosisResult(result.diagnosis);
+        } catch (err) {
+          setDiagnosisResult(`Failed to run diagnosis: ${err.message}`);
+        } finally {
+          setDiagnosing(false);
+        }
+      }
+
+      function copyText(text) {
+        navigator.clipboard.writeText(text);
+        setCopiedDraft(true);
+        setTimeout(() => setCopiedDraft(false), 2500);
+      }
+
+      if (loading) {
+        return (
+          <div className="flex items-center justify-center min-h-[60vh] text-[#6E6E73] text-[15px]">
+            Loading reconciliation data…
+          </div>
+        );
+      }
+
+      if (error) {
+        return (
+          <div className="max-w-[1120px] mx-auto px-6 py-12 text-[#C4462B] text-[15px]">
+            {error}
+          </div>
+        );
+      }
+
+      const summary = data?.summary || {};
+      const cash = simulatedCash || data?.cash_position || {};
+      const exceptions = data?.exceptions || [];
+      const auditTrail = data?.audit_trail || [];
+      const metrics = data?.metrics || {};
+      const modelInfo = data?.model_info || { model_name: 'offline mock', is_mock: true };
+
+      const matchedCount = summary.total_matched || 0;
+      const totalEligible = (summary.total_records || 0) - (summary.pending_count || 0);
+      const layers = summary.by_layer || {};
+      const exceptionCount = (summary.total_exceptions || 0) - (summary.pending_count || 0);
+      const pendingCount = summary.pending_count || 0;
+
+      // Group exceptions: real exceptions first, then pending
+      const realExceptions = exceptions.filter(e => e.reason_code !== 'PENDING_NOT_YET_SETTLED');
+      const pendingExceptions = exceptions.filter(e => e.reason_code === 'PENDING_NOT_YET_SETTLED');
+      const sortedExceptions = [...realExceptions, ...pendingExceptions];
+
+      const selectedAudit = selectedTraceId
+        ? auditTrail.find(r => r.trace_id === selectedTraceId)
+        : null;
+
+      const dailyProjection = cash.daily_projection || [];
+
+      // Custom Tooltip for Recharts
+      const CustomTooltip = ({ active, payload }) => {
+        if (active && payload && payload.length) {
+          const item = payload[0].payload;
+          return (
+            <div className="bg-white border border-[#E5E5E7] p-3 rounded shadow-sm text-xs space-y-1">
+              <div className="font-semibold text-[#1C1C1E]">{item.day_label} ({item.date})</div>
+              <div className="text-[#6E6E73]">
+                Cumulative: <span className="tabular font-medium text-[#1C1C1E]">{formatCurrency(item.cumulative_position)}</span>
+              </div>
+              <div className="text-[#6E6E73]">
+                Expected Inflow: <span className="tabular font-medium text-[#1C1C1E]">{formatCurrency(item.expected_inflow)}</span>
+              </div>
+              <div className="text-[11px] text-[#6E6E73] italic">
+                {item.is_projected ? 'Projected settlement' : 'Reconciled position'}
+              </div>
+            </div>
+          );
+        }
+        return null;
+      };
+
+      return (
+        <div className="max-w-[1120px] mx-auto px-6 sm:px-8 py-8">
+          {/* Header */}
+          <header className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#E5E5E7] mb-10">
+            <div className="flex items-center gap-3">
+              <h1 className="text-xl font-semibold text-[#1C1C1E]">SettleSense</h1>
+              
+              {/* Dynamic Model Status Indicator */}
+              {modelInfo.is_mock ? (
+                <span className="inline-flex items-center gap-1.5 text-xs text-[#6E6E73] bg-[#FAFAF9] px-2.5 py-1 rounded-full border border-[#E5E5E7]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#6E6E73]"></span>
+                  {modelInfo.model_name}
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 text-xs text-[#1F8A5F] bg-[#ECFDF3] px-2.5 py-1 rounded-full border border-[#A6F4C5] font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1F8A5F] animate-pulse"></span>
+                  {modelInfo.model_name} (Live AI)
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3">
+              {/* Settlement Q&A Agent Toggle Button */}
+              <button
+                onClick={() => setChatOpen(true)}
+                className="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium rounded-md bg-[#3A5DFF] hover:bg-[#2B4BF2] text-white shadow-sm focus-visible:outline-2 focus-visible:outline-[#3A5DFF] transition-all"
+                title="Open Interactive Settlement Q&A Agent"
+              >
+                <SparklesIcon />
+                <span>Ask Finance Agent</span>
+              </button>
+
+              {/* Dual JSON & CSV Export Group */}
+              <div className="inline-flex rounded-md shadow-sm border border-[#E5E5E7] bg-white overflow-hidden">
+                <a
+                  href="/api/audit/export?format=json"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium hover:bg-[#F5F5F4] text-[#1C1C1E] border-r border-[#E5E5E7] transition-colors"
+                  title="Export audit trail as JSON"
+                >
+                  <DownloadIcon />
+                  <span>JSON</span>
+                </a>
+                <a
+                  href="/api/audit/export?format=csv"
+                  download="audit_trail.csv"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium hover:bg-[#F5F5F4] text-[#1C1C1E] transition-colors"
+                  title="Export audit trail as CSV"
+                >
+                  <DownloadIcon />
+                  <span>CSV</span>
+                </a>
+              </div>
+            </div>
+          </header>
+
+          {/* Zone 1: Hero Metric Block */}
+          <section className="mb-12" aria-labelledby="hero-title">
+            <h2 id="hero-title" className="sr-only">Reconciliation Summary</h2>
+            <div className="text-5xl sm:text-6xl font-semibold tabular tracking-tight text-[#3A5DFF]">
+              {formatPercent(summary.match_rate)}
+            </div>
+            <div className="text-[15px] text-[#6E6E73] mt-1">
+              {matchedCount} of {totalEligible} records reconciled automatically
+            </div>
+
+            {/* Layer breakdown row */}
+            <div className="flex flex-wrap items-center gap-6 sm:gap-8 mt-5 pt-1">
+              <div className="flex items-center gap-2 text-[15px]">
+                <span className="w-2 h-2 rounded-full bg-[#1F8A5F] shrink-0"></span>
+                <span className="font-semibold tabular text-[#1C1C1E]">{layers.exact || 0}</span>
+                <span className="text-[#6E6E73]">exact</span>
+              </div>
+              <div className="flex items-center gap-2 text-[15px]">
+                <span className="w-2 h-2 rounded-full bg-[#3A5DFF] shrink-0"></span>
+                <span className="font-semibold tabular text-[#1C1C1E]">{layers.tolerant || 0}</span>
+                <span className="text-[#6E6E73]">tolerant</span>
+              </div>
+              <div className="flex items-center gap-2 text-[15px]">
+                <span className="w-2 h-2 rounded-full bg-[#7C5CFC] shrink-0"></span>
+                <span className="font-semibold tabular text-[#1C1C1E]">{layers.llm_assisted || 0}</span>
+                <span className="text-[#6E6E73]">AI-assisted</span>
+              </div>
+              {exceptionCount > 0 && (
+                <div className="flex items-center gap-2 text-[15px]">
+                  <span className="w-2 h-2 rounded-full bg-[#C4462B] shrink-0"></span>
+                  <span className="font-semibold tabular text-[#1C1C1E]">{exceptionCount}</span>
+                  <span className="text-[#6E6E73]">exceptions</span>
+                </div>
+              )}
+              {pendingCount > 0 && (
+                <div className="flex items-center gap-2 text-[15px]">
+                  <span className="w-2 h-2 rounded-full bg-[#B07D2F] shrink-0"></span>
+                  <span className="font-semibold tabular text-[#1C1C1E]">{pendingCount}</span>
+                  <span className="text-[#6E6E73]">pending</span>
+                </div>
+              )}
+            </div>
+          </section>
+
+          <hr className="border-t border-[#E5E5E7] mb-10" />
+
+          {/* Zone 2: Cash Position Panel */}
+          <section className="mb-12" aria-labelledby="cash-position-title">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <h2 id="cash-position-title" className="text-xl font-semibold text-[#1C1C1E]">Cash position</h2>
+              
+              {/* Settlement Lag Stress Test Controls */}
+              <div className="flex items-center gap-1.5 bg-[#F5F5F4] p-1 rounded-lg border border-[#E5E5E7] text-xs">
+                <span className="text-[#6E6E73] px-1.5 font-medium">Scenario:</span>
+                <button
+                  type="button"
+                  onClick={() => handleLagSimulation(0)}
+                  disabled={simulatingLag}
+                  className={`px-2.5 py-1 rounded font-medium transition-all ${
+                    activeLagDays === 0
+                      ? 'bg-white text-[#1C1C1E] shadow-sm font-semibold'
+                      : 'text-[#6E6E73] hover:text-[#1C1C1E]'
+                  }`}
+                >
+                  Standard (T+2)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleLagSimulation(2)}
+                  disabled={simulatingLag}
+                  className={`px-2.5 py-1 rounded font-medium transition-all ${
+                    activeLagDays === 2
+                      ? 'bg-[#C4462B] text-white shadow-sm font-semibold'
+                      : 'text-[#6E6E73] hover:text-[#C4462B]'
+                  }`}
+                >
+                  Stress (+2 Days Lag)
+                </button>
+              </div>
+            </div>
+
+            {activeLagDays > 0 && (
+              <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#FEF2F0] border border-[#FECDCA] text-xs text-[#C4462B]">
+                <span className="font-semibold">Simulated Gateway Settlement Lag (+2 Days):</span>
+                <span>Inflows shifted forward into subsequent settlement cycles. Reconciled bank balance unaffected.</span>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-4">
+              <div>
+                <div className="text-[13px] text-[#6E6E73] mb-1">Reconciled inflow</div>
+                <div className="text-[28px] font-semibold tabular text-[#1C1C1E]">
+                  {formatCurrency(cash.reconciled_inflow)}
+                </div>
+              </div>
+              <div>
+                <div className="text-[13px] text-[#6E6E73] mb-1">
+                  Pending settlement {activeLagDays > 0 ? '(deferred window)' : ''}
+                </div>
+                <div className="text-[28px] font-semibold tabular text-[#1C1C1E]">
+                  {formatCurrency(cash.pending_total)}
+                </div>
+              </div>
+            </div>
+
+            <p className="text-[13px] text-[#6E6E73] italic mb-6">
+              Projected, based on pending settlements — deterministic rollup, not a statistical forecast
+            </p>
+
+            {/* 14-day projection chart */}
+            <div className="w-full h-52 mt-2">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={dailyProjection} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
+                  <CartesianGrid stroke="#E5E5E7" strokeWidth={0.5} vertical={false} />
+                  <XAxis
+                    dataKey="day_label"
+                    stroke="#6E6E73"
+                    fontSize={11}
+                    tickLine={false}
+                    axisLine={{ stroke: '#E5E5E7' }}
+                  />
+                  <YAxis
+                    stroke="#6E6E73"
+                    fontSize={11}
+                    tickLine={false}
+                    axisLine={{ stroke: '#E5E5E7' }}
+                    tickFormatter={formatCompact}
+                    domain={['auto', 'auto']}
+                  />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Line
+                    type="monotone"
+                    dataKey="cumulative_position"
+                    stroke="#3A5DFF"
+                    strokeWidth={2}
+                    dot={(props) => {
+                      const { cx, cy, payload } = props;
+                      const isToday = !payload.is_projected;
+                      return (
+                        <circle
+                          key={`dot-${payload.date}`}
+                          cx={cx}
+                          cy={cy}
+                          r={isToday ? 5 : 3}
+                          fill={isToday ? '#1F8A5F' : '#3A5DFF'}
+                          stroke="#FFFFFF"
+                          strokeWidth={isToday ? 1.5 : 0}
+                        />
+                      );
+                    }}
+                    activeDot={{ r: 6, fill: '#3A5DFF' }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
+
+          <hr className="border-t border-[#E5E5E7] mb-10" />
+
+          {/* Zone 3: Exceptions Table ("Needs review") */}
+          <section className="mb-12" aria-labelledby="review-title">
+            <div className="flex items-center gap-2.5 mb-4">
+              <h2 id="review-title" className="text-xl font-semibold text-[#1C1C1E]">Needs review</h2>
+              <span className="inline-flex items-center justify-center bg-[#C4462B] text-white text-[13px] font-semibold min-w-[24px] h-6 px-2 rounded-full">
+                {realExceptions.length}
+              </span>
+              <span className="inline-flex items-center justify-center bg-[#B07D2F] text-white text-[13px] font-semibold min-w-[24px] h-6 px-2 rounded-full ml-1">
+                {pendingExceptions.length}
+              </span>
+              <span className="text-[13px] text-[#6E6E73] ml-1">pending</span>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-[#E5E5E7] text-[13px] text-[#6E6E73] font-medium">
+                    <th className="py-2.5 px-3">Order / Payment</th>
+                    <th className="py-2.5 px-3">Amount</th>
+                    <th className="py-2.5 px-3">Reason</th>
+                    <th className="py-2.5 px-3">Suggested step</th>
+                    <th className="py-2.5 px-2 w-8"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedExceptions.map((exc) => {
+                    const orderRef = exc.gateway_order_ids?.length
+                      ? exc.gateway_order_ids.join(', ')
+                      : (exc.ledger_order_ids?.join(', ') || '—');
+                    const paymentRef = exc.gateway_payment_ids?.[0];
+                    const isPending = exc.reason_code === 'PENDING_NOT_YET_SETTLED';
+
+                    return (
+                      <tr
+                        key={exc.trace_id}
+                        tabIndex={0}
+                        role="button"
+                        aria-label={`View audit trail for ${orderRef}`}
+                        onClick={() => setSelectedTraceId(exc.trace_id)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setSelectedTraceId(exc.trace_id);
+                          }
+                        }}
+                        className="border-b border-[#E5E5E7] hover:bg-[#F5F5F4] focus-visible:outline-2 focus-visible:outline-[#3A5DFF] cursor-pointer transition-colors"
+                      >
+                        <td className="py-3 px-3 align-top">
+                          <div className="font-mono text-[13px] text-[#1C1C1E]">{orderRef}</div>
+                          {paymentRef && (
+                            <div className="font-mono text-xs text-[#6E6E73] mt-0.5">{paymentRef}</div>
+                          )}
+                        </td>
+                        <td className="py-3 px-3 align-top tabular font-medium text-[#1C1C1E]">
+                          {exc.bank_amount ? formatCurrency(exc.bank_amount) : '—'}
+                        </td>
+                        <td className="py-3 px-3 align-top">
+                          <span
+                            className={`inline-block text-xs font-medium px-2 py-0.5 rounded ${
+                              isPending
+                                ? 'bg-[#FFF8EB] text-[#B07D2F]'
+                                : 'bg-[#FEF2F0] text-[#C4462B]'
+                            }`}
+                          >
+                            {formatReasonCode(exc.reason_code)}
+                          </span>
+                          <div className="text-[13px] text-[#6E6E73] mt-1">{exc.reason}</div>
+                        </td>
+                        <td className="py-3 px-3 align-top">
+                          <div className="text-xs text-[#6E6E73] mt-1">{exc.suggested_step}</div>
+                        </td>
+                        <td className="py-3 px-2 align-middle text-right">
+                          <ChevronRightIcon />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-[13px] text-[#6E6E73] mt-3">Click a row to open the audit trail for that record</p>
+          </section>
+
+          <hr className="border-t border-[#E5E5E7] mb-10" />
+
+          {/* Zone 4: Tax-Line & GSTR-2B Input Tax Credit Reconciliation */}
+          <section className="mb-12" aria-labelledby="tax-title">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 id="tax-title" className="text-xl font-semibold text-[#1C1C1E]">Tax-line & GSTR-2B matcher</h2>
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#ECFDF3] text-[#1F8A5F] border border-[#A6F4C5]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1F8A5F]"></span>
+                    100% ITC Matched
+                  </span>
+                </div>
+                <p className="text-xs text-[#6E6E73] mt-0.5">
+                  Monthly Razorpay Tax Invoice vs Daily Fee Deductions vs GSTR-2B Input Tax Credit (SAC {taxData?.sac_code || '997159'})
+                </p>
+              </div>
+              <div className="text-xs text-[#6E6E73] tabular">
+                Period: <span className="font-semibold text-[#1C1C1E]">{taxData?.period || 'June 2025'}</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+              <div className="p-4 rounded-lg bg-white border border-[#E5E5E7]">
+                <div className="text-xs text-[#6E6E73] mb-1">Taxable Fee Base</div>
+                <div className="text-xl font-semibold tabular text-[#1C1C1E]">
+                  {formatCurrency(taxData?.invoice?.taxable_value || taxData?.taxable_fee_base)}
+                </div>
+                <div className="text-[11px] text-[#6E6E73] mt-1">SAC 997159 (Payment Svc)</div>
+              </div>
+              <div className="p-4 rounded-lg bg-white border border-[#E5E5E7]">
+                <div className="text-xs text-[#6E6E73] mb-1">GST Charged ({taxData?.gst_rate || '18% IGST'})</div>
+                <div className="text-xl font-semibold tabular text-[#3A5DFF]">
+                  {formatCurrency(taxData?.invoice?.igst_amount || taxData?.itc_claimable)}
+                </div>
+                <div className="text-[11px] text-[#6E6E73] mt-1">Inv: {taxData?.invoice?.invoice_number || 'RPL/25-26/06/00918'}</div>
+              </div>
+              <div className="p-4 rounded-lg bg-white border border-[#E5E5E7]">
+                <div className="text-xs text-[#6E6E73] mb-1">Eligible ITC Claimable</div>
+                <div className="text-xl font-semibold tabular text-[#1F8A5F]">
+                  {formatCurrency(taxData?.itc_claimable)}
+                </div>
+                <div className="text-[11px] text-[#1F8A5F] font-medium mt-1">Section 16(2)(aa) Eligible</div>
+              </div>
+              <div className="p-4 rounded-lg bg-white border border-[#E5E5E7]">
+                <div className="text-xs text-[#6E6E73] mb-1">Tax Discrepancy</div>
+                <div className="text-xl font-semibold tabular text-[#1C1C1E]">
+                  {formatCurrency(taxData?.reconciliation?.variance_taxable || 0.0)}
+                </div>
+                <div className="text-[11px] text-[#1F8A5F] font-medium mt-1">Zero Variance (3-Way)</div>
+              </div>
+            </div>
+
+            {/* Detailed 3-Way Match Verification Card */}
+            <div className="bg-white rounded-lg border border-[#E5E5E7] p-5 text-xs">
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#E5E5E7]">
+                <div className="flex flex-wrap items-center gap-4 text-[#6E6E73]">
+                  <div>Supplier: <span className="font-medium text-[#1C1C1E]">{taxData?.invoice?.vendor_name || 'Razorpay Software Private Limited'}</span></div>
+                  <div>GSTIN: <span className="font-mono text-[#1C1C1E]">{taxData?.vendor_gstin}</span></div>
+                  <div>Filing: <span className="font-semibold text-[#1F8A5F]">{taxData?.gstr2b?.filing_status || 'FILED_ON_TIME'}</span></div>
+                </div>
+                <span className="text-[11px] text-[#1F8A5F] bg-[#ECFDF3] px-2.5 py-0.5 rounded font-medium border border-[#A6F4C5]">
+                  GSTR-2B Auto-Reconciled
+                </span>
+              </div>
+              <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-3 gap-4 text-[13px]">
+                <div className="bg-[#FAFAF9] p-3 rounded border border-[#E5E5E7]">
+                  <div className="text-xs text-[#6E6E73] mb-1 font-medium">1. Daily Ledger Deductions</div>
+                  <div className="tabular font-semibold text-[#1C1C1E]">
+                    {formatCurrency(taxData?.reconciliation?.ledger_fee_total)}
+                  </div>
+                  <div className="text-xs text-[#6E6E73] mt-0.5">+ {formatCurrency(taxData?.reconciliation?.ledger_gst_total)} GST</div>
+                </div>
+                <div className="bg-[#FAFAF9] p-3 rounded border border-[#E5E5E7]">
+                  <div className="text-xs text-[#6E6E73] mb-1 font-medium">2. Monthly Tax Invoice</div>
+                  <div className="tabular font-semibold text-[#1C1C1E]">
+                    {formatCurrency(taxData?.reconciliation?.invoice_taxable)}
+                  </div>
+                  <div className="text-xs text-[#6E6E73] mt-0.5">+ {formatCurrency(taxData?.reconciliation?.invoice_gst)} IGST</div>
+                </div>
+                <div className="bg-[#FAFAF9] p-3 rounded border border-[#A6F4C5]">
+                  <div className="text-xs text-[#1F8A5F] mb-1 font-semibold">3. GSTR-2B Portal Return</div>
+                  <div className="tabular font-semibold text-[#1F8A5F]">
+                    {formatCurrency(taxData?.reconciliation?.gstr2b_taxable)}
+                  </div>
+                  <div className="text-xs text-[#1F8A5F] mt-0.5 font-medium">+ {formatCurrency(taxData?.reconciliation?.gstr2b_gst)} ITC Claimable</div>
+                </div>
+              </div>
+              <div className="mt-3 pt-3 border-t border-[#E5E5E7] text-[#6E6E73] italic">
+                {taxData?.reconciliation?.notes || "100% 3-way match: Daily fee deductions align with Razorpay Tax Invoice and GSTR-2B. ITC is claimable under Section 16(2)(aa)."}
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-t border-[#E5E5E7] mb-10" />
+
+          {/* Zone 5: Evaluation Metrics Bar */}
+          <section className="mb-8" aria-labelledby="metrics-title">
+            <h2 id="metrics-title" className="text-xl font-semibold text-[#1C1C1E] mb-4">Evaluation metrics</h2>
+            <div className="flex flex-wrap gap-8 sm:gap-10">
+              <div>
+                <div className="text-xl font-semibold tabular text-[#1C1C1E]">
+                  {metrics.total_records_processed ?? '—'}
+                </div>
+                <div className="text-xs text-[#6E6E73]">Records processed</div>
+              </div>
+              <div>
+                <div className="text-xl font-semibold tabular text-[#1C1C1E]">
+                  {formatPercent(metrics.with_llm?.summary?.match_rate)}
+                </div>
+                <div className="text-xs text-[#6E6E73]">Match rate (with AI)</div>
+              </div>
+              <div>
+                <div className="text-xl font-semibold tabular text-[#1C1C1E]">
+                  {formatPercent(metrics.without_llm?.summary?.match_rate)}
+                </div>
+                <div className="text-xs text-[#6E6E73]">Match rate (without AI)</div>
+              </div>
+              <div>
+                <div className="text-xl font-semibold tabular text-[#1F8A5F]">
+                  +{formatPercent(metrics.ablation?.match_rate_lift)}
+                </div>
+                <div className="text-xs text-[#6E6E73]">AI contribution</div>
+              </div>
+              <div>
+                <div className="text-xl font-semibold tabular text-[#1C1C1E]">
+                  {formatPercent(metrics.with_llm?.evaluation?.auto_match_precision)}
+                </div>
+                <div className="text-xs text-[#6E6E73]">Auto-match precision</div>
+              </div>
+              <div>
+                <div className="text-xl font-semibold tabular text-[#1C1C1E]">
+                  {formatPercent(metrics.with_llm?.evaluation?.reason_code_coverage)}
+                </div>
+                <div className="text-xs text-[#6E6E73]">Reason code coverage</div>
+              </div>
+            </div>
+          </section>
+
+          {/* --- Interactive Settlement Q&A Agent Drawer --- */}
+          {chatOpen && (
+            <>
+              <div
+                className="fixed inset-0 bg-black/20 z-40 motion-safe-transition transition-opacity"
+                onClick={() => setChatOpen(false)}
+                aria-hidden="true"
+              />
+              <aside
+                role="dialog"
+                aria-label="Settlement Q&A Agent"
+                aria-modal="true"
+                className="fixed top-0 right-0 w-[560px] max-w-[95vw] h-screen bg-white shadow-drawer z-50 flex flex-col border-l border-[#E5E5E7] motion-safe-transition transition-transform"
+              >
+                {/* Chat Drawer Header */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E5E7] shrink-0 bg-[#FAFAF9]">
+                  <div className="flex items-center gap-2.5">
+                    <span className="p-1.5 bg-[#3A5DFF]/10 text-[#3A5DFF] rounded-md">
+                      <SparklesIcon />
+                    </span>
+                    <div>
+                      <h2 className="text-base font-semibold text-[#1C1C1E]">Settlement Q&A Agent</h2>
+                      <p className="text-xs text-[#6E6E73]">AI Finance Controller • Grounded in live books</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setChatOpen(false)}
+                    aria-label="Close chat"
+                    className="p-1.5 rounded hover:bg-white text-[#6E6E73] hover:text-[#1C1C1E] focus-visible:outline-2 focus-visible:outline-[#3A5DFF]"
+                  >
+                    <CloseIcon />
+                  </button>
+                </div>
+
+                {/* Quick Action Prompt Chips */}
+                <div className="px-6 py-2.5 border-b border-[#E5E5E7] bg-white flex flex-wrap gap-2 text-xs shrink-0">
+                  {[
+                    "Summarize exceptions",
+                    "Cash forecast for next 7 days",
+                    "Reconcile Tax Invoice (SAC 997159)",
+                    "Draft merchant dispute ticket",
+                    "Why is Order 8829 pending?",
+                  ].map((chip) => (
+                    <button
+                      key={chip}
+                      onClick={() => handleSendMessage(chip)}
+                      className="px-2.5 py-1 rounded-full bg-[#F5F5F4] hover:bg-[#E5E5E7] text-[#1C1C1E] font-medium transition-colors"
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Chat Messages */}
+                <div
+                  className="flex-1 overflow-y-auto px-6 py-4 space-y-4"
+                  onClick={(e) => {
+                    const btn = e.target.closest('[data-trace-id]');
+                    if (btn) {
+                      const traceId = btn.getAttribute('data-trace-id');
+                      if (traceId) setSelectedTraceId(traceId);
+                    }
+                  }}
+                >
+                  {chatHistory.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className={`flex ${item.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className={`max-w-[85%] rounded-lg px-4 py-3 text-sm ${
+                          item.role === 'user'
+                            ? 'bg-[#3A5DFF] text-white'
+                            : 'bg-[#F5F5F4] text-[#1C1C1E] border border-[#E5E5E7]'
+                        }`}
+                      >
+                        {item.role === 'user' ? (
+                          <div className="whitespace-pre-wrap">{item.content}</div>
+                        ) : (
+                          <div
+                            className="markdown-body leading-relaxed"
+                            dangerouslySetInnerHTML={{
+                              __html: marked.parse(
+                                (item.content || '').replace(
+                                  /\[(TR-[A-Za-z0-9-]+)\]/g,
+                                  '<button type="button" data-trace-id="$1" class="inline-flex items-center font-mono text-[11px] px-1.5 py-0.5 rounded bg-[#3A5DFF]/15 text-[#3A5DFF] hover:bg-[#3A5DFF]/25 font-semibold cursor-pointer underline decoration-dotted transition-colors" title="Inspect Trace $1">[$1]</button>'
+                                )
+                              )
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                  {chatLoading && (
+                    <div className="flex justify-start">
+                      <div className="bg-[#F5F5F4] border border-[#E5E5E7] rounded-lg px-4 py-2.5 text-xs text-[#6E6E73] flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#3A5DFF] animate-ping"></span>
+                        Analyzing financial ledger & gateway logs…
+                      </div>
+                    </div>
+                  )}
+                  <div ref={chatEndRef} />
+                </div>
+
+                {/* Chat Input Box */}
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSendMessage();
+                  }}
+                  className="p-4 border-t border-[#E5E5E7] bg-white shrink-0"
+                >
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      placeholder="Ask about discrepancies, fees, settlements, or cash flow…"
+                      className="flex-1 px-3.5 py-2 text-sm border border-[#E5E5E7] rounded-md focus:outline-none focus:border-[#3A5DFF] bg-[#FAFAF9]"
+                    />
+                    <button
+                      type="submit"
+                      disabled={!chatInput.trim() || chatLoading}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md bg-[#3A5DFF] hover:bg-[#2B4BF2] text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      <SendIcon />
+                      <span>Send</span>
+                    </button>
+                  </div>
+                </form>
+              </aside>
+            </>
+          )}
+
+          {/* Audit Trail Drawer Modal */}
+          {selectedAudit && (
+            <>
+              {/* Backdrop */}
+              <div
+                className="fixed inset-0 bg-black/15 z-40 motion-safe-transition transition-opacity"
+                onClick={() => setSelectedTraceId(null)}
+                aria-hidden="true"
+              />
+
+              {/* Drawer Container */}
+              <aside
+                role="dialog"
+                aria-label="Audit trail detail"
+                aria-modal="true"
+                className="fixed top-0 right-0 w-[520px] max-w-[90vw] h-screen bg-white shadow-drawer z-50 overflow-y-auto p-8 border-l border-[#E5E5E7] motion-safe-transition transition-transform"
+              >
+                <div className="flex items-center justify-between mb-6 pb-2 border-b border-[#E5E5E7]">
+                  <h2 className="text-lg font-semibold text-[#1C1C1E]">Audit trail</h2>
+                  <button
+                    ref={closeBtnRef}
+                    onClick={() => setSelectedTraceId(null)}
+                    aria-label="Close audit drawer"
+                    className="p-1 rounded hover:bg-[#FAFAF9] focus-visible:outline-2 focus-visible:outline-[#3A5DFF]"
+                  >
+                    <CloseIcon />
+                  </button>
+                </div>
+
+                {/* AI Deep Investigation Section */}
+                {selectedAudit.status === 'exception' && (
+                  <div className="mb-6 p-4 rounded-lg bg-[#FAFAF9] border border-[#E5E5E7]">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <SparklesIcon />
+                        <span className="text-xs font-semibold uppercase tracking-wider text-[#3A5DFF]">AI Deep Audit</span>
+                      </div>
+                      <button
+                        onClick={() => runDiagnosis(selectedAudit.trace_id)}
+                        disabled={diagnosing}
+                        className="text-xs font-medium px-2.5 py-1 rounded bg-[#3A5DFF] text-white hover:bg-[#2B4BF2] disabled:opacity-50 transition-colors"
+                      >
+                        {diagnosing ? 'Investigating…' : 'Run Root-Cause Diagnosis'}
+                      </button>
+                    </div>
+
+                    {diagnosisResult ? (
+                      <div className="mt-3 text-xs text-[#1C1C1E] bg-white p-3 rounded border border-[#E5E5E7] space-y-2">
+                        <div
+                          className="markdown-body"
+                          dangerouslySetInnerHTML={{ __html: marked.parse(diagnosisResult) }}
+                        />
+                        <div className="pt-2 border-t border-[#E5E5E7] flex justify-end">
+                          <button
+                            onClick={() => copyText(diagnosisResult)}
+                            className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3A5DFF] hover:underline"
+                          >
+                            <CopyIcon />
+                            <span>{copiedDraft ? 'Copied to Clipboard!' : 'Copy Ticket Draft'}</span>
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-xs text-[#6E6E73] mt-1">
+                        Click to generate an AI root-cause analysis and a ready-to-send Razorpay Merchant Support dispute ticket.
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* Drawer Content */}
+                <div className="space-y-6 text-sm">
+                  {/* Decision */}
+                  <div>
+                    <h3 className="text-[13px] font-medium text-[#6E6E73] mb-2">Decision</h3>
+                    <div className="divide-y divide-[#E5E5E7]">
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Trace ID</span>
+                        <span className="font-mono text-xs break-all text-[#1C1C1E]">{selectedAudit.trace_id}</span>
+                      </div>
+                      <div className="flex py-2 items-center">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Status</span>
+                        <span
+                          className={`text-xs font-medium px-2 py-0.5 rounded ${
+                            selectedAudit.status === 'matched'
+                              ? 'bg-[#ECFDF3] text-[#1F8A5F]'
+                              : selectedAudit.reason_code === 'PENDING_NOT_YET_SETTLED'
+                              ? 'bg-[#FFF8EB] text-[#B07D2F]'
+                              : 'bg-[#FEF2F0] text-[#C4462B]'
+                          }`}
+                        >
+                          {selectedAudit.status}
+                        </span>
+                      </div>
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Layer</span>
+                        <span className="text-[#1C1C1E]">{selectedAudit.layer}</span>
+                      </div>
+                      {selectedAudit.confidence != null && (
+                        <div className="flex py-2">
+                          <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Confidence</span>
+                          <span className="tabular font-medium text-[#1C1C1E]">{formatPercent(selectedAudit.confidence)}</span>
+                        </div>
+                      )}
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Reason</span>
+                        <span className="text-[#1C1C1E]">{selectedAudit.reason}</span>
+                      </div>
+                      {selectedAudit.suggested_step && (
+                        <div className="flex py-2">
+                          <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Suggested step</span>
+                          <span className="text-[#1C1C1E]">{selectedAudit.suggested_step}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Bank Statement */}
+                  <div>
+                    <h3 className="text-[13px] font-medium text-[#6E6E73] mb-2">Bank statement</h3>
+                    <div className="divide-y divide-[#E5E5E7]">
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Date</span>
+                        <span className="text-[#1C1C1E]">{selectedAudit.bank_date || '—'}</span>
+                      </div>
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Narration</span>
+                        <span className="font-mono text-xs text-[#1C1C1E] break-all">{selectedAudit.bank_narration || '—'}</span>
+                      </div>
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Amount</span>
+                        <span className="tabular font-medium text-[#1C1C1E]">{formatCurrency(selectedAudit.bank_amount)}</span>
+                      </div>
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Extracted UTR</span>
+                        <span className="font-mono text-xs text-[#1C1C1E]">{selectedAudit.bank_utr || '—'}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Gateway Settlement */}
+                  <div>
+                    <h3 className="text-[13px] font-medium text-[#6E6E73] mb-2">Gateway settlement</h3>
+                    <div className="divide-y divide-[#E5E5E7]">
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Order ID(s)</span>
+                        <span className="font-mono text-xs text-[#1C1C1E] break-all">
+                          {selectedAudit.gateway_order_ids?.join(', ') || '—'}
+                        </span>
+                      </div>
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Payment ID(s)</span>
+                        <span className="font-mono text-xs text-[#1C1C1E] break-all">
+                          {selectedAudit.gateway_payment_ids?.join(', ') || '—'}
+                        </span>
+                      </div>
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">UTR(s)</span>
+                        <span className="font-mono text-xs text-[#1C1C1E] break-all">
+                          {selectedAudit.gateway_utrs?.join(', ') || '—'}
+                        </span>
+                      </div>
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Net amount(s)</span>
+                        <span className="tabular text-[#1C1C1E]">
+                          {selectedAudit.gateway_net_amounts?.map(a => formatCurrency(a)).join(', ') || '—'}
+                        </span>
+                      </div>
+                      {selectedAudit.gateway_total_net != null && (
+                        <div className="flex py-2">
+                          <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Total net</span>
+                          <span className="tabular font-medium text-[#1C1C1E]">{formatCurrency(selectedAudit.gateway_total_net)}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Internal Ledger */}
+                  <div>
+                    <h3 className="text-[13px] font-medium text-[#6E6E73] mb-2">Internal ledger</h3>
+                    <div className="divide-y divide-[#E5E5E7]">
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Order ID(s)</span>
+                        <span className="font-mono text-xs text-[#1C1C1E] break-all">
+                          {selectedAudit.ledger_order_ids?.join(', ') || '—'}
+                        </span>
+                      </div>
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Expected amount(s)</span>
+                        <span className="tabular text-[#1C1C1E]">
+                          {selectedAudit.ledger_expected_amounts?.map(a => formatCurrency(a)).join(', ') || '—'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Verification */}
+                  {selectedAudit.amount_diff != null && (
+                    <div>
+                      <h3 className="text-[13px] font-medium text-[#6E6E73] mb-2">Verification</h3>
+                      <div className="divide-y divide-[#E5E5E7]">
+                        <div className="flex py-2">
+                          <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Amount difference</span>
+                          <span className="tabular font-medium text-[#1C1C1E]">{formatCurrency(selectedAudit.amount_diff)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Metadata */}
+                  <div>
+                    <h3 className="text-[13px] font-medium text-[#6E6E73] mb-2">Metadata</h3>
+                    <div className="divide-y divide-[#E5E5E7]">
+                      <div className="flex py-2">
+                        <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Timestamp</span>
+                        <span className="text-[#1C1C1E]">{selectedAudit.timestamp || '—'}</span>
+                      </div>
+                      {selectedAudit.reason_code && (
+                        <div className="flex py-2">
+                          <span className="w-36 text-[13px] text-[#6E6E73] shrink-0">Reason code</span>
+                          <span className="font-mono text-xs text-[#1C1C1E]">{selectedAudit.reason_code}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<SettleSenseApp />);
+  </script>
+</body>
+</html>

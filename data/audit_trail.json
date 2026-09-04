@@ -1,0 +1,2314 @@
+[
+  {
+    "trace_id": "TR-3798385CA4B1",
+    "timestamp": "2026-09-04T13:40:29.048896",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-01",
+    "bank_narration": "IMPS/SBIN1317127484/RAZORPAY/order_0061/SETTLEMENT",
+    "bank_amount": 2928.22,
+    "bank_utr": "SBIN1317127484",
+    "gateway_order_ids": [
+      "order_0061"
+    ],
+    "gateway_payment_ids": [
+      "pay_f9d6f5d9bd1249"
+    ],
+    "gateway_utrs": [
+      "SBIN1317127484"
+    ],
+    "gateway_net_amounts": [
+      2928.22
+    ],
+    "gateway_total_net": 2928.22,
+    "ledger_order_ids": [
+      "order_0061"
+    ],
+    "ledger_expected_amounts": [
+      2999.0
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN1317127484), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-8097B0B7E97A",
+    "timestamp": "2026-09-04T13:40:29.048924",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-01",
+    "bank_narration": "NEFT HDFC7826398214 RAZORPAY SOFTWAR PVT LTD order_0062",
+    "bank_amount": 2928.22,
+    "bank_utr": "HDFC7826398214",
+    "gateway_order_ids": [
+      "order_0062"
+    ],
+    "gateway_payment_ids": [
+      "pay_80fe4251119546"
+    ],
+    "gateway_utrs": [
+      "HDFC7826398214"
+    ],
+    "gateway_net_amounts": [
+      2928.22
+    ],
+    "gateway_total_net": 2928.22,
+    "ledger_order_ids": [
+      "order_0062"
+    ],
+    "ledger_expected_amounts": [
+      2999.0
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC7826398214), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-2F9871DB80BA",
+    "timestamp": "2026-09-04T13:40:29.048928",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-02",
+    "bank_narration": "NEFT-BARB2174596158-RAZORPAY-SETTLEMENT-order_0065",
+    "bank_amount": 2363.58,
+    "bank_utr": "BARB2174596158",
+    "gateway_order_ids": [
+      "order_0065"
+    ],
+    "gateway_payment_ids": [
+      "pay_f700dab5657041"
+    ],
+    "gateway_utrs": [
+      "BARB2174596158"
+    ],
+    "gateway_net_amounts": [
+      2363.58
+    ],
+    "gateway_total_net": 2363.58,
+    "ledger_order_ids": [
+      "order_0065"
+    ],
+    "ledger_expected_amounts": [
+      2420.7
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (BARB2174596158), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-D0202E3A98CF",
+    "timestamp": "2026-09-04T13:40:29.048931",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-03",
+    "bank_narration": "RTGS/KKBK3561595148/RAZORPAYSOFTWARE/order_0028",
+    "bank_amount": 11437.49,
+    "bank_utr": "KKBK3561595148",
+    "gateway_order_ids": [
+      "order_0028"
+    ],
+    "gateway_payment_ids": [
+      "pay_2a05c88980f44d"
+    ],
+    "gateway_utrs": [
+      "KKBK3561595148"
+    ],
+    "gateway_net_amounts": [
+      11437.49
+    ],
+    "gateway_total_net": 11437.49,
+    "ledger_order_ids": [
+      "order_0028"
+    ],
+    "ledger_expected_amounts": [
+      11835.15
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (KKBK3561595148), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-8CBC7A4B9AA1",
+    "timestamp": "2026-09-04T13:40:29.048933",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-07-04",
+    "bank_narration": "ONLINE TRF RAZORPAY PVT ACME CORP SETL",
+    "bank_amount": 32886.24,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0036"
+    ],
+    "gateway_payment_ids": [
+      "pay_9d135e3c638349"
+    ],
+    "gateway_utrs": [
+      "KKBK3734670656"
+    ],
+    "gateway_net_amounts": [
+      32886.24
+    ],
+    "gateway_total_net": 32886.24,
+    "ledger_order_ids": [
+      "order_0036"
+    ],
+    "ledger_expected_amounts": [
+      34029.64
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.75,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 4d, fuzzy score 17%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-C3FC4EC27ED4",
+    "timestamp": "2026-09-04T13:40:29.048935",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-06-05",
+    "bank_narration": "BY CLG RAZORPAY STTLMNT order_0032",
+    "bank_amount": 6900.14,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0032"
+    ],
+    "gateway_payment_ids": [
+      "pay_b69f14ab4e4743"
+    ],
+    "gateway_utrs": [
+      "HDFC2870831727"
+    ],
+    "gateway_net_amounts": [
+      6900.14
+    ],
+    "gateway_total_net": 6900.14,
+    "ledger_order_ids": [
+      "order_0032"
+    ],
+    "ledger_expected_amounts": [
+      7066.92
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.84,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 3d, fuzzy score 45%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-574C0AF6D9E2",
+    "timestamp": "2026-09-04T13:40:29.048937",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-05",
+    "bank_narration": "NEFT/ICIC6413953767/RAZORPAY SOFTWARE PVT LTD/order_0006",
+    "bank_amount": 36729.87,
+    "bank_utr": "ICIC6413953767",
+    "gateway_order_ids": [
+      "order_0006"
+    ],
+    "gateway_payment_ids": [
+      "pay_d7e6f2cf6f284b"
+    ],
+    "gateway_utrs": [
+      "ICIC6413953767"
+    ],
+    "gateway_net_amounts": [
+      36729.87
+    ],
+    "gateway_total_net": 36729.87,
+    "ledger_order_ids": [
+      "order_0006"
+    ],
+    "ledger_expected_amounts": [
+      38006.91
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (ICIC6413953767), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-AB2588243B36",
+    "timestamp": "2026-09-04T13:40:29.048939",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-05",
+    "bank_narration": "MMT/NEFT/SBIN4990913341/RAZORPAY/SETTLMNT/order_0050",
+    "bank_amount": 19857.48,
+    "bank_utr": "SBIN4990913341",
+    "gateway_order_ids": [
+      "order_0050"
+    ],
+    "gateway_payment_ids": [
+      "pay_9aed87e9c11a45"
+    ],
+    "gateway_utrs": [
+      "SBIN4990913341"
+    ],
+    "gateway_net_amounts": [
+      19857.48
+    ],
+    "gateway_total_net": 19857.48,
+    "ledger_order_ids": [
+      "order_0050"
+    ],
+    "ledger_expected_amounts": [
+      20547.89
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN4990913341), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-BC28B8B57173",
+    "timestamp": "2026-09-04T13:40:29.048941",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-07-05",
+    "bank_narration": "NEFT CR RZPAY SETTLMENT",
+    "bank_amount": 22108.17,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0018"
+    ],
+    "gateway_payment_ids": [
+      "pay_70b28f7d2eac4f"
+    ],
+    "gateway_utrs": [
+      "KKBK1219136193"
+    ],
+    "gateway_net_amounts": [
+      22108.17
+    ],
+    "gateway_total_net": 22108.17,
+    "ledger_order_ids": [
+      "order_0018"
+    ],
+    "ledger_expected_amounts": [
+      22876.84
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.74,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 0d, fuzzy score 12%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-111C75A8714D",
+    "timestamp": "2026-09-04T13:40:29.048942",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-06",
+    "bank_narration": "NEFT CR-SBIN8727743487-RAZORPAY SOFTWARE PVT-order_0033",
+    "bank_amount": 41339.45,
+    "bank_utr": "SBIN8727743487",
+    "gateway_order_ids": [
+      "order_0033"
+    ],
+    "gateway_payment_ids": [
+      "pay_10097b259b3e4a"
+    ],
+    "gateway_utrs": [
+      "SBIN8727743487"
+    ],
+    "gateway_net_amounts": [
+      41339.45
+    ],
+    "gateway_total_net": 41339.45,
+    "ledger_order_ids": [
+      "order_0033"
+    ],
+    "ledger_expected_amounts": [
+      42776.76
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN8727743487), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-0BA65CA19013",
+    "timestamp": "2026-09-04T13:40:29.048944",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-06-06",
+    "bank_narration": "ACH CR RAZRPAY STLMT order_0039",
+    "bank_amount": 9150.38,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0039"
+    ],
+    "gateway_payment_ids": [
+      "pay_8050cc53bc1143"
+    ],
+    "gateway_utrs": [
+      "HDFC2719374529"
+    ],
+    "gateway_net_amounts": [
+      9150.38
+    ],
+    "gateway_total_net": 9150.38,
+    "ledger_order_ids": [
+      "order_0039"
+    ],
+    "ledger_expected_amounts": [
+      9371.55
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.85,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 1d, fuzzy score 49%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-079B8D1BC7BC",
+    "timestamp": "2026-09-04T13:40:29.048946",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-06",
+    "bank_narration": "NEFT CR-KKBK4131869993-RAZORPAY SOFTWARE PVT-order_0049",
+    "bank_amount": 25297.88,
+    "bank_utr": "KKBK4131869993",
+    "gateway_order_ids": [
+      "order_0049"
+    ],
+    "gateway_payment_ids": [
+      "pay_4234211151fd4e"
+    ],
+    "gateway_utrs": [
+      "KKBK4131869993"
+    ],
+    "gateway_net_amounts": [
+      25297.88
+    ],
+    "gateway_total_net": 25297.88,
+    "ledger_order_ids": [
+      "order_0049"
+    ],
+    "ledger_expected_amounts": [
+      26177.44
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (KKBK4131869993), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-E8B900453146",
+    "timestamp": "2026-09-04T13:40:29.048948",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-06",
+    "bank_narration": "NEFT SBIN7974034471 RAZORPAY SOFTWAR PVT LTD order_0051",
+    "bank_amount": 8040.37,
+    "bank_utr": "SBIN7974034471",
+    "gateway_order_ids": [
+      "order_0051"
+    ],
+    "gateway_payment_ids": [
+      "pay_ff34da9b49434f"
+    ],
+    "gateway_utrs": [
+      "SBIN7974034471"
+    ],
+    "gateway_net_amounts": [
+      8040.37
+    ],
+    "gateway_total_net": 8040.37,
+    "ledger_order_ids": [
+      "order_0051"
+    ],
+    "ledger_expected_amounts": [
+      8234.7
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN7974034471), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-730B65290DD3",
+    "timestamp": "2026-09-04T13:40:29.048949",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-06",
+    "bank_narration": "NEFT CR-BARB8637940265-RAZORPAY SOFTWARE PVT-order_0002",
+    "bank_amount": 22215.9,
+    "bank_utr": "BARB8637940265",
+    "gateway_order_ids": [
+      "order_0002"
+    ],
+    "gateway_payment_ids": [
+      "pay_0a8103a9329246"
+    ],
+    "gateway_utrs": [
+      "BARB8637940265"
+    ],
+    "gateway_net_amounts": [
+      22215.9
+    ],
+    "gateway_total_net": 22215.9,
+    "ledger_order_ids": [
+      "order_0002"
+    ],
+    "ledger_expected_amounts": [
+      22988.31
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (BARB8637940265), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-55803E0D532B",
+    "timestamp": "2026-09-04T13:40:29.048951",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-07",
+    "bank_narration": "BY TRANSFER-NEFT-HDFC2782489638-RAZORPAY SOFTWARE P-GLOBAL IMPEX",
+    "bank_amount": 4209.83,
+    "bank_utr": "HDFC2782489638",
+    "gateway_order_ids": [
+      "order_0011"
+    ],
+    "gateway_payment_ids": [
+      "pay_03903122af314a"
+    ],
+    "gateway_utrs": [
+      "HDFC2782489638"
+    ],
+    "gateway_net_amounts": [
+      4209.83
+    ],
+    "gateway_total_net": 4209.83,
+    "ledger_order_ids": [
+      "order_0011"
+    ],
+    "ledger_expected_amounts": [
+      4311.58
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC2782489638), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-BDB785F450FE",
+    "timestamp": "2026-09-04T13:40:29.048953",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-07",
+    "bank_narration": "NEFT HDFC3218196001 RAZORPAY SOFTWAR PVT LTD order_0001",
+    "bank_amount": 27981.62,
+    "bank_utr": "HDFC3218196001",
+    "gateway_order_ids": [
+      "order_0001"
+    ],
+    "gateway_payment_ids": [
+      "pay_07a7bc5dcb124d"
+    ],
+    "gateway_utrs": [
+      "HDFC3218196001"
+    ],
+    "gateway_net_amounts": [
+      27981.62
+    ],
+    "gateway_total_net": 27981.62,
+    "ledger_order_ids": [
+      "order_0001"
+    ],
+    "ledger_expected_amounts": [
+      28954.49
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC3218196001), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-FC16834318CC",
+    "timestamp": "2026-09-04T13:40:29.048954",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-07",
+    "bank_narration": "BY TRANSFER-NEFT-UTIB5331586923-RAZORPAY SOFTWARE P-order_0024",
+    "bank_amount": 18966.09,
+    "bank_utr": "UTIB5331586923",
+    "gateway_order_ids": [
+      "order_0024"
+    ],
+    "gateway_payment_ids": [
+      "pay_435ebe2636c94b"
+    ],
+    "gateway_utrs": [
+      "UTIB5331586923"
+    ],
+    "gateway_net_amounts": [
+      18966.09
+    ],
+    "gateway_total_net": 18966.09,
+    "ledger_order_ids": [
+      "order_0024"
+    ],
+    "ledger_expected_amounts": [
+      19625.51
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (UTIB5331586923), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-79F3CC3C31F4",
+    "timestamp": "2026-09-04T13:40:29.048956",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-07",
+    "bank_narration": "IMPS/UTIB3482477109/RAZORPAY/order_0060/SETTLEMENT",
+    "bank_amount": 2928.22,
+    "bank_utr": "UTIB3482477109",
+    "gateway_order_ids": [
+      "order_0060"
+    ],
+    "gateway_payment_ids": [
+      "pay_2601ce72d44c4f"
+    ],
+    "gateway_utrs": [
+      "UTIB3482477109"
+    ],
+    "gateway_net_amounts": [
+      2928.22
+    ],
+    "gateway_total_net": 2928.22,
+    "ledger_order_ids": [
+      "order_0060"
+    ],
+    "ledger_expected_amounts": [
+      2999.0
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (UTIB3482477109), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-C3027EA9C5A8",
+    "timestamp": "2026-09-04T13:40:29.048958",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-08",
+    "bank_narration": "RTGS/SBIN8087603859/RAZORPAYSOFTWARE/order_0059",
+    "bank_amount": 2928.22,
+    "bank_utr": "SBIN8087603859",
+    "gateway_order_ids": [
+      "order_0059"
+    ],
+    "gateway_payment_ids": [
+      "pay_c906f109df6442"
+    ],
+    "gateway_utrs": [
+      "SBIN8087603859"
+    ],
+    "gateway_net_amounts": [
+      2928.22
+    ],
+    "gateway_total_net": 2928.22,
+    "ledger_order_ids": [
+      "order_0059"
+    ],
+    "ledger_expected_amounts": [
+      2999.0
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN8087603859), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-BF43FF13A05A",
+    "timestamp": "2026-09-04T13:40:29.048959",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-08",
+    "bank_narration": "NEFT/BARB4316117240/RAZORPAY SOFTWARE PVT LTD/order_0066",
+    "bank_amount": 9305.08,
+    "bank_utr": "BARB4316117240",
+    "gateway_order_ids": [
+      "order_0066"
+    ],
+    "gateway_payment_ids": [
+      "pay_0f52cce4127f40"
+    ],
+    "gateway_utrs": [
+      "BARB4316117240"
+    ],
+    "gateway_net_amounts": [
+      9305.08
+    ],
+    "gateway_total_net": 9305.08,
+    "ledger_order_ids": [
+      "order_0066"
+    ],
+    "ledger_expected_amounts": [
+      9529.99
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (BARB4316117240), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-822CA1011143",
+    "timestamp": "2026-09-04T13:40:29.048961",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-09",
+    "bank_narration": "BY TRANSFER-NEFT-KKBK9118384251-RAZORPAY SOFTWARE P-FRESH FOODS CO",
+    "bank_amount": 40435.45,
+    "bank_utr": "KKBK9118384251",
+    "gateway_order_ids": [
+      "order_0020"
+    ],
+    "gateway_payment_ids": [
+      "pay_013797932a2149"
+    ],
+    "gateway_utrs": [
+      "KKBK9118384251"
+    ],
+    "gateway_net_amounts": [
+      40435.45
+    ],
+    "gateway_total_net": 40435.45,
+    "ledger_order_ids": [
+      "order_0020"
+    ],
+    "ledger_expected_amounts": [
+      41841.32
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (KKBK9118384251), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-A91171C2587F",
+    "timestamp": "2026-09-04T13:40:29.048962",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-07-11",
+    "bank_narration": "BY CLG RAZORPAY STTLMNT order_0007",
+    "bank_amount": 6555.11,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0007"
+    ],
+    "gateway_payment_ids": [
+      "pay_3dfe4fa849544c"
+    ],
+    "gateway_utrs": [
+      "BARB9696532871"
+    ],
+    "gateway_net_amounts": [
+      6555.11
+    ],
+    "gateway_total_net": 6555.11,
+    "ledger_order_ids": [
+      "order_0007"
+    ],
+    "ledger_expected_amounts": [
+      6713.55
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.84,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 2d, fuzzy score 45%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-3A261191174A",
+    "timestamp": "2026-09-04T13:40:29.048964",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-12",
+    "bank_narration": "NEFT HDFC3430980500 RAZORPAY SOFTWAR PVT LTD order_0017",
+    "bank_amount": 30439.98,
+    "bank_utr": "HDFC3430980500",
+    "gateway_order_ids": [
+      "order_0017"
+    ],
+    "gateway_payment_ids": [
+      "pay_9cda18e7162f45"
+    ],
+    "gateway_utrs": [
+      "HDFC3430980500"
+    ],
+    "gateway_net_amounts": [
+      30439.98
+    ],
+    "gateway_total_net": 30439.98,
+    "ledger_order_ids": [
+      "order_0017"
+    ],
+    "ledger_expected_amounts": [
+      31498.32
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC3430980500), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-2FEE914E086D",
+    "timestamp": "2026-09-04T13:40:29.048965",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-06-13",
+    "bank_narration": "TRF FRM RAZORPAY-0040",
+    "bank_amount": 33931.99,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0040"
+    ],
+    "gateway_payment_ids": [
+      "pay_2ff5a8cd5e0d45"
+    ],
+    "gateway_utrs": [
+      "KKBK0496631931"
+    ],
+    "gateway_net_amounts": [
+      33931.99
+    ],
+    "gateway_total_net": 33931.99,
+    "ledger_order_ids": [
+      "order_0040"
+    ],
+    "ledger_expected_amounts": [
+      35111.74
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.82,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 0d, fuzzy score 39%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-9C478ACB4BC4",
+    "timestamp": "2026-09-04T13:40:29.048967",
+    "layer": "exception",
+    "status": "exception",
+    "bank_date": "2025-06-16",
+    "bank_narration": "TRF FRM RAZORPAY-0053",
+    "bank_amount": 27753.02,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0015",
+      "order_0046"
+    ],
+    "gateway_payment_ids": [
+      "pay_a7af430dd3a34e",
+      "pay_1b8197999d4046"
+    ],
+    "gateway_utrs": [
+      "HDFC6247317810",
+      "ICIC1823374989"
+    ],
+    "gateway_net_amounts": [
+      11176.63,
+      13669.46
+    ],
+    "gateway_total_net": 24846.09,
+    "ledger_order_ids": [],
+    "ledger_expected_amounts": [],
+    "amount_diff": 2906.93,
+    "confidence": 0.75,
+    "reason_code": "AMOUNT_MISMATCH_BEYOND_TOLERANCE",
+    "reason": "AI proposed match but arithmetic failed: bank ₹27753.02 vs gateway net ₹24846.09 (diff ₹2906.93)",
+    "suggested_step": "Verify fee computation or check for partial refund not reflected in gateway"
+  },
+  {
+    "trace_id": "TR-A13CFDD2D12D",
+    "timestamp": "2026-09-04T13:40:29.048969",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-16",
+    "bank_narration": "BY TRANSFER-NEFT-BARB3654145868-RAZORPAY SOFTWARE P-order_0026",
+    "bank_amount": 35770.2,
+    "bank_utr": "BARB3654145868",
+    "gateway_order_ids": [
+      "order_0026"
+    ],
+    "gateway_payment_ids": [
+      "pay_5ae917cabf794a"
+    ],
+    "gateway_utrs": [
+      "BARB3654145868"
+    ],
+    "gateway_net_amounts": [
+      35770.2
+    ],
+    "gateway_total_net": 35770.2,
+    "ledger_order_ids": [
+      "order_0026"
+    ],
+    "ledger_expected_amounts": [
+      37013.87
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (BARB3654145868), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-E9435FBD8CB3",
+    "timestamp": "2026-09-04T13:40:29.048971",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-17",
+    "bank_narration": "NEFT CR-KKBK1669784801-RAZORPAY SOFTWARE PVT-SUNRISE TRADERS",
+    "bank_amount": 7129.12,
+    "bank_utr": "KKBK1669784801",
+    "gateway_order_ids": [
+      "order_0008"
+    ],
+    "gateway_payment_ids": [
+      "pay_3fd9407045084d"
+    ],
+    "gateway_utrs": [
+      "KKBK1669784801"
+    ],
+    "gateway_net_amounts": [
+      7129.12
+    ],
+    "gateway_total_net": 7129.12,
+    "ledger_order_ids": [
+      "order_0008"
+    ],
+    "ledger_expected_amounts": [
+      7301.44
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (KKBK1669784801), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-2FBB92F93AB6",
+    "timestamp": "2026-09-04T13:40:29.048973",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-19",
+    "bank_narration": "MMT/NEFT/HDFC4874016400/RAZORPAY/SETTLMNT/order_0022",
+    "bank_amount": 12600.07,
+    "bank_utr": "HDFC4874016400",
+    "gateway_order_ids": [
+      "order_0022"
+    ],
+    "gateway_payment_ids": [
+      "pay_983f7ab89f5b49"
+    ],
+    "gateway_utrs": [
+      "HDFC4874016400"
+    ],
+    "gateway_net_amounts": [
+      12600.07
+    ],
+    "gateway_total_net": 12600.07,
+    "ledger_order_ids": [
+      "order_0022"
+    ],
+    "ledger_expected_amounts": [
+      13038.15
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC4874016400), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-7C8745504C23",
+    "timestamp": "2026-09-04T13:40:29.048974",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-19",
+    "bank_narration": "NEFT HDFC6247317810 RAZORPAY SOFTWAR PVT LTD order_0015",
+    "bank_amount": 11176.63,
+    "bank_utr": "HDFC6247317810",
+    "gateway_order_ids": [
+      "order_0015"
+    ],
+    "gateway_payment_ids": [
+      "pay_a7af430dd3a34e"
+    ],
+    "gateway_utrs": [
+      "HDFC6247317810"
+    ],
+    "gateway_net_amounts": [
+      11176.63
+    ],
+    "gateway_total_net": 11176.63,
+    "ledger_order_ids": [
+      "order_0015"
+    ],
+    "ledger_expected_amounts": [
+      11565.21
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC6247317810), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-4EFCCF834ECB",
+    "timestamp": "2026-09-04T13:40:29.048976",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-05",
+    "bank_narration": "NEFT/SBIN3421607337/RAZORPAY SOFTWARE PVT LTD/METRO RETAIL",
+    "bank_amount": 38388.33,
+    "bank_utr": "SBIN3421607337",
+    "gateway_order_ids": [
+      "order_0025"
+    ],
+    "gateway_payment_ids": [
+      "pay_39bd49141b0b45"
+    ],
+    "gateway_utrs": [
+      "SBIN3421607337"
+    ],
+    "gateway_net_amounts": [
+      38388.33
+    ],
+    "gateway_total_net": 38388.33,
+    "ledger_order_ids": [
+      "order_0025"
+    ],
+    "ledger_expected_amounts": [
+      39723.02
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN3421607337), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-E9CC6C241CF3",
+    "timestamp": "2026-09-04T13:40:29.048978",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-06-05",
+    "bank_narration": "BY CLG RAZORPAY STTLMNT order_0013",
+    "bank_amount": 3572.84,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0013"
+    ],
+    "gateway_payment_ids": [
+      "pay_20e25422c57f42"
+    ],
+    "gateway_utrs": [
+      "UTIB5183473829"
+    ],
+    "gateway_net_amounts": [
+      3572.84
+    ],
+    "gateway_total_net": 3572.84,
+    "ledger_order_ids": [
+      "order_0013"
+    ],
+    "ledger_expected_amounts": [
+      3659.19
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.84,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 0d, fuzzy score 45%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-A86A2A42D745",
+    "timestamp": "2026-09-04T13:40:29.048980",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-06",
+    "bank_narration": "BY TRANSFER-NEFT-SBIN7752047116-RAZORPAY SOFTWARE P-order_0048",
+    "bank_amount": 4945.62,
+    "bank_utr": "SBIN7752047116",
+    "gateway_order_ids": [
+      "order_0048"
+    ],
+    "gateway_payment_ids": [
+      "pay_31e96a5ad64d4e"
+    ],
+    "gateway_utrs": [
+      "SBIN7752047116"
+    ],
+    "gateway_net_amounts": [
+      4945.62
+    ],
+    "gateway_total_net": 4945.62,
+    "ledger_order_ids": [
+      "order_0048"
+    ],
+    "ledger_expected_amounts": [
+      5065.15
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN7752047116), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-D3CE6C74F35E",
+    "timestamp": "2026-09-04T13:40:29.048981",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-09",
+    "bank_narration": "NEFT SBIN5185067165 RAZORPAY SOFTWAR PVT LTD order_0041",
+    "bank_amount": 34724.79,
+    "bank_utr": "SBIN5185067165",
+    "gateway_order_ids": [
+      "order_0041"
+    ],
+    "gateway_payment_ids": [
+      "pay_fb67c81d545f40"
+    ],
+    "gateway_utrs": [
+      "SBIN5185067165"
+    ],
+    "gateway_net_amounts": [
+      34724.79
+    ],
+    "gateway_total_net": 34724.79,
+    "ledger_order_ids": [
+      "order_0041"
+    ],
+    "ledger_expected_amounts": [
+      35932.11
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN5185067165), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-47F11BAF0DB0",
+    "timestamp": "2026-09-04T13:40:29.048983",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-10",
+    "bank_narration": "NEFT HDFC4558122362 RAZORPAY SOFTWAR PVT LTD order_0034",
+    "bank_amount": 12292.21,
+    "bank_utr": "HDFC4558122362",
+    "gateway_order_ids": [
+      "order_0034"
+    ],
+    "gateway_payment_ids": [
+      "pay_50f9172bd5df44"
+    ],
+    "gateway_utrs": [
+      "HDFC4558122362"
+    ],
+    "gateway_net_amounts": [
+      12292.21
+    ],
+    "gateway_total_net": 12292.21,
+    "ledger_order_ids": [
+      "order_0034"
+    ],
+    "ledger_expected_amounts": [
+      12719.59
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC4558122362), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-E7356034BA11",
+    "timestamp": "2026-09-04T13:40:29.048985",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-14",
+    "bank_narration": "BY TRANSFER-NEFT-UTIB3791769367-RAZORPAY SOFTWARE P-order_0031",
+    "bank_amount": 10143.82,
+    "bank_utr": "UTIB3791769367",
+    "gateway_order_ids": [
+      "order_0031"
+    ],
+    "gateway_payment_ids": [
+      "pay_1828517f8ba148"
+    ],
+    "gateway_utrs": [
+      "UTIB3791769367"
+    ],
+    "gateway_net_amounts": [
+      10143.82
+    ],
+    "gateway_total_net": 10143.82,
+    "ledger_order_ids": [
+      "order_0031"
+    ],
+    "ledger_expected_amounts": [
+      10496.51
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (UTIB3791769367), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-212871A08609",
+    "timestamp": "2026-09-04T13:40:29.048987",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-06-17",
+    "bank_narration": "CLG CREDIT RAZORPAY SOFT 0046 PYMT",
+    "bank_amount": 13669.46,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0046"
+    ],
+    "gateway_payment_ids": [
+      "pay_1b8197999d4046"
+    ],
+    "gateway_utrs": [
+      "ICIC1823374989"
+    ],
+    "gateway_net_amounts": [
+      13669.46
+    ],
+    "gateway_total_net": 13669.46,
+    "ledger_order_ids": [
+      "order_0046"
+    ],
+    "ledger_expected_amounts": [
+      14144.72
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.8,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 1d, fuzzy score 32%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-D45F223CACB6",
+    "timestamp": "2026-09-04T13:40:29.048988",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-18",
+    "bank_narration": "NEFT/UTIB9570154303/RAZORPAY SOFTWARE PVT LTD/FLIPKART INDIA",
+    "bank_amount": 7129.03,
+    "bank_utr": "UTIB9570154303",
+    "gateway_order_ids": [
+      "order_0010"
+    ],
+    "gateway_payment_ids": [
+      "pay_58f014dba29e44"
+    ],
+    "gateway_utrs": [
+      "UTIB9570154303"
+    ],
+    "gateway_net_amounts": [
+      7129.03
+    ],
+    "gateway_total_net": 7129.03,
+    "ledger_order_ids": [
+      "order_0010"
+    ],
+    "ledger_expected_amounts": [
+      7301.35
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (UTIB9570154303), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-834CD06D8F0C",
+    "timestamp": "2026-09-04T13:40:29.048990",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-20",
+    "bank_narration": "NEFT/SBIN7360260647/RAZORPAY SOFTWARE PVT LTD/ACME CORP",
+    "bank_amount": 42154.69,
+    "bank_utr": "SBIN7360260647",
+    "gateway_order_ids": [
+      "order_0016"
+    ],
+    "gateway_payment_ids": [
+      "pay_38fa74f10c944a"
+    ],
+    "gateway_utrs": [
+      "SBIN7360260647"
+    ],
+    "gateway_net_amounts": [
+      42154.69
+    ],
+    "gateway_total_net": 42154.69,
+    "ledger_order_ids": [
+      "order_0016"
+    ],
+    "ledger_expected_amounts": [
+      43620.33
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN7360260647), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-20CDBB2B568E",
+    "timestamp": "2026-09-04T13:40:29.048991",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-22",
+    "bank_narration": "NEFT CR-ICIC0196556981-RAZORPAY SOFTWARE PVT-order_0027",
+    "bank_amount": 5499.78,
+    "bank_utr": "ICIC0196556981",
+    "gateway_order_ids": [
+      "order_0027"
+    ],
+    "gateway_payment_ids": [
+      "pay_2328f8d8331148"
+    ],
+    "gateway_utrs": [
+      "ICIC0196556981"
+    ],
+    "gateway_net_amounts": [
+      5499.78
+    ],
+    "gateway_total_net": 5499.78,
+    "ledger_order_ids": [
+      "order_0027"
+    ],
+    "ledger_expected_amounts": [
+      5632.71
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (ICIC0196556981), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-A62806E1613C",
+    "timestamp": "2026-09-04T13:40:29.048993",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-22",
+    "bank_narration": "IMPS/HDFC4082400842/RAZORPAY/order_0047/SETTLEMENT",
+    "bank_amount": 36290.21,
+    "bank_utr": "HDFC4082400842",
+    "gateway_order_ids": [
+      "order_0047"
+    ],
+    "gateway_payment_ids": [
+      "pay_10cbaffc8c9340"
+    ],
+    "gateway_utrs": [
+      "HDFC4082400842"
+    ],
+    "gateway_net_amounts": [
+      36290.21
+    ],
+    "gateway_total_net": 36290.21,
+    "ledger_order_ids": [
+      "order_0047"
+    ],
+    "ledger_expected_amounts": [
+      37551.96
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC4082400842), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-98E4F563CF7A",
+    "timestamp": "2026-09-04T13:40:29.048995",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-23",
+    "bank_narration": "IMPS/SBIN1559407816/RAZORPAY/GLOBAL IMPEX/SETTLEMENT",
+    "bank_amount": 9742.73,
+    "bank_utr": "SBIN1559407816",
+    "gateway_order_ids": [
+      "order_0003"
+    ],
+    "gateway_payment_ids": [
+      "pay_619e52fc474f44"
+    ],
+    "gateway_utrs": [
+      "SBIN1559407816"
+    ],
+    "gateway_net_amounts": [
+      9742.73
+    ],
+    "gateway_total_net": 9742.73,
+    "ledger_order_ids": [
+      "order_0003"
+    ],
+    "ledger_expected_amounts": [
+      10081.46
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN1559407816), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-5E61506C075B",
+    "timestamp": "2026-09-04T13:40:29.048996",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-06-26",
+    "bank_narration": "ONLINE TRF RAZORPAY PVT order_0038 SETL",
+    "bank_amount": 20037.46,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0038"
+    ],
+    "gateway_payment_ids": [
+      "pay_84d9d262650149"
+    ],
+    "gateway_utrs": [
+      "SBIN4170805310"
+    ],
+    "gateway_net_amounts": [
+      20037.46
+    ],
+    "gateway_total_net": 20037.46,
+    "ledger_order_ids": [
+      "order_0038"
+    ],
+    "ledger_expected_amounts": [
+      20734.12
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.82,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 2d, fuzzy score 41%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-62754C426515",
+    "timestamp": "2026-09-04T13:40:29.048998",
+    "layer": "llm_assisted",
+    "status": "matched",
+    "bank_date": "2025-06-28",
+    "bank_narration": "ONLINE TRF RAZORPAY PVT order_0056 SETL",
+    "bank_amount": 19612.86,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0056",
+      "order_0055"
+    ],
+    "gateway_payment_ids": [
+      "pay_7198c902d43949",
+      "pay_0573d6035d4244"
+    ],
+    "gateway_utrs": [
+      "UTIB9065940139",
+      "UTIB9065940139"
+    ],
+    "gateway_net_amounts": [
+      7407.96,
+      12204.9
+    ],
+    "gateway_total_net": 19612.86,
+    "ledger_order_ids": [
+      "order_0056",
+      "order_0055"
+    ],
+    "ledger_expected_amounts": [
+      7587.01,
+      12499.9
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.85,
+    "reason_code": null,
+    "reason": "AI-assisted split match — The bank narration explicitly references order_0056, and the combined net amount of order_0056 and order_0055 matches the bank credit amount, suggesting a split settlement.. Arithmetic verified: diff ₹0.00",
+    "suggested_step": "AI-matched and arithmetically verified — review if needed"
+  },
+  {
+    "trace_id": "TR-F37B5ADB2C30",
+    "timestamp": "2026-09-04T13:40:29.049000",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-03",
+    "bank_narration": "BY TRANSFER-NEFT-BARB4987769453-RAZORPAY SOFTWARE P-order_0042",
+    "bank_amount": 30900.87,
+    "bank_utr": "BARB4987769453",
+    "gateway_order_ids": [
+      "order_0042"
+    ],
+    "gateway_payment_ids": [
+      "pay_c1a39cf771a446"
+    ],
+    "gateway_utrs": [
+      "BARB4987769453"
+    ],
+    "gateway_net_amounts": [
+      30900.87
+    ],
+    "gateway_total_net": 30900.87,
+    "ledger_order_ids": [
+      "order_0042"
+    ],
+    "ledger_expected_amounts": [
+      31975.23
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (BARB4987769453), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-4605EE772B05",
+    "timestamp": "2026-09-04T13:40:29.049002",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-04",
+    "bank_narration": "BY TRANSFER-NEFT-KKBK8543534624-RAZORPAY SOFTWARE P-SUNRISE TRADERS",
+    "bank_amount": 27119.59,
+    "bank_utr": "KKBK8543534624",
+    "gateway_order_ids": [
+      "order_0019"
+    ],
+    "gateway_payment_ids": [
+      "pay_55c67fe3a0b94b"
+    ],
+    "gateway_utrs": [
+      "KKBK8543534624"
+    ],
+    "gateway_net_amounts": [
+      27119.59
+    ],
+    "gateway_total_net": 27119.59,
+    "ledger_order_ids": [
+      "order_0019"
+    ],
+    "ledger_expected_amounts": [
+      28062.48
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (KKBK8543534624), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-C2517AAFC04D",
+    "timestamp": "2026-09-04T13:40:29.049003",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-07-04",
+    "bank_narration": "BY CLG RAZORPAY STTLMNT order_0021",
+    "bank_amount": 12739.02,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0021"
+    ],
+    "gateway_payment_ids": [
+      "pay_4dec5c3bedf74c"
+    ],
+    "gateway_utrs": [
+      "KKBK8084124118"
+    ],
+    "gateway_net_amounts": [
+      12739.02
+    ],
+    "gateway_total_net": 12739.02,
+    "ledger_order_ids": [
+      "order_0021"
+    ],
+    "ledger_expected_amounts": [
+      13181.94
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.84,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 2d, fuzzy score 45%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-88A00DD8E01D",
+    "timestamp": "2026-09-04T13:40:29.049005",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-04",
+    "bank_narration": "BY TRANSFER-NEFT-UTIB1656670106-RAZORPAY SOFTWARE P-PRIYA SHARMA",
+    "bank_amount": 10933.25,
+    "bank_utr": "UTIB1656670106",
+    "gateway_order_ids": [
+      "order_0014"
+    ],
+    "gateway_payment_ids": [
+      "pay_8146252b7b724e"
+    ],
+    "gateway_utrs": [
+      "UTIB1656670106"
+    ],
+    "gateway_net_amounts": [
+      10933.25
+    ],
+    "gateway_total_net": 10933.25,
+    "ledger_order_ids": [
+      "order_0014"
+    ],
+    "ledger_expected_amounts": [
+      11313.38
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (UTIB1656670106), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-8849431191C4",
+    "timestamp": "2026-09-04T13:40:29.049007",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-09",
+    "bank_narration": "NEFT CR-KKBK9016272046-RAZORPAY SOFTWARE PVT-order_0037",
+    "bank_amount": 40027.9,
+    "bank_utr": "KKBK9016272046",
+    "gateway_order_ids": [
+      "order_0037"
+    ],
+    "gateway_payment_ids": [
+      "pay_a9ce6cdc017847"
+    ],
+    "gateway_utrs": [
+      "KKBK9016272046"
+    ],
+    "gateway_net_amounts": [
+      40027.9
+    ],
+    "gateway_total_net": 40027.9,
+    "ledger_order_ids": [
+      "order_0037"
+    ],
+    "ledger_expected_amounts": [
+      41419.6
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (KKBK9016272046), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-0B13CE20A669",
+    "timestamp": "2026-09-04T13:40:29.049008",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-07-12",
+    "bank_narration": "MMT/NEFT/ICIC9972787558/RAZORPAY/SETTLMNT/order_0063",
+    "bank_amount": 11367.15,
+    "bank_utr": "ICIC9972787558",
+    "gateway_order_ids": [
+      "order_0063"
+    ],
+    "gateway_payment_ids": [
+      "pay_5d7892e3e47d47"
+    ],
+    "gateway_utrs": [
+      "ICIC9972787558"
+    ],
+    "gateway_net_amounts": [
+      11367.15
+    ],
+    "gateway_total_net": 11367.15,
+    "ledger_order_ids": [
+      "order_0063"
+    ],
+    "ledger_expected_amounts": [
+      11641.9
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (ICIC9972787558), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-2008EDF6F6F4",
+    "timestamp": "2026-09-04T13:40:29.049010",
+    "layer": "llm_assisted",
+    "status": "matched",
+    "bank_date": "2025-06-21",
+    "bank_narration": "ACH CR RAZRPAY STLMT order_0057",
+    "bank_amount": 14942.96,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0057",
+      "order_0058"
+    ],
+    "gateway_payment_ids": [
+      "pay_158a923a713b4e",
+      "pay_08d94033b8ac4f"
+    ],
+    "gateway_utrs": [
+      "KKBK6717565512",
+      "KKBK6717565512"
+    ],
+    "gateway_net_amounts": [
+      7749.27,
+      7193.69
+    ],
+    "gateway_total_net": 14942.96,
+    "ledger_order_ids": [
+      "order_0057",
+      "order_0058"
+    ],
+    "ledger_expected_amounts": [
+      7936.57,
+      7367.56
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.92,
+    "reason_code": null,
+    "reason": "AI-assisted split match — The bank narration explicitly references order_0057, and the sum of net amounts for order_0057 and order_0058 (7,749.27 + 7,193.69 = 14,942.96) matches the bank credit amount exactly.. Arithmetic verified: diff ₹0.00",
+    "suggested_step": "AI-matched and arithmetically verified — review if needed"
+  },
+  {
+    "trace_id": "TR-10DCCBF90B69",
+    "timestamp": "2026-09-04T13:40:29.049011",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-21",
+    "bank_narration": "RTGS/KKBK3136783777/RAZORPAYSOFTWARE/order_0044",
+    "bank_amount": 38341.19,
+    "bank_utr": "KKBK3136783777",
+    "gateway_order_ids": [
+      "order_0044"
+    ],
+    "gateway_payment_ids": [
+      "pay_011d9e7026f248"
+    ],
+    "gateway_utrs": [
+      "KKBK3136783777"
+    ],
+    "gateway_net_amounts": [
+      38341.19
+    ],
+    "gateway_total_net": 38341.19,
+    "ledger_order_ids": [
+      "order_0044"
+    ],
+    "ledger_expected_amounts": [
+      39674.24
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (KKBK3136783777), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-EC5E864182A2",
+    "timestamp": "2026-09-04T13:40:29.049013",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-06-21",
+    "bank_narration": "ONLINE TRF RAZORPAY PVT FRESH FOODS CO SETL",
+    "bank_amount": 27882.13,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0023"
+    ],
+    "gateway_payment_ids": [
+      "pay_aec267b8237246"
+    ],
+    "gateway_utrs": [
+      "KKBK6801128059"
+    ],
+    "gateway_net_amounts": [
+      27882.13
+    ],
+    "gateway_total_net": 27882.13,
+    "ledger_order_ids": [
+      "order_0023"
+    ],
+    "ledger_expected_amounts": [
+      28851.55
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.75,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 3d, fuzzy score 15%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-D23980B9BA64",
+    "timestamp": "2026-09-04T13:40:29.049015",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-22",
+    "bank_narration": "RTGS/KKBK6507527354/RAZORPAYSOFTWARE/order_0043",
+    "bank_amount": 38397.57,
+    "bank_utr": "KKBK6507527354",
+    "gateway_order_ids": [
+      "order_0043"
+    ],
+    "gateway_payment_ids": [
+      "pay_353452e8dc4b4f"
+    ],
+    "gateway_utrs": [
+      "KKBK6507527354"
+    ],
+    "gateway_net_amounts": [
+      38397.57
+    ],
+    "gateway_total_net": 38397.57,
+    "ledger_order_ids": [
+      "order_0043"
+    ],
+    "ledger_expected_amounts": [
+      39732.59
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (KKBK6507527354), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-5DA7F8AE184D",
+    "timestamp": "2026-09-04T13:40:29.049016",
+    "layer": "exception",
+    "status": "exception",
+    "bank_date": "2025-06-22",
+    "bank_narration": "ONLINE TRF RAZORPAY PVT order_0067 SETL",
+    "bank_amount": 13614.88,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0067"
+    ],
+    "gateway_payment_ids": [
+      "pay_11161e2be9fc4f"
+    ],
+    "gateway_utrs": [
+      "SBIN2386922219"
+    ],
+    "gateway_net_amounts": [
+      13864.88
+    ],
+    "gateway_total_net": 13864.88,
+    "ledger_order_ids": [],
+    "ledger_expected_amounts": [],
+    "amount_diff": 250.0,
+    "confidence": 0.9,
+    "reason_code": "AMOUNT_MISMATCH_BEYOND_TOLERANCE",
+    "reason": "AI proposed match but arithmetic failed: bank ₹13614.88 vs gateway net ₹13864.88 (diff ₹250.00)",
+    "suggested_step": "Verify fee computation or check for partial refund not reflected in gateway"
+  },
+  {
+    "trace_id": "TR-51D924C7BD62",
+    "timestamp": "2026-09-04T13:40:29.049018",
+    "layer": "exception",
+    "status": "exception",
+    "bank_date": "2025-06-22",
+    "bank_narration": "NEFT/UTIB9998887776/RAZORPAY ADHOC CREDIT/UNIDENTIFIED",
+    "bank_amount": 8450.0,
+    "bank_utr": "UTIB9998887776",
+    "gateway_order_ids": [],
+    "gateway_payment_ids": [],
+    "gateway_utrs": [],
+    "gateway_net_amounts": [],
+    "gateway_total_net": null,
+    "ledger_order_ids": [],
+    "ledger_expected_amounts": [],
+    "amount_diff": null,
+    "confidence": null,
+    "reason_code": "NO_CANDIDATE_IN_WINDOW",
+    "reason": "No gateway record found within ₹5.0 and 5-day window",
+    "suggested_step": "Check gateway dashboard for settlement status of this order"
+  },
+  {
+    "trace_id": "TR-09B3F7685AD5",
+    "timestamp": "2026-09-04T13:40:29.049019",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-23",
+    "bank_narration": "NEFT HDFC6629946804 RAZORPAY SOFTWAR PVT LTD order_0029",
+    "bank_amount": 14510.64,
+    "bank_utr": "HDFC6629946804",
+    "gateway_order_ids": [
+      "order_0029"
+    ],
+    "gateway_payment_ids": [
+      "pay_794de0ef811741"
+    ],
+    "gateway_utrs": [
+      "HDFC6629946804"
+    ],
+    "gateway_net_amounts": [
+      14510.64
+    ],
+    "gateway_total_net": 14510.64,
+    "ledger_order_ids": [
+      "order_0029"
+    ],
+    "ledger_expected_amounts": [
+      15015.14
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (HDFC6629946804), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-A026D3FEA02B",
+    "timestamp": "2026-09-04T13:40:29.049023",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-25",
+    "bank_narration": "MMT/NEFT/SBIN2704828148/RAZORPAY/SETTLMNT/order_0009",
+    "bank_amount": 33536.63,
+    "bank_utr": "SBIN2704828148",
+    "gateway_order_ids": [
+      "order_0009"
+    ],
+    "gateway_payment_ids": [
+      "pay_813aa55eb5aa4e"
+    ],
+    "gateway_utrs": [
+      "SBIN2704828148"
+    ],
+    "gateway_net_amounts": [
+      33536.63
+    ],
+    "gateway_total_net": 33536.63,
+    "ledger_order_ids": [
+      "order_0009"
+    ],
+    "ledger_expected_amounts": [
+      34702.64
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN2704828148), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-24D85785E695",
+    "timestamp": "2026-09-04T13:40:29.049025",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-26",
+    "bank_narration": "IMPS/SBIN0576627028/RAZORPAY/order_0064/SETTLEMENT",
+    "bank_amount": 8775.91,
+    "bank_utr": "SBIN0576627028",
+    "gateway_order_ids": [
+      "order_0064"
+    ],
+    "gateway_payment_ids": [
+      "pay_99dc4ae4a05244"
+    ],
+    "gateway_utrs": [
+      "SBIN0576627028"
+    ],
+    "gateway_net_amounts": [
+      8775.91
+    ],
+    "gateway_total_net": 8775.91,
+    "ledger_order_ids": [
+      "order_0064"
+    ],
+    "ledger_expected_amounts": [
+      8988.03
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN0576627028), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-625BCDA09A32",
+    "timestamp": "2026-09-04T13:40:29.049026",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-26",
+    "bank_narration": "BY TRANSFER-NEFT-SBIN3872148951-RAZORPAY SOFTWARE P-METRO RETAIL",
+    "bank_amount": 18970.45,
+    "bank_utr": "SBIN3872148951",
+    "gateway_order_ids": [
+      "order_0030"
+    ],
+    "gateway_payment_ids": [
+      "pay_fbfc9b46bad740"
+    ],
+    "gateway_utrs": [
+      "SBIN3872148951"
+    ],
+    "gateway_net_amounts": [
+      18970.45
+    ],
+    "gateway_total_net": 18970.45,
+    "ledger_order_ids": [
+      "order_0030"
+    ],
+    "ledger_expected_amounts": [
+      19630.02
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN3872148951), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-A51D083B547A",
+    "timestamp": "2026-09-04T13:40:29.049027",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-26",
+    "bank_narration": "IMPS/BARB1928327648/RAZORPAY/order_0005/SETTLEMENT",
+    "bank_amount": 7555.49,
+    "bank_utr": "BARB1928327648",
+    "gateway_order_ids": [
+      "order_0005"
+    ],
+    "gateway_payment_ids": [
+      "pay_672e247ca6f24f"
+    ],
+    "gateway_utrs": [
+      "BARB1928327648"
+    ],
+    "gateway_net_amounts": [
+      7555.49
+    ],
+    "gateway_total_net": 7555.49,
+    "ledger_order_ids": [
+      "order_0005"
+    ],
+    "ledger_expected_amounts": [
+      7738.11
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (BARB1928327648), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-17E40671391A",
+    "timestamp": "2026-09-04T13:40:29.049029",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-28",
+    "bank_narration": "NEFT/BARB1034131647/RAZORPAY SOFTWARE PVT LTD/order_0004",
+    "bank_amount": 36151.58,
+    "bank_utr": "BARB1034131647",
+    "gateway_order_ids": [
+      "order_0004"
+    ],
+    "gateway_payment_ids": [
+      "pay_ece461dbebe548"
+    ],
+    "gateway_utrs": [
+      "BARB1034131647"
+    ],
+    "gateway_net_amounts": [
+      36151.58
+    ],
+    "gateway_total_net": 36151.58,
+    "ledger_order_ids": [
+      "order_0004"
+    ],
+    "ledger_expected_amounts": [
+      37408.51
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (BARB1034131647), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-A1C11AD6D4AA",
+    "timestamp": "2026-09-04T13:40:29.049030",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-28",
+    "bank_narration": "NEFT/SBIN0366909670/RAZORPAY SOFTWARE PVT LTD/order_0035",
+    "bank_amount": 18324.51,
+    "bank_utr": "SBIN0366909670",
+    "gateway_order_ids": [
+      "order_0035"
+    ],
+    "gateway_payment_ids": [
+      "pay_78cb7800239c4b"
+    ],
+    "gateway_utrs": [
+      "SBIN0366909670"
+    ],
+    "gateway_net_amounts": [
+      18324.51
+    ],
+    "gateway_total_net": 18324.51,
+    "ledger_order_ids": [
+      "order_0035"
+    ],
+    "ledger_expected_amounts": [
+      18961.62
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (SBIN0366909670), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-E8DAB0F720A5",
+    "timestamp": "2026-09-04T13:40:29.049031",
+    "layer": "tolerant",
+    "status": "matched",
+    "bank_date": "2025-06-30",
+    "bank_narration": "ONLINE TRF RAZORPAY PVT order_0012 SETL",
+    "bank_amount": 17641.79,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0012"
+    ],
+    "gateway_payment_ids": [
+      "pay_5e4c69263d6549"
+    ],
+    "gateway_utrs": [
+      "SBIN1331509839"
+    ],
+    "gateway_net_amounts": [
+      17641.79
+    ],
+    "gateway_total_net": 17641.79,
+    "ledger_order_ids": [
+      "order_0012"
+    ],
+    "ledger_expected_amounts": [
+      18255.16
+    ],
+    "amount_diff": 0.0,
+    "confidence": 0.82,
+    "reason_code": null,
+    "reason": "Tolerant match — amount diff ₹0.00, date within 4d, fuzzy score 41%",
+    "suggested_step": "No action needed — matched within tolerance"
+  },
+  {
+    "trace_id": "TR-B4C0447485B8",
+    "timestamp": "2026-09-04T13:40:29.049033",
+    "layer": "exact",
+    "status": "matched",
+    "bank_date": "2025-06-30",
+    "bank_narration": "NEFT/ICIC9578856855/RAZORPAY SOFTWARE PVT LTD/order_0045",
+    "bank_amount": 13136.74,
+    "bank_utr": "ICIC9578856855",
+    "gateway_order_ids": [
+      "order_0045"
+    ],
+    "gateway_payment_ids": [
+      "pay_7f4f5d779ea347"
+    ],
+    "gateway_utrs": [
+      "ICIC9578856855"
+    ],
+    "gateway_net_amounts": [
+      13136.74
+    ],
+    "gateway_total_net": 13136.74,
+    "ledger_order_ids": [
+      "order_0045"
+    ],
+    "ledger_expected_amounts": [
+      13593.48
+    ],
+    "amount_diff": 0.0,
+    "confidence": 1.0,
+    "reason_code": null,
+    "reason": "Exact UTR match (ICIC9578856855), amount matches to ₹0.00",
+    "suggested_step": "No action needed — fully reconciled"
+  },
+  {
+    "trace_id": "TR-6F3D9EB001CC",
+    "timestamp": "2026-09-04T13:40:29.049034",
+    "layer": "exception",
+    "status": "exception",
+    "bank_date": null,
+    "bank_narration": "",
+    "bank_amount": 0.0,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0068"
+    ],
+    "gateway_payment_ids": [],
+    "gateway_utrs": [],
+    "gateway_net_amounts": [],
+    "gateway_total_net": null,
+    "ledger_order_ids": [
+      "order_0068"
+    ],
+    "ledger_expected_amounts": [
+      15873.05
+    ],
+    "amount_diff": null,
+    "confidence": null,
+    "reason_code": "PENDING_NOT_YET_SETTLED",
+    "reason": "Order exists in ledger but no settlement yet — still in pipeline",
+    "suggested_step": "No action needed — settlement expected within normal processing window"
+  },
+  {
+    "trace_id": "TR-2795B62918B3",
+    "timestamp": "2026-09-04T13:40:29.049036",
+    "layer": "exception",
+    "status": "exception",
+    "bank_date": null,
+    "bank_narration": "",
+    "bank_amount": 0.0,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0069"
+    ],
+    "gateway_payment_ids": [],
+    "gateway_utrs": [],
+    "gateway_net_amounts": [],
+    "gateway_total_net": null,
+    "ledger_order_ids": [
+      "order_0069"
+    ],
+    "ledger_expected_amounts": [
+      12067.6
+    ],
+    "amount_diff": null,
+    "confidence": null,
+    "reason_code": "PENDING_NOT_YET_SETTLED",
+    "reason": "Order exists in ledger but no settlement yet — still in pipeline",
+    "suggested_step": "No action needed — settlement expected within normal processing window"
+  },
+  {
+    "trace_id": "TR-14483F9454B0",
+    "timestamp": "2026-09-04T13:40:29.049037",
+    "layer": "exception",
+    "status": "exception",
+    "bank_date": null,
+    "bank_narration": "",
+    "bank_amount": 0.0,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0071"
+    ],
+    "gateway_payment_ids": [],
+    "gateway_utrs": [],
+    "gateway_net_amounts": [],
+    "gateway_total_net": null,
+    "ledger_order_ids": [
+      "order_0071"
+    ],
+    "ledger_expected_amounts": [
+      11601.51
+    ],
+    "amount_diff": null,
+    "confidence": null,
+    "reason_code": "PENDING_NOT_YET_SETTLED",
+    "reason": "Order exists in ledger but no settlement yet — still in pipeline",
+    "suggested_step": "No action needed — settlement expected within normal processing window"
+  },
+  {
+    "trace_id": "TR-7D7D6E0980F4",
+    "timestamp": "2026-09-04T13:40:29.049039",
+    "layer": "exception",
+    "status": "exception",
+    "bank_date": null,
+    "bank_narration": "",
+    "bank_amount": 0.0,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0070"
+    ],
+    "gateway_payment_ids": [],
+    "gateway_utrs": [],
+    "gateway_net_amounts": [],
+    "gateway_total_net": null,
+    "ledger_order_ids": [
+      "order_0070"
+    ],
+    "ledger_expected_amounts": [
+      22573.8
+    ],
+    "amount_diff": null,
+    "confidence": null,
+    "reason_code": "PENDING_NOT_YET_SETTLED",
+    "reason": "Order exists in ledger but no settlement yet — still in pipeline",
+    "suggested_step": "No action needed — settlement expected within normal processing window"
+  },
+  {
+    "trace_id": "TR-F32820997D56",
+    "timestamp": "2026-09-04T13:40:29.049040",
+    "layer": "exception",
+    "status": "exception",
+    "bank_date": null,
+    "bank_narration": "",
+    "bank_amount": 0.0,
+    "bank_utr": null,
+    "gateway_order_ids": [
+      "order_0072"
+    ],
+    "gateway_payment_ids": [],
+    "gateway_utrs": [],
+    "gateway_net_amounts": [],
+    "gateway_total_net": null,
+    "ledger_order_ids": [
+      "order_0072"
+    ],
+    "ledger_expected_amounts": [
+      17567.52
+    ],
+    "amount_diff": null,
+    "confidence": null,
+    "reason_code": "PENDING_NOT_YET_SETTLED",
+    "reason": "Order exists in ledger but no settlement yet — still in pipeline",
+    "suggested_step": "No action needed — settlement expected within normal processing window"
+  }
+]

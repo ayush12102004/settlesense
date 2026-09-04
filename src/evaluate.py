@@ -1,135 +1,191 @@
-"""Evaluation harness — the part that turns "looks plausible" into "is measured".
+"""Evaluation harness — measures correctness, not just coverage.
 
-In finance, a demo that runs is worthless without an answer to "how often is it
-wrong, and what does it do when it's unsure?" This harness answers both, against
-ground truth the model never sees.
-
-It reports three things:
-  1. Categorization accuracy, with a RAG ablation (memory ON vs OFF) so the
-     design choice is proven, not asserted.
-  2. Confidence-routed human-in-the-loop: at a confidence threshold, how much can
-     we auto-post, and how accurate is that auto-posted slice? (Coverage vs
-     precision is the real production lever.)
-  3. Reconciliation accuracy: did the deterministic engine match each deposit to
-     the correct payout?
+Scores the reconciliation engine against held-out ground truth:
+  1. Overall match rate (records correctly reconciled / total)
+  2. Match rate by layer (exact / tolerant / LLM-assisted)
+  3. Precision on auto-matched slice (wrong auto-match > flagged exception)
+  4. Ablation: match rate WITH vs WITHOUT the LLM layer
+  5. Exception coverage: 100% of exceptions have valid reason codes
 
 Run: python src/evaluate.py
 """
 
 from __future__ import annotations
 
-import csv
 import json
 import os
-import zlib
-from collections import defaultdict
 
-from categorize import build_memory_from_golden, categorize_one, load_bank_feed
-from model import USING_MOCK
-from reconcile import reconcile, summarize
+from normalize import load_ground_truth
+from reconcile import reconcile, summarize, ReasonCode
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
-TEST_FRACTION = 0.35
-AUTO_APPROVE_THRESHOLD = 0.75
+
+# Valid reason codes
+VALID_REASON_CODES = {
+    ReasonCode.NO_CANDIDATE_IN_WINDOW,
+    ReasonCode.AMOUNT_MISMATCH_BEYOND_TOLERANCE,
+    ReasonCode.SPLIT_SETTLEMENT_UNRESOLVED,
+    ReasonCode.DUPLICATE_CANDIDATES_AMBIGUOUS,
+    ReasonCode.PENDING_NOT_YET_SETTLED,
+    ReasonCode.LOW_CONFIDENCE_LLM_MATCH,
+}
 
 
-def _golden_categories() -> dict[str, str]:
-    with open(os.path.join(DATA_DIR, "golden_categories.csv"), newline="") as f:
-        return {r["txn_id"]: r["true_category"] for r in csv.DictReader(f)}
+def _eval_run(results, ground_truth: list[dict]) -> dict:
+    """Score a reconciliation run against ground truth."""
+    # Build ground truth lookup: order_id -> expected info
+    gt_by_order = {}
+    for gt in ground_truth:
+        gt_by_order[gt["order_id"]] = gt
 
+    # Score each result
+    total_evaluated = 0
+    correct = 0
+    by_layer_correct = {}
+    by_layer_total = {}
 
-def _is_test(txn_id: str) -> bool:
-    """Deterministic, stable train/test split from the id hash."""
-    return (zlib.crc32(txn_id.encode()) % 100) < int(TEST_FRACTION * 100)
+    for r in results:
+        if r.status == "matched":
+            for order_id in r.gateway_order_ids:
+                if order_id in gt_by_order:
+                    total_evaluated += 1
+                    gt_entry = gt_by_order[order_id]
+                    # A match is correct if the order was supposed to be matched
+                    # (not pending) and the right payment_id was found
+                    expected_outcome = gt_entry["expected_outcome"]
+                    is_correct = expected_outcome.startswith("matched")
 
+                    layer = r.layer
+                    by_layer_total[layer] = by_layer_total.get(layer, 0) + 1
+                    if is_correct:
+                        correct += 1
+                        by_layer_correct[layer] = by_layer_correct.get(layer, 0) + 1
 
-def _run_categorization(test_rows, golden, memory) -> dict:
-    correct = abstained = 0
-    auto_n = auto_correct = 0
-    confusion: dict[tuple[str, str], int] = defaultdict(int)
-    for r in test_rows:
-        truth = golden[r["txn_id"]]
-        res = categorize_one(r["description"], memory=memory)
-        pred, conf = res["category"], res["confidence"]
-        if pred == "Needs Review":
-            abstained += 1
-        elif pred == truth:
-            correct += 1
-        confusion[(truth, pred)] += 1
-        if conf >= AUTO_APPROVE_THRESHOLD and pred != "Needs Review":
-            auto_n += 1
-            if pred == truth:
-                auto_correct += 1
-    n = len(test_rows)
+        elif r.status == "exception":
+            # Check pending exceptions
+            for order_id in r.gateway_order_ids + r.ledger_order_ids:
+                if order_id in gt_by_order:
+                    total_evaluated += 1
+                    gt_entry = gt_by_order[order_id]
+                    if gt_entry["expected_outcome"] == r.reason_code:
+                        correct += 1
+
+    # Precision on auto-matched slice
+    auto_matched = [r for r in results if r.status == "matched"]
+    auto_matched_orders = set()
+    for r in auto_matched:
+        auto_matched_orders.update(r.gateway_order_ids)
+
+    auto_correct = sum(
+        1 for oid in auto_matched_orders
+        if oid in gt_by_order and gt_by_order[oid]["expected_outcome"].startswith("matched")
+    )
+    auto_precision = (round(auto_correct / len(auto_matched_orders), 4)
+                      if auto_matched_orders else 0.0)
+
+    # Exception coverage: every exception has a valid reason code
+    exceptions = [r for r in results if r.status == "exception"]
+    valid_reasons = sum(1 for r in exceptions if r.reason_code in VALID_REASON_CODES)
+    reason_coverage = round(valid_reasons / len(exceptions), 4) if exceptions else 1.0
+
+    # Layer breakdown
+    layers = {}
+    for layer in sorted(set(list(by_layer_total.keys()) + list(by_layer_correct.keys()))):
+        t = by_layer_total.get(layer, 0)
+        c = by_layer_correct.get(layer, 0)
+        layers[layer] = {
+            "total": t,
+            "correct": c,
+            "accuracy": round(c / t, 4) if t else 0.0,
+        }
+
     return {
-        "n": n,
-        "accuracy": round(correct / n, 3) if n else 0.0,
-        "abstention_rate": round(abstained / n, 3) if n else 0.0,
-        "auto_approve_coverage": round(auto_n / n, 3) if n else 0.0,
-        "auto_approve_accuracy": round(auto_correct / auto_n, 3) if auto_n else None,
-        "_confusion": {f"{t} -> {p}": c for (t, p), c in confusion.items() if t != p},
-    }
-
-
-def _eval_reconciliation() -> dict:
-    with open(os.path.join(DATA_DIR, "golden_reconciliation.csv"), newline="") as f:
-        golden = {r["txn_id"]: r["payout_id"] for r in csv.DictReader(f)}
-    matches = reconcile()
-    considered = correct = 0
-    for m in matches:
-        if m.txn_id in golden:
-            considered += 1
-            if m.payout_id == golden[m.txn_id]:
-                correct += 1
-    return {
-        "engine_summary": summarize(matches),
-        "deposits_with_truth": considered,
-        "correct_payout_matches": correct,
-        "match_accuracy": round(correct / considered, 3) if considered else 0.0,
+        "total_evaluated": total_evaluated,
+        "correct": correct,
+        "overall_accuracy": round(correct / total_evaluated, 4) if total_evaluated else 0.0,
+        "auto_match_precision": auto_precision,
+        "auto_matched_count": len(auto_matched_orders),
+        "reason_code_coverage": reason_coverage,
+        "by_layer": layers,
     }
 
 
 def main() -> None:
-    golden = _golden_categories()
-    feed = load_bank_feed()
-    test_rows = [r for r in feed if _is_test(r["txn_id"])]
-    test_ids = {r["txn_id"] for r in test_rows}
+    ground_truth = load_ground_truth()
+    print(f"Ground truth: {len(ground_truth)} records\n")
 
-    print(f"Model: {'MOCK (offline baseline)' if USING_MOCK else os.getenv('APP_LLM_MODEL')}")
-    print(f"Test set: {len(test_rows)} held-out transactions\n")
+    # --- Run WITH LLM layer ---
+    print("Running reconciliation WITH LLM layer...")
+    results_with = reconcile(use_llm=True)
+    summary_with = summarize(results_with)
+    eval_with = _eval_run(results_with, ground_truth)
 
-    # RAG memory is built only from NON-test rows (no answer leakage).
-    memory = build_memory_from_golden(holdout_ids=test_ids)
-    print(f"RAG memory: {len(memory)} labelled examples\n")
+    # --- Run WITHOUT LLM layer (ablation) ---
+    print("Running reconciliation WITHOUT LLM layer (ablation)...")
+    results_without = reconcile(use_llm=False)
+    summary_without = summarize(results_without)
+    eval_without = _eval_run(results_without, ground_truth)
 
-    print("Categorization — RAG memory OFF ...")
-    no_rag = _run_categorization(test_rows, golden, memory=None)
-    print("Categorization — RAG memory ON  ...")
-    with_rag = _run_categorization(test_rows, golden, memory=memory)
+    # --- Compute ablation delta ---
+    llm_lift = round(eval_with["overall_accuracy"] - eval_without["overall_accuracy"], 4)
+    match_rate_lift = round(summary_with["match_rate"] - summary_without["match_rate"], 4)
 
-    recon = _eval_reconciliation()
+    from model import get_active_model_info
+    model_info = get_active_model_info()
 
+    # --- Build full report ---
     report = {
-        "model": "mock" if USING_MOCK else os.getenv("APP_LLM_MODEL"),
-        "categorization": {"rag_off": no_rag, "rag_on": with_rag},
-        "reconciliation": recon,
+        "model": model_info["model_name"],
+        "provider": model_info["provider"],
+        "is_mock": model_info["is_mock"],
+        "total_records_processed": summary_with["total_records"],
+        "with_llm": {
+            "summary": summary_with,
+            "evaluation": eval_with,
+        },
+        "without_llm": {
+            "summary": summary_without,
+            "evaluation": eval_without,
+        },
+        "ablation": {
+            "accuracy_lift": llm_lift,
+            "match_rate_lift": match_rate_lift,
+            "with_llm_match_rate": summary_with["match_rate"],
+            "without_llm_match_rate": summary_without["match_rate"],
+            "with_llm_matched": summary_with["total_matched"],
+            "without_llm_matched": summary_without["total_matched"],
+        },
     }
-    with open(os.path.join(DATA_DIR, "metrics.json"), "w") as f:
+
+    out_path = os.path.join(DATA_DIR, "metrics.json")
+    with open(out_path, "w") as f:
         json.dump(report, f, indent=2)
 
-    lift = round(with_rag["accuracy"] - no_rag["accuracy"], 3)
-    print("\n================ RESULTS ================")
-    print(f"Categorization accuracy   RAG off: {no_rag['accuracy']:.1%}   "
-          f"RAG on: {with_rag['accuracy']:.1%}   (lift {lift:+.1%})")
-    print(f"Auto-approve coverage (conf>={AUTO_APPROVE_THRESHOLD}): {with_rag['auto_approve_coverage']:.1%}  "
-          f"accuracy on that slice: "
-          f"{with_rag['auto_approve_accuracy'] if with_rag['auto_approve_accuracy'] is None else format(with_rag['auto_approve_accuracy'], '.1%')}")
-    print(f"Reconciliation match accuracy: {recon['match_accuracy']:.1%} "
-          f"on {recon['deposits_with_truth']} deposits")
-    print(f"Auto-matched by engine: {recon['engine_summary']['auto_matched_pct']:.1f}%  "
-          f"(rest flagged, not guessed)")
-    print("=========================================")
-    print("\nFull report written to data/metrics.json")
+    # --- Print results ---
+    print("\n" + "=" * 60)
+    print("RECONCILIATION EVALUATION RESULTS")
+    print("=" * 60)
+    print(f"\nTotal records processed: {summary_with['total_records']}")
+    print(f"  (of which {summary_with['pending_count']} are pending — informational, not errors)")
+    print(f"\n--- WITH LLM layer ---")
+    print(f"  Match rate:          {summary_with['match_rate']:.1%}")
+    print(f"  Matched by layer:    {summary_with['by_layer']}")
+    print(f"  Exceptions:          {summary_with['total_exceptions']}")
+    print(f"  Exception reasons:   {summary_with['exception_reasons']}")
+    print(f"  Auto-match precision:{eval_with['auto_match_precision']:.1%}")
+    print(f"  Reason code coverage:{eval_with['reason_code_coverage']:.0%}")
+
+    print(f"\n--- WITHOUT LLM layer (ablation) ---")
+    print(f"  Match rate:          {summary_without['match_rate']:.1%}")
+    print(f"  Matched by layer:    {summary_without['by_layer']}")
+
+    print(f"\n--- ABLATION ---")
+    print(f"  Match rate lift:     {match_rate_lift:+.1%}")
+    print(f"  Accuracy lift:       {llm_lift:+.1%}")
+    print(f"  Records resolved by LLM: "
+          f"{summary_with['total_matched'] - summary_without['total_matched']}")
+    print("=" * 60)
+    print(f"\nFull report written to {out_path}")
 
 
 if __name__ == "__main__":

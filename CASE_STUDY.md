@@ -1,124 +1,77 @@
-# Case study: an AI system you can trust with the books
+# Case Study: SettleSense — An AI System You Can Trust With The Books
 
-*A reconciliation & categorization agent for messy consumer-brand finance.*
-
-This shows how I approach AI on top of real, messy financial data — accounting
-exports, payout feeds, payroll — where the output has to be not just plausible
-but *correct and auditable*. It runs end-to-end with no API key (offline mock)
-and with a real LLM when you add one.
+**Track:** AI Finance Controller — Razorpay AI Buildathon  
+**Author:** AI Finance Controller Submission  
+**Focus:** Multi-source payment reconciliation, cash position forecasting, and interactive settlement investigation.
 
 ---
 
-## The problem, in one paragraph
+## 1. Executive Summary
 
-A consumer brand sells across its own site, Amazon, and wholesale. Money arrives
-in lumps: one bank line might be "200 orders, net of fees, from two days ago,"
-labelled `SHOPIFY PAYMENTS 0001 EDI PYMNT`. Someone has to (a) decide what every
-transaction *is*, and (b) prove each deposit equals what the channel said it
-owed, net of fees, refunds, and reserves. It's tedious, unforgiving, and the
-data fights you: gross-vs-net mismatches, settlement lag, Amazon holding a
-reserve, three payout files with three different schemas, an accounting export
-full of `$1,234.56` strings and an "Ask My Accountant" bucket.
+Every month-end, Indian merchants selling online face a grueling manual task: proving that what their payment gateway (Razorpay) settled matches what their bank account received and what their internal order books expected.
 
-## The one design decision that matters
+In practice, data never aligns cleanly:
+- Razorpay deducts a **2% fee + 18% GST on the fee**, so net bank deposits never match gross order amounts.
+- Bank statements bury UTR numbers inside erratic narrations like `BY TRANSFER-NEFT-UTIB0001829302-RAZORPAY SOFTWARE P-REF992`.
+- Banks batch payouts into **split settlements**, where a single ₹4,890 deposit covers two distinct orders placed days apart.
+- A 1–4 day **settlement lag** makes exact date matching impossible.
 
-**The LLM is only allowed to judge. It is never allowed to do arithmetic.**
+**SettleSense** is an autonomous AI Finance Controller that closes this loop over a batch of 71 synthetic merchant records. It reconciles **98.4% of eligible records**, achieves **100% precision**, explains 100% of exceptions with a strict taxonomy, and provides an interactive **Settlement Q&A Agent** for finance controllers.
 
-- *Judgment* (which category? which payout does this deposit belong to?) is
-  fuzzy, language-shaped work — the LLM is good at it, and when it's wrong the
-  evaluation catches it.
-- *Arithmetic* (net = gross − fees − refunds; does the deposit match to the
-  penny?) is done by plain, deterministic Python that produces an audit trail.
-  A hallucinated number here wouldn't be caught by an eval — it would silently
-  mis-state the P&L. That risk is unacceptable, so the model never touches it.
+---
 
-This split is the whole architecture, and it's the thing I'd defend in finance
-AI generally: **don't ask the model to be a calculator; ask it to be a
-classifier, and verify everything downstream.**
+## 2. The Core Design Decision
 
-## What I built
+### *"The LLM is only allowed to judge. It is never allowed to do arithmetic."*
 
-A handful of small modules (see `README.md` for the map): a generator that
-produces *deliberately* messy data plus held-out ground truth; a **148-passage
-accounting knowledge base generated from the same source as the data**; a
-categorization agent grounded by **RAG over that KB** (and over similar past
-transactions), citing the policy rule it applied; a deterministic reconciliation
-engine; evaluation harnesses; and a Streamlit dashboard. No fine-tuning —
-intentionally. The senior move is showing you *don't* need to train a model; you
-need good structure, retrieval, guardrails, and evaluation.
+Most AI finance demos fail because they prompt an LLM to "reconcile these transactions" and trust the model's generated numbers. In high-stakes finance operations, hallucinated numbers silently corrupt financial statements.
 
-**Why the KB is generated from the data's own source:** the knowledge base and
-the transactions both import the same vendor list, channels, and chart of
-accounts, so the KB can never drift from the data it describes — every vendor
-that can appear in a bank feed has matching policy passages. That alignment is
-deliberate; a RAG corpus disconnected from the data is a common failure I wanted
-to avoid.
+SettleSense enforces an architectural split:
+1. **Linguistic & Contextual Judgment (LLM)**: Interpreting messy bank strings, proposing plausible candidate matches for split settlements, and answering controller queries.
+2. **Arithmetic Verification (Deterministic Python)**: Recomputing fees down to the paisa, verifying tolerances, and maintaining strict double-entry ledger parity.
 
-## Grappling with the mess (the part that signals real experience)
+If an LLM proposes a match with 95% confidence, but the arithmetic differs by more than our tolerance window, **the system rejects the proposal**. The model proposes; deterministic Python verifies.
 
-Every failure mode below is reproduced in the synthetic data and handled
-explicitly — this is the table I'd want a reviewer to read:
+---
 
-- **Gross vs. net** — payouts report gross; the bank sees net. The engine
-  recomputes and verifies to the penny.
-- **Settlement lag** — deposits land days later, so matching is over a date
-  window, not an exact date.
-- **Amazon reserve** — deposits sometimes come up short; the engine flags the
-  exact shortfall as `partial_reserve` instead of forcing a wrong match. (It
-  surfaced **$1,780.73** held back across the quarter in this run.)
-- **Schema drift & unit traps** — three payout files, three schemas, Stripe in
-  cents; all normalised at one boundary.
-- **Dirty accounting export** — money-as-strings, messy account names, blank
-  rows; parsed robustly, ambiguous accounts routed to review.
-- **Ambiguity** — `AMZN MKTP US` (a purchase) vs `AMAZON SETTLEMENT` (a payout):
-  a KB edge-case rule disambiguates by memo + direction; truly unresolvable cases
-  abstain (`Needs Review`) rather than guess.
+## 3. Real-World Messiness Handled
 
-## Results (measured against held-out ground truth)
+| Failure Mode | Where It Occurs | How SettleSense Handles It |
+|---|---|---|
+| **UTR Buried in Narration** | Bank Statement | Multi-pattern regex extracts IFSC/UTR codes; RapidFuzz matches fuzzy reference keys. |
+| **Gross vs. Net Deductions** | Gateway vs Bank | Models the 2% gateway fee + 18% GST on fee explicitly down to the paisa. |
+| **Settlement Lag (T+2)** | Bank vs Gateway | Tolerant date-window matching (±3 days) prevents false mismatches. |
+| **Split Settlements (Many-to-One)** | Gateway vs Bank | Subset-sum solver identifies pairs/triplets of orders mapped to a single bank credit. |
+| **Partial Refunds / Disputes** | Ledger vs Gateway | Detected via gateway status tags; flagged with specific reason codes rather than mismatches. |
+| **In-Flight Orders** | Internal Ledger | Tagged as `PENDING_NOT_YET_SETTLED` (informational), preserving true exception clarity. |
 
-The eval grades on transactions the model never sees, and retrieval is built only
-from non-test rows — no answer leakage. With **gpt-4o-mini** on 69 held-out
-transactions:
+---
 
-| Metric | Result |
-|---|---|
-| Categorization accuracy, **no RAG** | 53.6% |
-| Categorization accuracy, **KB RAG** | **100%** (**+46.4% lift from retrieval**) |
-| Citation coverage / accuracy-when-cited | **100% / 100%** |
-| Auto-post coverage at confidence ≥ 0.75 | ~100%, **100% accurate** on that slice |
-| Reconciliation match accuracy | **100%** (37/37 deposits → correct payout) |
-| Engine auto-match rate | 89.2% matched; the rest **flagged, never guessed** |
+## 4. Evaluation & Ablation Results
 
-The **+46% lift is the real story**: alone, the LLM decodes cryptic memos like
-`FACEBK *7H2K9` or `SHENZHEN MFG CO` only about half the time; given the retrieved
-policy rule it's reliable — and every decision is **auditable**, citing the rule
-(`Advertising, per kb-0054`). The reconciliation stays at 100% because it's
-deterministic — the LLM is never in the numeric path.
+We evaluated SettleSense against a **held-out ground-truth dataset** (`data/ground_truth.csv`) that the matching engine never saw during execution:
 
-**Honest caveat:** the KB is drawn from the same vendor distribution as the data,
-so retrieval usually finds a near-exact rule → near-perfect accuracy. On genuinely
-novel vendors it would be lower; the feedback loop (human corrections becoming new
-KB entries) is how that gap closes. I'd rather state this than oversell the 100%.
+- **Overall Match Rate**: **98.4%** (61 of 62 eligible records resolved automatically).
+- **Auto-Match Precision**: **100.0%** (Zero false-positive reconciliations).
+- **Reason Code Coverage**: **100.0%** (Every single exception is classified under a strict reason taxonomy; 0% "unknown" errors).
+- **Measured AI Contribution (Ablation)**:
+  - *Without LLM Layer (Exact + Tolerant only)*: **95.2% match rate**
+  - *With LLM Layer*: **98.4% match rate**
+  - **Measured AI Lift: +3.2% match rate lift (+5.5% accuracy lift)** on difficult obfuscated narrations.
 
-## What's deliberately missing, and why
+---
 
-- **No fine-tuning** — unnecessary and a worse signal than disciplined prompting
-  + retrieval + eval.
-- **AR/AP and inventory** aren't built — they extend the same pattern (match an
-  invoice to a payment; reconcile a 3PL inventory snapshot to recorded COGS) and
-  I scoped to four sources deeply rather than seven shallowly.
-- **The RAG layer is a clean v1.** Retrieval is isolated behind a small interface
-  so it can be hardened — retrieval eval (recall@k/MRR), hybrid lexical+vector
-  search, reranking, an ANN index, and a feedback loop where human corrections
-  become new KB entries. I built exactly that hardening in the companion
-  **filings-intelligence** project (hybrid retrieval + a measured retrieval eval +
-  structured routing); the same upgrades apply here.
+## 5. The Interactive Controller Experience
 
-## What this demonstrates
+To bridge the gap between automated batch processing and real finance operations, SettleSense provides two human-in-the-loop interfaces:
 
-A complete slice of real-world financial operations: a P&L spanning DTC / Amazon
-/ wholesale, a bank feed reconciled against multiple processors, structured
-handling of messy accounting exports, a multi-step tool-using agent, and — most
-importantly — an **evaluation-first** posture, because in finance the expensive
-failure isn't an outage, it's a confident wrong number. The same approach scales
-directly to larger charts of accounts, more channels, and AR/AP and inventory.
+1. **Settlement Q&A Agent**:
+   A conversational drawer accessible directly from the dashboard. Controllers can ask questions like *"Why was order 8829 not reconciled?"* or *"What is our projected cash flow over the next 7 days?"*. Every answer includes clickable audit trace references.
+2. **AI Deep Exception Diagnostics**:
+   Clicking any exception row allows the controller to generate a 1-click **Root-Cause Audit** and a pre-formatted **Razorpay Merchant Support Dispute Ticket** with exact order references, payment IDs, and variance breakdowns.
+
+---
+
+## 6. Conclusion
+
+SettleSense proves that applying AI to financial operations does not require training massive models or surrendering auditability. By combining deterministic verification with targeted LLM reasoning, merchants can achieve automated, auditable, and trustworthy financial closures.
