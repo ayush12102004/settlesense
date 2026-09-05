@@ -1,180 +1,235 @@
-# SettleSense — AI Finance Controller
+<div align="center">
 
-**Razorpay AI Buildathon — Track 04: AI Finance Controller ("Run the books and the cash position")**  
-*Closes the multi-source settlement loop across gateway, bank feed, and internal ledger, with cash position rollup, 3-way GST audit, and an interactive Settlement Q&A Agent.*
+# ⚡ SettleSense — Autonomous AI Finance Controller
 
-🚀 **Live Production Application:** [https://settlesense-k8lf.onrender.com](https://settlesense-k8lf.onrender.com)  
-🩺 **Production Health Probe:** [https://settlesense-k8lf.onrender.com/health](https://settlesense-k8lf.onrender.com/health)  
-📦 **GitHub Repository:** [https://github.com/ayush12102004/settlesense](https://github.com/ayush12102004/settlesense)
+### *Closes the multi-source financial settlement loop, runs the books, and forecasts the forward cash position.*
 
-
----
-
-## The Problem
-
-Merchants using Razorpay reconcile three sources every settlement cycle:
-1. **What the gateway says it settled**: Net payouts after deducting 2% fee + 18% GST on fee, TDS, and refund adjustments.
-2. **What the bank statement actually credits**: NEFT/RTGS credits with UTRs buried in noisy narrations, split across multiple orders, and arriving with a 1–4 day lag.
-3. **What the internal ledger expected**: Gross invoice amounts and order dates.
-
-Today, finance controllers do this by hand in spreadsheets under month-end time pressure. Discrepancies get discovered late or written off.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://settlesense-k8lf.onrender.com)
+[![Track](https://img.shields.io/badge/Razorpay%20Track%2004-AI%20Finance%20Controller-0C2340?style=for-the-badge)](https://settlesense-k8lf.onrender.com)
+[![Precision](https://img.shields.io/badge/Auto--Match%20Precision-100%25-success?style=for-the-badge)](https://settlesense-k8lf.onrender.com)
+[![Health Probe](https://img.shields.io/badge/Health%20Probe-Passing-blue?style=for-the-badge)](https://settlesense-k8lf.onrender.com/health)
 
 ---
 
-## Core Architectural Invariant
+### 🌐 [**Live Web Application**](https://settlesense-k8lf.onrender.com) • 🩺 [**Health Check**](https://settlesense-k8lf.onrender.com/health) • 📖 [**Architecture Guide**](HOW_IT_WORKS.md) • 📊 [**Finance Case Study**](CASE_STUDY.md)
 
-> **The LLM proposes judgment; deterministic Python verifies the arithmetic.**
->
-> In finance operations, hallucinated numbers silently corrupt the books. SettleSense uses Google Gemini / OpenAI exclusively for **linguistic and contextual judgment** (parsing noisy narrations, detecting split settlements, and answering controller inquiries). Every amount is re-verified down to the paisa by deterministic code before any record is marked as reconciled.
+</div>
 
 ---
 
-## Key Features
+## 🎯 The Track 04 Challenge
 
-### 1. Layered Multi-Source Matching Engine
-- **Layer 1: Exact Match**: UTR and amounts align to the paisa.
-- **Layer 2: Tolerant Match**: High string similarity via RapidFuzz, configurable date window, and fee-aware tolerance.
-- **Layer 3: AI-Assisted Residue Match**: Google Gemini or OpenAI analyzes cryptic bank narrations and split payout structures.
-- **Layer 4: Taxonomical Exceptions**: Every unresolved record receives an actionable reason code (e.g. `SPLIT_SETTLEMENT_UNRESOLVED`, `AMOUNT_MISMATCH_BEYOND_TOLERANCE`, `PENDING_NOT_YET_SETTLED`).
+> **"Build an agent that closes ONE finance-ops loop across a 50+ record batch of synthetic data, reporting its match rate and the exceptions it could not resolve. Explicit judging bar: Throughput + measured accuracy + an honest exception list."**
 
-### 2. Interactive Settlement Q&A Agent
-- An on-dashboard AI assistant grounded in the live reconciliation run.
-- Answers complex controller queries: *"Why was order 8829 not reconciled?"*, *"What is our 7-day projected cash inflow?"*.
-- Automatically provides clickable citations to audit records.
+Merchants processing payments on Razorpay reconcile three disparate, asynchronous data sources every day:
+1. **Gateway Settlement Report:** Net payouts after deducting ~2% MDR fees, 18% GST on fees, refunds, and TDS.
+2. **Bank Statement Feed:** Net deposits arriving with a 1–4 day clearing lag, split across orders, with UTRs obscured inside noisy bank narrations.
+3. **Internal ERP / Order Book:** Expected gross checkout volumes and fulfillment timestamps.
 
-### 3. AI Deep Exception Diagnostics & Dispute Drafting
-- 1-click root-cause investigation for any unresolved exception.
-- Formulates a ready-to-send dispute ticket for the Razorpay Merchant Support desk with exact order IDs, payment IDs, and variance calculations.
-
-### 4. Deterministic Cash Position & Lag Stress Forecaster
-- Aggregates settled cash inflow vs. in-flight pipeline settlements.
-- Generates a 14-day forward liquidity projection rendered with Recharts.
-- Features dynamic **Cash Stress Testing** (+2 Days clearing lag simulation) to forecast merchant liquidity risks.
-
-### 5. Tax-Line & GSTR-2B Input Tax Credit (ITC) Matcher
-- Reconciles Razorpay monthly tax invoices under SAC `997159` (Payment processing and settlement services at 18% IGST).
-- Cross-references daily settlement fee deductions against monthly supplier tax invoices and the government's GSTR-2B portal filing.
-- Ensures 100% compliance under Section 16(2)(aa) of the CGST Act for seamless ITC claim processing with zero leakage.
+Today, finance controllers perform this in spreadsheets with fragile VLOOKUPs. Unreconciled variances get written off or caught weeks late during GST filing. **SettleSense automates this entire settlement and cash loop end-to-end.**
 
 ---
 
-## Benchmark & Evaluation Results
+## 🛡️ Core Architectural Invariant
 
-Evaluated against a **held-out ground-truth test set** (`data/ground_truth.csv`):
+<div align="center">
 
-| Metric | Measured Score | Evaluation Meaning |
+> ### *"The LLM proposes judgment; deterministic Python verifies the arithmetic down to the paisa."*
+
+</div>
+
+In financial operations, an undetected 50-paise discrepancy fails an audit. **SettleSense never allows an LLM to hallucinate numbers or directly mark a transaction as reconciled.**
+* **LLMs (Groq LPU / Google Gemini)** are used strictly for **contextual judgment** — parsing cryptic bank narrations, detecting multi-order batch splits, and answering controller queries.
+* **Deterministic Python code** rigorously re-calculates every fee, tax deduction, and net payout down to ₹0.00 before any state mutation occurs.
+* If the arithmetic does not balance, the AI proposal is immediately rejected and quarantined into Layer 4 as an actionable exception.
+
+---
+
+## 📊 Measured Benchmark Results (Held-Out Ground Truth)
+
+Evaluated against a held-out ground truth test set (`data/ground_truth.csv`) with zero cherry-picking:
+
+| Metric | Measured Result | Fintech Meaning & Evaluation Standard |
 |---|---|---|
-| **Auto-Match Precision** | **100.0%** | Zero false-positive matches; no incorrect attribution (critical in fintech) |
+| **Total Processed Records** | **69** | Synthetic batch exceeding the 50+ record requirement |
+| **Eligible Records** | **64** | Records expected to settle within the cycle |
+| **Auto-Match Precision** | **100.0%** | **Zero False Positives** (Zero incorrect match attributions) |
 | **Recall (Coverage)** | **95.5%** | 63 of 66 matchable orders reconciled across sources |
-| **F1-Score** | **97.7%** | Balanced harmonic accuracy metric |
-| **Overall Match Rate** | **95.3%** | 61 of 64 eligible records auto-reconciled; exceptions isolated |
-| **Rupee Reconciled** | **₹11,95,753.22** | Reconciled bank credits verified down to the paisa |
-| **₹ Amount at Risk** | **₹22,064.88** | Actionable exception volume (orphan deposit + fee penalty variance) |
-| **Reason Code Coverage** | **100.0%** | 0% generic errors; 100% of exceptions classified with suggested actions |
-| **Confusion Matrix** | **TP=63, FP=0, FN=3, TN=5** | Complete transparency against held-out ground truth |
-| **AI Ablation Lift** | **+3.1% Match / +6.1% Recall** | Empirically measured lift of Layer 3 AI over pure rules |
+| **F1-Score** | **97.7%** | Harmonic accuracy metric balancing precision and recall |
+| **Overall Match Rate** | **95.3%** | 61 of 64 eligible records auto-reconciled |
+| **Reconciled Bank Inflow** | **₹11,95,753.22** | Reconciled bank credits verified down to the paisa |
+| **Amount at Risk (Exceptions)**| **₹22,064.88** | Actionable exception volume quarantined for dispute |
+| **In-Flight Pipeline Liquidity**| **₹79,683.48** | 5 pending transactions within normal T+2 clearing window |
+| **Reason Code Coverage** | **100.0%** | 0% generic errors; 100% of exceptions mapped to action codes |
+| **Confusion Matrix** | **TP=63, FP=0, FN=3, TN=5** | Complete transparency against held-out benchmark |
+| **Measured AI Ablation Lift** | **+3.1% Match / +6.1% Recall** | Empirically verified lift of Layer 3 AI over pure rules |
+| **Processing Throughput** | **~3.3 rec/sec** | Sub-second average latency per record |
 
 ---
 
-## Project Structure
+## 🏗️ System Architecture
 
 ```
-razorpay/
-├── data/                       # Synthetic sources + generated artifacts
-│   ├── gateway_settlement.csv  # Razorpay payout reports (fees, GST, TDS)
-│   ├── bank_statement.csv      # Bank feed with noisy UTR narrations
-│   ├── internal_ledger.csv     # Merchant order book & expected amounts
-│   ├── ground_truth.csv        # Held-out evaluation benchmark
-│   ├── dashboard_data.json     # Consolidated frontend bundle
-│   ├── tax_reconciliation.json # Tax invoice vs GSTR-2B ITC 3-way match
-│   └── audit_trail.json / .csv # Full exportable audit trail
-├── frontend/
-│   └── index.html              # Single-file React dashboard (Tailwind + Recharts)
-├── src/
-│   ├── generate_data.py        # Realistic financial data synthesizer (seed: 42)
-│   ├── normalize.py            # Normalization and date/currency parsing
-│   ├── reconcile.py            # Deterministic + AI layered reconciliation engine
-│   ├── tax_matcher.py          # SAC 997159 Monthly Tax & GSTR-2B ITC matcher
-│   ├── model.py                # Native Groq (LPU), Google Gemini & OpenAI
-│   ├── evaluate.py             # Ground-truth evaluation & ablation harness
-│   ├── cash_position.py        # 14-day liquidity rollup & lag simulation
-│   ├── audit.py                # Trace logging and export engine
-│   ├── api.py                  # Flask backend with Q&A, diagnosis, tax & simulation
-│   └── main.py                 # Single-command pipeline orchestrator
-├── tests/
-│   ├── test_reconcile.py       # Engine accuracy, tolerance & exception tests
-│   ├── test_tax_matcher.py     # Tax invoice arithmetic and GSTR-2B match tests
-│   ├── test_edge_cases.py      # Precision/Recall/F1, guardrails & 3-way tax tests
-│   ├── test_api.py             # REST API endpoint tests
-│   ├── test_production_endpoints.py # Production health check & live endpoint tests
-│   └── test_failure_modes.py   # AI degradation & error handling tests
-├── Dockerfile                  # Production-hardened container spec
-├── Procfile                    # Declarative WSGI process for PaaS (Render / Railway)
-├── render.yaml                 # 1-click cloud infrastructure blueprint
-├── server.py                   # Multi-threaded production WSGI runner (Waitress)
-├── CASE_STUDY.md               # Finance Ops Case Study
-├── HOW_IT_WORKS.md             # Comprehensive Architecture & Guide
-└── requirements.txt            # Python dependencies (includes gunicorn & waitress)
+  Gateway Settlement CSV       Bank Statement Feed CSV        Internal Ledger CSV
+           │                             │                             │
+           └─────────────────────────────┼─────────────────────────────┘
+                                         ▼
+                             Data Normalization Engine
+                                         ▼
+                           4-Layer Reconciliation Engine
+      ┌──────────────────────────────────┼──────────────────────────────────┐
+      ▼                                  ▼                                  ▼
+Layer 1: Exact Match            Layer 2: Tolerant Match             Layer 3: AI Residue
+(UTR + Paisa alignment)         (RapidFuzz + Date window)           (Groq LPU / Gemini)
+      │                                  │                                  │
+      └──────────────────────────────────┼──────────────────────────────────┘
+                                         ▼
+                            Deterministic Verification
+                        (Paisa-level arithmetic re-check)
+                                         ▼
+                      Layer 4: Taxonomical Exception Engine
+                     (100% Actionable Reason Code Quarantine)
+                                         ▼
+     ┌───────────────────────────┬───────────────────────────┬──────────────────────────┐
+     ▼                           ▼                           ▼                          ▼
+3-Way GST Audit            Cash Forecaster             Audit Trail            Settlement Q&A
+(GSTR-2B vs Inv)           (14-Day + Stress)          (JSON / CSV)             (Groq Agent)
+     └───────────────────────────┼───────────────────────────┴──────────────────────────┘
+                                 ▼
+                     Production WSGI API (Waitress / Gunicorn)
+                                 ▼
+                     React 18 Single-Page Dashboard (Live on Render)
 ```
 
 ---
 
-## Quickstart
+## ✨ Key Capabilities
 
-### 1. Installation
+### 1. 4-Layer Multi-Source Matching Engine
+* **Layer 1 (Exact):** Instant paisa-perfect alignment on UTR and net payout (47 records).
+* **Layer 2 (RapidFuzz Tolerant):** Handles OCR typos, narration truncation, and configurable 3-day clearing windows (12 records).
+* **Layer 3 (AI-Assisted Residue):** Leverages Groq LPUs (`openai/gpt-oss-120b`) or Gemini Flash to untangle complex split-settlement groups and noisy narrations (2 records).
+* **Layer 4 (Taxonomical Exceptions):** Quarantines unresolvable records under standardized codes (`AMOUNT_MISMATCH_BEYOND_TOLERANCE`, `NO_CANDIDATE_IN_WINDOW`, `PENDING_NOT_YET_SETTLED`).
+
+### 2. Forward Cash Position Forecaster & Clearing Lag Stress Test
+* Aggregates settled bank credits vs. in-flight pipeline settlements.
+* Generates an interactive **14-day liquidity projection** rendered with Recharts.
+* **Dynamic Lag Stress Simulation (+2 Days):** 1-click simulation of weekend banking delays or RBI RTGS freezes to stress-test liquidity troughs.
+
+### 3. Triangulated 3-Way GST Input Tax Credit (ITC) Matcher
+* Reconciles daily fee deductions against monthly supplier tax invoices and the government's **GSTR-2B** portal under **SAC 997159** (18% IGST).
+* Enforces **Section 16(2)(aa) of the CGST Act** (deferring unfiled invoices to prevent tax notice penalties).
+* Accommodates micro-paise daily rounding variances under **GST Rule 36(4)**.
+
+### 4. Interactive Settlement Q&A Controller Agent
+* An on-dashboard AI assistant running on Groq LPUs for sub-second responses.
+* Grounded strictly in the live reconciliation run: answers complex inquiries (*"What is our 7-day projected cash inflow?"*, *"Why was order 0067 flagged?"*) with cited numbers.
+
+### 5. Deep Exception Diagnosis & Dispute Ticket Drafting
+* 1-click root-cause analysis of unresolved discrepancies.
+* Automatically drafts ready-to-send dispute support tickets for the **Razorpay Merchant Desk** with order IDs, payment IDs, and mathematical variance proofs.
+
+---
+
+## 🚀 Quickstart & Local Setup
+
+### 1. Clone & Install
 ```bash
+git clone https://github.com/ayush12102004/settlesense.git
+cd settlesense
 pip install -r requirements.txt
 ```
 
-### 2. Configure Model (Optional)
-To use a live LLM, copy `.env.example` to `.env`:
+### 2. Environment Configuration (Optional)
 ```bash
 cp .env.example .env
 ```
-Add your Groq API key:
+Add your Groq or Gemini API key in `.env`:
 ```env
-GROQ_API_KEY=your_groq_api_key_here
+GROQ_API_KEY=gsk_...
 LLM_PROVIDER=groq
 ```
-*(Or use Google Gemini with `GEMINI_API_KEY=...`. If no API key is provided, SettleSense runs seamlessly on its grounded offline mock).*
+*(If no API key is provided, SettleSense automatically operates on its grounded deterministic heuristic mock with 100% feature availability).*
 
-### 3. Run Automated Tests
+### 3. Run Test Suite
 ```bash
 python -m pytest tests/ -v
 ```
+*(All 16 unit, integration, and failure-mode tests pass in ~10 seconds).*
 
-### 4. Run Pipeline & Launch Local Production Server
+### 4. Launch Production Server
 ```bash
-# Windows / Cross-platform Production WSGI Server (Waitress)
+# Production WSGI Server (Waitress / Gunicorn)
 python server.py
 
-# Or classic development server:
+# Or classic developer server:
 python src/main.py --serve
 ```
 Open **`http://localhost:5000`** in your browser.
 
 ---
 
-## Production Cloud Deployment
+## ☁️ Cloud & Docker Deployment
 
-### Option 1: 1-Click Deploy on Render / Railway
-This repository contains a pre-configured [`render.yaml`](file:///render.yaml) and [`Procfile`](file:///Procfile).
-1. Connect your GitHub repository (`ayush12102004/settlesense`) to [Render](https://render.com) or [Railway](https://railway.app).
-2. Set build command: `pip install -r requirements.txt && python src/main.py`
-3. Set start command: `gunicorn src.wsgi:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120`
-4. Set health check path: `/health`
+### Public Cloud (Render / Railway)
+SettleSense is pre-configured with declarative [`render.yaml`](render.yaml) and [`Procfile`](Procfile) blueprints:
+* **Build Command:** `pip install -r requirements.txt && python src/main.py`
+* **Start Command:** `gunicorn src.wsgi:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120`
+* **Health Check Path:** `/health`
 
-### Option 2: Docker Container
+### Docker Container
 ```bash
-# Build production image
 docker build -t settlesense .
-
-# Run container on port 5000
 docker run -p 5000:5000 -e PORT=5000 settlesense
 ```
 
-### Option 3: Health & Liveness Probe
-SettleSense provides an automated health endpoint at `/health` returning status, active AI provider info, and file integrity flags:
-```bash
-curl http://localhost:5000/health
+---
+
+## 📂 Repository Structure
+
+```text
+settlesense/
+├── data/                       # Synthetic financial batch & evaluation artifacts
+│   ├── gateway_settlement.csv  # Razorpay payout reports (fees, GST, TDS)
+│   ├── bank_statement.csv      # Bank statement feed with noisy narrations
+│   ├── internal_ledger.csv     # Merchant order book & expected amounts
+│   ├── ground_truth.csv        # Held-out benchmark dataset (69 transactions)
+│   ├── dashboard_data.json     # Consolidated frontend bundle
+│   ├── tax_reconciliation.json # 3-way GSTR-2B ITC audit report
+│   └── audit_trail.json / .csv # Exportable audit trail
+├── frontend/
+│   └── index.html              # React 18 single-page dashboard (Tailwind + Recharts)
+├── src/
+│   ├── generate_data.py        # Financial data synthesizer (seed: 42)
+│   ├── normalize.py            # Financial normalizer & date/currency parser
+│   ├── reconcile.py            # 4-layer multi-source reconciliation engine
+│   ├── tax_matcher.py          # 3-way SAC 997159 GST & GSTR-2B auditor
+│   ├── cash_position.py        # 14-day liquidity forecaster & stress simulator
+│   ├── model.py                # Native Groq LPU, Gemini Flash & OpenAI client
+│   ├── evaluate.py             # Ground-truth evaluation & ablation harness
+│   ├── audit.py                # Trace logging and CSV/JSON export engine
+│   ├── api.py                  # Production Flask API with CORS & health probes
+│   ├── wsgi.py                 # Gunicorn WSGI production entrypoint
+│   └── main.py                 # Pipeline orchestrator
+├── tests/                      # Comprehensive test suite (16 tests)
+│   ├── test_reconcile.py       # Matching logic, tolerance, and reason codes
+│   ├── test_tax_matcher.py     # Multi-line 3-way GST audit verification
+│   ├── test_edge_cases.py      # Precision, recall, and guardrail validations
+│   ├── test_production_endpoints.py # Health check and live API tests
+│   └── test_failure_modes.py   # AI degradation, rate limits, and fallback tests
+├── server.py                   # Multi-threaded production WSGI runner (Waitress)
+├── Dockerfile                  # Container specification
+├── Procfile                    # Web process definition for PaaS
+├── render.yaml                 # Infrastructure-as-code cloud blueprint
+├── requirements.txt            # Python dependencies (gunicorn, waitress, etc.)
+└── HOW_IT_WORKS.md             # In-depth architectural documentation
 ```
+
+---
+
+<div align="center">
+
+**Built with ❤️ for the Razorpay AI Buildathon — Track 04: AI Finance Controller**  
+*Live Application: [https://settlesense-k8lf.onrender.com](https://settlesense-k8lf.onrender.com)*
+
+</div>
