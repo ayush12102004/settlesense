@@ -1,7 +1,7 @@
 [
   {
-    "trace_id": "TR-A601A5228B4A",
-    "timestamp": "2026-09-05T19:37:10.818811",
+    "trace_id": "TR-463D834DA6D2",
+    "timestamp": "2026-09-05T20:01:34.117482",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-01",
@@ -12,7 +12,7 @@
       "order_0061"
     ],
     "gateway_payment_ids": [
-      "pay_13805228f6e547"
+      "pay_12e1e830194742"
     ],
     "gateway_utrs": [
       "SBIN1317127484"
@@ -34,8 +34,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-20FB9E86D444",
-    "timestamp": "2026-09-05T19:37:10.818840",
+    "trace_id": "TR-52CC204B4E8B",
+    "timestamp": "2026-09-05T20:01:34.117559",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-01",
@@ -46,7 +46,7 @@
       "order_0062"
     ],
     "gateway_payment_ids": [
-      "pay_cc52fbb9d1804f"
+      "pay_6c20c0964ec344"
     ],
     "gateway_utrs": [
       "HDFC7826398214"
@@ -68,8 +68,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-188EE229BEB9",
-    "timestamp": "2026-09-05T19:37:10.818844",
+    "trace_id": "TR-0C7CCC9B54A1",
+    "timestamp": "2026-09-05T20:01:34.117573",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-02",
@@ -80,7 +80,7 @@
       "order_0065"
     ],
     "gateway_payment_ids": [
-      "pay_e5b071f12d9847"
+      "pay_fad363d83b3a45"
     ],
     "gateway_utrs": [
       "BARB2174596158"
@@ -102,8 +102,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-1698D9E159A0",
-    "timestamp": "2026-09-05T19:37:10.818847",
+    "trace_id": "TR-7576CFDAB010",
+    "timestamp": "2026-09-05T20:01:34.117583",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-03",
@@ -114,7 +114,7 @@
       "order_0028"
     ],
     "gateway_payment_ids": [
-      "pay_6d820d60c23b42"
+      "pay_f9d0151a6f2d4e"
     ],
     "gateway_utrs": [
       "KKBK3561595148"
@@ -136,8 +136,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-AD5D0BDC20DD",
-    "timestamp": "2026-09-05T19:37:10.818849",
+    "trace_id": "TR-28BE6E6B4E4F",
+    "timestamp": "2026-09-05T20:01:34.117591",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-07-04",
@@ -148,7 +148,7 @@
       "order_0036"
     ],
     "gateway_payment_ids": [
-      "pay_5aa15b236b9548"
+      "pay_3312420661194e"
     ],
     "gateway_utrs": [
       "KKBK3734670656"
@@ -170,8 +170,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-63383DB20247",
-    "timestamp": "2026-09-05T19:37:10.818851",
+    "trace_id": "TR-3E4F0DB3E75E",
+    "timestamp": "2026-09-05T20:01:34.117599",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-05",
@@ -182,7 +182,7 @@
       "order_0032"
     ],
     "gateway_payment_ids": [
-      "pay_9de59ac3be0446"
+      "pay_7fdb3eced01945"
     ],
     "gateway_utrs": [
       "HDFC2870831727"
@@ -204,8 +204,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-750B2C057A7E",
-    "timestamp": "2026-09-05T19:37:10.818853",
+    "trace_id": "TR-B3A1EC2E2198",
+    "timestamp": "2026-09-05T20:01:34.117606",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-05",
@@ -216,7 +216,7 @@
       "order_0006"
     ],
     "gateway_payment_ids": [
-      "pay_42b7b28b1d534b"
+      "pay_25029235b18a49"
     ],
     "gateway_utrs": [
       "ICIC6413953767"
@@ -238,8 +238,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-91DBF9970284",
-    "timestamp": "2026-09-05T19:37:10.818855",
+    "trace_id": "TR-6BAF417AB152",
+    "timestamp": "2026-09-05T20:01:34.117614",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-05",
@@ -250,7 +250,7 @@
       "order_0050"
     ],
     "gateway_payment_ids": [
-      "pay_176f5b3eda894b"
+      "pay_8e765dc463544e"
     ],
     "gateway_utrs": [
       "SBIN4990913341"
@@ -272,8 +272,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-D534CF9D9F56",
-    "timestamp": "2026-09-05T19:37:10.818857",
+    "trace_id": "TR-910C16839974",
+    "timestamp": "2026-09-05T20:01:34.117620",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-07-05",
@@ -284,7 +284,7 @@
       "order_0018"
     ],
     "gateway_payment_ids": [
-      "pay_972b1289de0846"
+      "pay_d4ee61d47a3a4e"
     ],
     "gateway_utrs": [
       "KKBK1219136193"
@@ -306,8 +306,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-D305AE30F5C2",
-    "timestamp": "2026-09-05T19:37:10.818858",
+    "trace_id": "TR-14ABAB9B2607",
+    "timestamp": "2026-09-05T20:01:34.117627",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-06",
@@ -318,7 +318,7 @@
       "order_0033"
     ],
     "gateway_payment_ids": [
-      "pay_31dc9a71444949"
+      "pay_783963d35c964d"
     ],
     "gateway_utrs": [
       "SBIN8727743487"
@@ -340,8 +340,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-9B79B958A555",
-    "timestamp": "2026-09-05T19:37:10.818860",
+    "trace_id": "TR-AB660EF24236",
+    "timestamp": "2026-09-05T20:01:34.117634",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -352,7 +352,7 @@
       "order_0039"
     ],
     "gateway_payment_ids": [
-      "pay_a5aed80b758f41"
+      "pay_9f7cee96d8da4e"
     ],
     "gateway_utrs": [
       "HDFC2719374529"
@@ -374,8 +374,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-3135069BCD10",
-    "timestamp": "2026-09-05T19:37:10.818862",
+    "trace_id": "TR-C48EEF79FBC0",
+    "timestamp": "2026-09-05T20:01:34.117641",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -386,7 +386,7 @@
       "order_0049"
     ],
     "gateway_payment_ids": [
-      "pay_b9496050116744"
+      "pay_48d3a48e7f2e45"
     ],
     "gateway_utrs": [
       "KKBK4131869993"
@@ -408,8 +408,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-CEF810B8AE51",
-    "timestamp": "2026-09-05T19:37:10.818863",
+    "trace_id": "TR-5EFFF9E092C7",
+    "timestamp": "2026-09-05T20:01:34.117647",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -420,7 +420,7 @@
       "order_0051"
     ],
     "gateway_payment_ids": [
-      "pay_5ef45eca794b4a"
+      "pay_4b1e5fbf2a7d4c"
     ],
     "gateway_utrs": [
       "SBIN7974034471"
@@ -442,8 +442,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-6416FD1AC88C",
-    "timestamp": "2026-09-05T19:37:10.818865",
+    "trace_id": "TR-11A2D9A3F55C",
+    "timestamp": "2026-09-05T20:01:34.117655",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -454,7 +454,7 @@
       "order_0002"
     ],
     "gateway_payment_ids": [
-      "pay_be909ee1e39c42"
+      "pay_deb74b9bb16e4c"
     ],
     "gateway_utrs": [
       "BARB8637940265"
@@ -476,8 +476,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-ECC61C997337",
-    "timestamp": "2026-09-05T19:37:10.818866",
+    "trace_id": "TR-D331B81F4326",
+    "timestamp": "2026-09-05T20:01:34.117662",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-07",
@@ -488,7 +488,7 @@
       "order_0011"
     ],
     "gateway_payment_ids": [
-      "pay_9ca9c38dcea048"
+      "pay_2b0971636b5d49"
     ],
     "gateway_utrs": [
       "HDFC2782489638"
@@ -510,8 +510,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-90432B533FB7",
-    "timestamp": "2026-09-05T19:37:10.818868",
+    "trace_id": "TR-E97D10851509",
+    "timestamp": "2026-09-05T20:01:34.117668",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-07",
@@ -522,7 +522,7 @@
       "order_0001"
     ],
     "gateway_payment_ids": [
-      "pay_6bb8b9e0da0a46"
+      "pay_944d5e15692143"
     ],
     "gateway_utrs": [
       "HDFC3218196001"
@@ -544,8 +544,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-00C30EF7A5A7",
-    "timestamp": "2026-09-05T19:37:10.818870",
+    "trace_id": "TR-CAD256E7348F",
+    "timestamp": "2026-09-05T20:01:34.117674",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-07",
@@ -556,7 +556,7 @@
       "order_0024"
     ],
     "gateway_payment_ids": [
-      "pay_401240af77da4b"
+      "pay_81b50644c55f4d"
     ],
     "gateway_utrs": [
       "UTIB5331586923"
@@ -578,8 +578,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-C874B82BD2E1",
-    "timestamp": "2026-09-05T19:37:10.818871",
+    "trace_id": "TR-CF9162983EAC",
+    "timestamp": "2026-09-05T20:01:34.117681",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-07",
@@ -590,7 +590,7 @@
       "order_0060"
     ],
     "gateway_payment_ids": [
-      "pay_27cd12ff579046"
+      "pay_6a9dd91f674545"
     ],
     "gateway_utrs": [
       "UTIB3482477109"
@@ -612,8 +612,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-90A0C008A461",
-    "timestamp": "2026-09-05T19:37:10.818873",
+    "trace_id": "TR-F34BD9E2A2A8",
+    "timestamp": "2026-09-05T20:01:34.117687",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-08",
@@ -624,7 +624,7 @@
       "order_0059"
     ],
     "gateway_payment_ids": [
-      "pay_01c6f8fc053542"
+      "pay_4f0b8ceb85b044"
     ],
     "gateway_utrs": [
       "SBIN8087603859"
@@ -646,8 +646,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-B79FEEAFA195",
-    "timestamp": "2026-09-05T19:37:10.818874",
+    "trace_id": "TR-4A3B9E3C0900",
+    "timestamp": "2026-09-05T20:01:34.117693",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-08",
@@ -658,7 +658,7 @@
       "order_0066"
     ],
     "gateway_payment_ids": [
-      "pay_72cda40d8baf45"
+      "pay_b79f33bbc07046"
     ],
     "gateway_utrs": [
       "BARB4316117240"
@@ -680,8 +680,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-2444E714FCFE",
-    "timestamp": "2026-09-05T19:37:10.818876",
+    "trace_id": "TR-A5AB47B0EB25",
+    "timestamp": "2026-09-05T20:01:34.117700",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-09",
@@ -692,7 +692,7 @@
       "order_0020"
     ],
     "gateway_payment_ids": [
-      "pay_505588a7eaae44"
+      "pay_a744786da3684a"
     ],
     "gateway_utrs": [
       "KKBK9118384251"
@@ -714,8 +714,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-FEF0D0D1193F",
-    "timestamp": "2026-09-05T19:37:10.818877",
+    "trace_id": "TR-D1A4EE3DB605",
+    "timestamp": "2026-09-05T20:01:34.117706",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-07-11",
@@ -726,7 +726,7 @@
       "order_0007"
     ],
     "gateway_payment_ids": [
-      "pay_92fe8f5a8c9044"
+      "pay_c54235f45a1147"
     ],
     "gateway_utrs": [
       "BARB9696532871"
@@ -748,8 +748,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-DBA035B13CF6",
-    "timestamp": "2026-09-05T19:37:10.818879",
+    "trace_id": "TR-7B28ECB9BA37",
+    "timestamp": "2026-09-05T20:01:34.117712",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-12",
@@ -760,7 +760,7 @@
       "order_0017"
     ],
     "gateway_payment_ids": [
-      "pay_05940cf5b97447"
+      "pay_17abed86d8d049"
     ],
     "gateway_utrs": [
       "HDFC3430980500"
@@ -782,8 +782,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-79172C615CD6",
-    "timestamp": "2026-09-05T19:37:10.818880",
+    "trace_id": "TR-BE54772F9B28",
+    "timestamp": "2026-09-05T20:01:34.117718",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-13",
@@ -794,7 +794,7 @@
       "order_0040"
     ],
     "gateway_payment_ids": [
-      "pay_5a8ed54a219940"
+      "pay_e565a9af6b1a4c"
     ],
     "gateway_utrs": [
       "KKBK0496631931"
@@ -816,54 +816,30 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-79182FA97572",
-    "timestamp": "2026-09-05T19:37:10.818882",
-    "layer": "llm_assisted",
-    "status": "matched",
+    "trace_id": "TR-CDB3B8198CDD",
+    "timestamp": "2026-09-05T20:01:34.117725",
+    "layer": "exception",
+    "status": "exception",
     "bank_date": "2025-06-16",
     "bank_narration": "TRF FRM RAZORPAY-0053",
     "bank_amount": 27753.02,
     "bank_utr": null,
-    "gateway_order_ids": [
-      "order_0053",
-      "order_0054",
-      "order_0052"
-    ],
-    "gateway_payment_ids": [
-      "pay_8c93601d916146",
-      "pay_960fb71cb46948",
-      "pay_cd7e84ef6f1447"
-    ],
-    "gateway_utrs": [
-      "KKBK3618324210",
-      "KKBK3618324210",
-      "KKBK3618324210"
-    ],
-    "gateway_net_amounts": [
-      2676.26,
-      13862.41,
-      11214.35
-    ],
-    "gateway_total_net": 27753.02,
-    "ledger_order_ids": [
-      "order_0053",
-      "order_0054",
-      "order_0052"
-    ],
-    "ledger_expected_amounts": [
-      2740.95,
-      14197.47,
-      11485.41
-    ],
-    "amount_diff": 0.0,
-    "confidence": 0.96,
-    "reason_code": null,
-    "reason": "AI-assisted split match — UTR KKBK3618324210 matches three orders settled on 2025-06-13 and their net amounts sum to the ₹27,753.02 credit with a 3‑day lag; narration references order 0053. Arithmetic verified: diff ₹0.00",
-    "suggested_step": "AI-matched and arithmetically verified — review if needed"
+    "gateway_order_ids": [],
+    "gateway_payment_ids": [],
+    "gateway_utrs": [],
+    "gateway_net_amounts": [],
+    "gateway_total_net": null,
+    "ledger_order_ids": [],
+    "ledger_expected_amounts": [],
+    "amount_diff": null,
+    "confidence": null,
+    "reason_code": "NO_CANDIDATE_IN_WINDOW",
+    "reason": "No gateway record found within ₹5.0 and 5-day window",
+    "suggested_step": "Check gateway dashboard for settlement status of this order"
   },
   {
-    "trace_id": "TR-73FC39DB900B",
-    "timestamp": "2026-09-05T19:37:10.818884",
+    "trace_id": "TR-2F28B85995A6",
+    "timestamp": "2026-09-05T20:01:34.117732",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-16",
@@ -874,7 +850,7 @@
       "order_0026"
     ],
     "gateway_payment_ids": [
-      "pay_7b15cc5fdcda41"
+      "pay_4b7385eec39648"
     ],
     "gateway_utrs": [
       "BARB3654145868"
@@ -896,8 +872,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-AB9918274EAA",
-    "timestamp": "2026-09-05T19:37:10.818886",
+    "trace_id": "TR-C3366D4C08C5",
+    "timestamp": "2026-09-05T20:01:34.117740",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-17",
@@ -908,7 +884,7 @@
       "order_0008"
     ],
     "gateway_payment_ids": [
-      "pay_b15d0dcfa68d49"
+      "pay_9bb1e74cd9ee47"
     ],
     "gateway_utrs": [
       "KKBK1669784801"
@@ -930,8 +906,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-AAA317A5D912",
-    "timestamp": "2026-09-05T19:37:10.818888",
+    "trace_id": "TR-8D21828D937B",
+    "timestamp": "2026-09-05T20:01:34.117747",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-19",
@@ -942,7 +918,7 @@
       "order_0022"
     ],
     "gateway_payment_ids": [
-      "pay_06484b48a01a44"
+      "pay_c993c22d10f647"
     ],
     "gateway_utrs": [
       "HDFC4874016400"
@@ -964,8 +940,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-18F7276FE34B",
-    "timestamp": "2026-09-05T19:37:10.818890",
+    "trace_id": "TR-48B9AE0EFE75",
+    "timestamp": "2026-09-05T20:01:34.117753",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-19",
@@ -976,7 +952,7 @@
       "order_0015"
     ],
     "gateway_payment_ids": [
-      "pay_676b185519a643"
+      "pay_d921663f5ec845"
     ],
     "gateway_utrs": [
       "HDFC6247317810"
@@ -998,8 +974,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-4D1321A51DA9",
-    "timestamp": "2026-09-05T19:37:10.818892",
+    "trace_id": "TR-3E7B0D66F82F",
+    "timestamp": "2026-09-05T20:01:34.117761",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-05",
@@ -1010,7 +986,7 @@
       "order_0025"
     ],
     "gateway_payment_ids": [
-      "pay_1f1b65633de247"
+      "pay_ccfe571c23d045"
     ],
     "gateway_utrs": [
       "SBIN3421607337"
@@ -1032,8 +1008,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-DE9A33F644DB",
-    "timestamp": "2026-09-05T19:37:10.818893",
+    "trace_id": "TR-5E1AFFC63293",
+    "timestamp": "2026-09-05T20:01:34.117767",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-05",
@@ -1044,7 +1020,7 @@
       "order_0013"
     ],
     "gateway_payment_ids": [
-      "pay_f5f61995dd2147"
+      "pay_4964f137bf754d"
     ],
     "gateway_utrs": [
       "UTIB5183473829"
@@ -1066,8 +1042,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-1A372D2EDE31",
-    "timestamp": "2026-09-05T19:37:10.818895",
+    "trace_id": "TR-767C8CF97AD9",
+    "timestamp": "2026-09-05T20:01:34.117774",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -1078,7 +1054,7 @@
       "order_0048"
     ],
     "gateway_payment_ids": [
-      "pay_6d632216b4b748"
+      "pay_d82273cb7af742"
     ],
     "gateway_utrs": [
       "SBIN7752047116"
@@ -1100,8 +1076,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-9C707DC2A3C6",
-    "timestamp": "2026-09-05T19:37:10.818897",
+    "trace_id": "TR-1113FB669FEF",
+    "timestamp": "2026-09-05T20:01:34.117781",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-09",
@@ -1112,7 +1088,7 @@
       "order_0041"
     ],
     "gateway_payment_ids": [
-      "pay_7b082656bf444f"
+      "pay_467fb6f7d9ee4b"
     ],
     "gateway_utrs": [
       "SBIN5185067165"
@@ -1134,8 +1110,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-8CCDF97D7E8A",
-    "timestamp": "2026-09-05T19:37:10.818899",
+    "trace_id": "TR-467D49A7F9EE",
+    "timestamp": "2026-09-05T20:01:34.117788",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-10",
@@ -1146,7 +1122,7 @@
       "order_0034"
     ],
     "gateway_payment_ids": [
-      "pay_79a5ad700bee43"
+      "pay_a014cc0514b546"
     ],
     "gateway_utrs": [
       "HDFC4558122362"
@@ -1168,8 +1144,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-7967F803967C",
-    "timestamp": "2026-09-05T19:37:10.818901",
+    "trace_id": "TR-ED7C19811923",
+    "timestamp": "2026-09-05T20:01:34.117795",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-14",
@@ -1180,7 +1156,7 @@
       "order_0031"
     ],
     "gateway_payment_ids": [
-      "pay_7e9024a6a83e4a"
+      "pay_0c2520deafed43"
     ],
     "gateway_utrs": [
       "UTIB3791769367"
@@ -1202,8 +1178,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-3F9A6E2F0278",
-    "timestamp": "2026-09-05T19:37:10.818903",
+    "trace_id": "TR-DBFF7B367549",
+    "timestamp": "2026-09-05T20:01:34.117801",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-17",
@@ -1214,7 +1190,7 @@
       "order_0046"
     ],
     "gateway_payment_ids": [
-      "pay_72d0e1e4055049"
+      "pay_1b1f442b19634f"
     ],
     "gateway_utrs": [
       "ICIC1823374989"
@@ -1236,8 +1212,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-0AAEA0B6E1B2",
-    "timestamp": "2026-09-05T19:37:10.818904",
+    "trace_id": "TR-B563D001FFF2",
+    "timestamp": "2026-09-05T20:01:34.117808",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-18",
@@ -1248,7 +1224,7 @@
       "order_0010"
     ],
     "gateway_payment_ids": [
-      "pay_c77a034763a346"
+      "pay_3c987d03c1b94b"
     ],
     "gateway_utrs": [
       "UTIB9570154303"
@@ -1270,8 +1246,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-4215190C6894",
-    "timestamp": "2026-09-05T19:37:10.818906",
+    "trace_id": "TR-DD8917C777EC",
+    "timestamp": "2026-09-05T20:01:34.117814",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-20",
@@ -1282,7 +1258,7 @@
       "order_0016"
     ],
     "gateway_payment_ids": [
-      "pay_7d0c7c97f3c14c"
+      "pay_e1ef855f7b034a"
     ],
     "gateway_utrs": [
       "SBIN7360260647"
@@ -1304,8 +1280,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-D75F37725C81",
-    "timestamp": "2026-09-05T19:37:10.818907",
+    "trace_id": "TR-3E92C979D4EB",
+    "timestamp": "2026-09-05T20:01:34.117820",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-22",
@@ -1316,7 +1292,7 @@
       "order_0027"
     ],
     "gateway_payment_ids": [
-      "pay_d01eb6fe913a43"
+      "pay_7fac1a50e21c46"
     ],
     "gateway_utrs": [
       "ICIC0196556981"
@@ -1338,8 +1314,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-AFEB66733656",
-    "timestamp": "2026-09-05T19:37:10.818909",
+    "trace_id": "TR-B9D107874412",
+    "timestamp": "2026-09-05T20:01:34.117826",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-22",
@@ -1350,7 +1326,7 @@
       "order_0047"
     ],
     "gateway_payment_ids": [
-      "pay_6bfb434228714b"
+      "pay_e7749c16a80c48"
     ],
     "gateway_utrs": [
       "HDFC4082400842"
@@ -1372,8 +1348,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-426DE38EAD43",
-    "timestamp": "2026-09-05T19:37:10.818910",
+    "trace_id": "TR-1905FFBB471C",
+    "timestamp": "2026-09-05T20:01:34.117833",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-23",
@@ -1384,7 +1360,7 @@
       "order_0003"
     ],
     "gateway_payment_ids": [
-      "pay_aaa6c3adcec244"
+      "pay_87d28bc52b854b"
     ],
     "gateway_utrs": [
       "SBIN1559407816"
@@ -1406,8 +1382,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-989942D11D37",
-    "timestamp": "2026-09-05T19:37:10.818912",
+    "trace_id": "TR-721B213FD504",
+    "timestamp": "2026-09-05T20:01:34.117839",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-26",
@@ -1418,7 +1394,7 @@
       "order_0038"
     ],
     "gateway_payment_ids": [
-      "pay_b7a552c971c748"
+      "pay_04d5a2cb2e6b41"
     ],
     "gateway_utrs": [
       "SBIN4170805310"
@@ -1440,8 +1416,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-9AF9B5D65B35",
-    "timestamp": "2026-09-05T19:37:10.818913",
+    "trace_id": "TR-B42F7FFCF1CB",
+    "timestamp": "2026-09-05T20:01:34.117846",
     "layer": "llm_assisted",
     "status": "matched",
     "bank_date": "2025-06-28",
@@ -1453,8 +1429,8 @@
       "order_0055"
     ],
     "gateway_payment_ids": [
-      "pay_a3852039ac244d",
-      "pay_b6749e0958a348"
+      "pay_404e52986ea047",
+      "pay_9a1583a212c142"
     ],
     "gateway_utrs": [
       "UTIB9065940139",
@@ -1476,12 +1452,12 @@
     "amount_diff": 0.0,
     "confidence": 0.98,
     "reason_code": null,
-    "reason": "AI-assisted split match — UTR UTIB9065940139 matches both orders and their net amounts sum to the bank credit, with 3‑day lag and order ID in narration. Arithmetic verified: diff ₹0.00",
+    "reason": "AI-assisted split match — UTR UTIB9065940139 matches both orders and their net amounts sum to the bank credit, with 3‑day lag. Arithmetic verified: diff ₹0.00",
     "suggested_step": "AI-matched and arithmetically verified — review if needed"
   },
   {
-    "trace_id": "TR-2AEDB038C16D",
-    "timestamp": "2026-09-05T19:37:10.818915",
+    "trace_id": "TR-9DB9E7804D77",
+    "timestamp": "2026-09-05T20:01:34.117853",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-03",
@@ -1492,7 +1468,7 @@
       "order_0042"
     ],
     "gateway_payment_ids": [
-      "pay_f7febd6accfd45"
+      "pay_f201d9e08bd944"
     ],
     "gateway_utrs": [
       "BARB4987769453"
@@ -1514,8 +1490,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-3631FFBE670D",
-    "timestamp": "2026-09-05T19:37:10.818917",
+    "trace_id": "TR-D9F6B4CB424D",
+    "timestamp": "2026-09-05T20:01:34.117860",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-04",
@@ -1526,7 +1502,7 @@
       "order_0019"
     ],
     "gateway_payment_ids": [
-      "pay_683c8329e82847"
+      "pay_946e3c9629e644"
     ],
     "gateway_utrs": [
       "KKBK8543534624"
@@ -1548,8 +1524,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-B67B630E3819",
-    "timestamp": "2026-09-05T19:37:10.818918",
+    "trace_id": "TR-D80848EE0317",
+    "timestamp": "2026-09-05T20:01:34.117866",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-07-04",
@@ -1560,7 +1536,7 @@
       "order_0021"
     ],
     "gateway_payment_ids": [
-      "pay_f43bb212860d44"
+      "pay_cfa12d14d65e48"
     ],
     "gateway_utrs": [
       "KKBK8084124118"
@@ -1582,8 +1558,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-7E8A00619315",
-    "timestamp": "2026-09-05T19:37:10.818920",
+    "trace_id": "TR-249D4C4FA640",
+    "timestamp": "2026-09-05T20:01:34.117872",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-04",
@@ -1594,7 +1570,7 @@
       "order_0014"
     ],
     "gateway_payment_ids": [
-      "pay_625ab03c9fcc46"
+      "pay_c97cd24aad664d"
     ],
     "gateway_utrs": [
       "UTIB1656670106"
@@ -1616,8 +1592,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-A860591027EA",
-    "timestamp": "2026-09-05T19:37:10.818921",
+    "trace_id": "TR-F99576CB774B",
+    "timestamp": "2026-09-05T20:01:34.117879",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-09",
@@ -1628,7 +1604,7 @@
       "order_0037"
     ],
     "gateway_payment_ids": [
-      "pay_c85d34bcb90d4b"
+      "pay_a412248f82ca45"
     ],
     "gateway_utrs": [
       "KKBK9016272046"
@@ -1650,8 +1626,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-D77B7CE23DCB",
-    "timestamp": "2026-09-05T19:37:10.818923",
+    "trace_id": "TR-5C3ED7521034",
+    "timestamp": "2026-09-05T20:01:34.117884",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-12",
@@ -1662,7 +1638,7 @@
       "order_0063"
     ],
     "gateway_payment_ids": [
-      "pay_030b13a0c4b346"
+      "pay_aeec5dcf91414c"
     ],
     "gateway_utrs": [
       "ICIC9972787558"
@@ -1684,8 +1660,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-4C161AE47E11",
-    "timestamp": "2026-09-05T19:37:10.818924",
+    "trace_id": "TR-BABAC50B7246",
+    "timestamp": "2026-09-05T20:01:34.117890",
     "layer": "llm_assisted",
     "status": "matched",
     "bank_date": "2025-06-21",
@@ -1697,8 +1673,8 @@
       "order_0058"
     ],
     "gateway_payment_ids": [
-      "pay_285e6565b8184d",
-      "pay_22951086db164d"
+      "pay_36cfa6a07bb24a",
+      "pay_b60a1f5a716d44"
     ],
     "gateway_utrs": [
       "KKBK6717565512",
@@ -1718,14 +1694,14 @@
       7367.56
     ],
     "amount_diff": 0.0,
-    "confidence": 0.97,
+    "confidence": 0.82,
     "reason_code": null,
-    "reason": "AI-assisted split match — Narration mentions order_0057, amount equals sum of order_0057 and order_0058 net amounts, same UTR and 3‑day lag indicate a split settlement. Arithmetic verified: diff ₹0.00",
+    "reason": "AI-assisted split match — Multi-order split settlement detected: orders order_0057 + order_0058 sum to bank credit within ₹0.00. Arithmetic verified: diff ₹0.00",
     "suggested_step": "AI-matched and arithmetically verified — review if needed"
   },
   {
-    "trace_id": "TR-75A99942C376",
-    "timestamp": "2026-09-05T19:37:10.818926",
+    "trace_id": "TR-F49B1882F983",
+    "timestamp": "2026-09-05T20:01:34.117896",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-21",
@@ -1736,7 +1712,7 @@
       "order_0044"
     ],
     "gateway_payment_ids": [
-      "pay_e72c16c0a50e4c"
+      "pay_6eaef1fbe3b244"
     ],
     "gateway_utrs": [
       "KKBK3136783777"
@@ -1758,8 +1734,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-4DCA527D8213",
-    "timestamp": "2026-09-05T19:37:10.818927",
+    "trace_id": "TR-83CC003CC127",
+    "timestamp": "2026-09-05T20:01:34.117902",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-21",
@@ -1770,7 +1746,7 @@
       "order_0023"
     ],
     "gateway_payment_ids": [
-      "pay_ab05a7b4b6804a"
+      "pay_600ed0706b5a4b"
     ],
     "gateway_utrs": [
       "KKBK6801128059"
@@ -1792,8 +1768,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-A3B51D6FDB78",
-    "timestamp": "2026-09-05T19:37:10.818929",
+    "trace_id": "TR-31AD0021FF92",
+    "timestamp": "2026-09-05T20:01:34.117909",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-22",
@@ -1804,7 +1780,7 @@
       "order_0043"
     ],
     "gateway_payment_ids": [
-      "pay_c9af3759325c47"
+      "pay_f7dcd26087bf43"
     ],
     "gateway_utrs": [
       "KKBK6507527354"
@@ -1826,8 +1802,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-381128C3B0B2",
-    "timestamp": "2026-09-05T19:37:10.818930",
+    "trace_id": "TR-1835661D034E",
+    "timestamp": "2026-09-05T20:01:34.117915",
     "layer": "exception",
     "status": "exception",
     "bank_date": "2025-06-22",
@@ -1838,7 +1814,7 @@
       "order_0067"
     ],
     "gateway_payment_ids": [
-      "pay_738f20d20f6643"
+      "pay_d1ff58dc3a484b"
     ],
     "gateway_utrs": [
       "SBIN2386922219"
@@ -1850,14 +1826,14 @@
     "ledger_order_ids": [],
     "ledger_expected_amounts": [],
     "amount_diff": 250.0,
-    "confidence": 0.9,
+    "confidence": 0.78,
     "reason_code": "AMOUNT_MISMATCH_BEYOND_TOLERANCE",
     "reason": "AI proposed match but arithmetic failed: bank ₹13614.88 vs gateway net ₹13864.88 (diff ₹250.00)",
     "suggested_step": "Verify fee computation or check for partial refund not reflected in gateway"
   },
   {
-    "trace_id": "TR-1A3D3520098B",
-    "timestamp": "2026-09-05T19:37:10.818932",
+    "trace_id": "TR-389B38A7D196",
+    "timestamp": "2026-09-05T20:01:34.117922",
     "layer": "exception",
     "status": "exception",
     "bank_date": "2025-06-22",
@@ -1878,8 +1854,8 @@
     "suggested_step": "Check gateway dashboard for settlement status of this order"
   },
   {
-    "trace_id": "TR-7A6EEADA6239",
-    "timestamp": "2026-09-05T19:37:10.818934",
+    "trace_id": "TR-7D36F2232991",
+    "timestamp": "2026-09-05T20:01:34.117928",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-23",
@@ -1890,7 +1866,7 @@
       "order_0029"
     ],
     "gateway_payment_ids": [
-      "pay_ba32abbef14144"
+      "pay_c1c1257911a046"
     ],
     "gateway_utrs": [
       "HDFC6629946804"
@@ -1912,8 +1888,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-83E2CBB39C73",
-    "timestamp": "2026-09-05T19:37:10.818936",
+    "trace_id": "TR-4ADB40D2A112",
+    "timestamp": "2026-09-05T20:01:34.117934",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-25",
@@ -1924,7 +1900,7 @@
       "order_0009"
     ],
     "gateway_payment_ids": [
-      "pay_963c5f3659e84f"
+      "pay_773666dc12c14d"
     ],
     "gateway_utrs": [
       "SBIN2704828148"
@@ -1946,8 +1922,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-41EA7BF47474",
-    "timestamp": "2026-09-05T19:37:10.818937",
+    "trace_id": "TR-B83720AD3F95",
+    "timestamp": "2026-09-05T20:01:34.117941",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-26",
@@ -1958,7 +1934,7 @@
       "order_0064"
     ],
     "gateway_payment_ids": [
-      "pay_47c5f188032c49"
+      "pay_bbe46d1285ea43"
     ],
     "gateway_utrs": [
       "SBIN0576627028"
@@ -1980,8 +1956,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-8C30569B2068",
-    "timestamp": "2026-09-05T19:37:10.818938",
+    "trace_id": "TR-31EEED110E2A",
+    "timestamp": "2026-09-05T20:01:34.117947",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-26",
@@ -1992,7 +1968,7 @@
       "order_0030"
     ],
     "gateway_payment_ids": [
-      "pay_19979c514b9b40"
+      "pay_b012e79ef5824a"
     ],
     "gateway_utrs": [
       "SBIN3872148951"
@@ -2014,8 +1990,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-6B3659E3E954",
-    "timestamp": "2026-09-05T19:37:10.818940",
+    "trace_id": "TR-FC79B9DCD545",
+    "timestamp": "2026-09-05T20:01:34.117953",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-26",
@@ -2026,7 +2002,7 @@
       "order_0005"
     ],
     "gateway_payment_ids": [
-      "pay_4e26dc99d65547"
+      "pay_1e9dde04c04d4a"
     ],
     "gateway_utrs": [
       "BARB1928327648"
@@ -2048,8 +2024,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-5FC6E6A3821E",
-    "timestamp": "2026-09-05T19:37:10.818941",
+    "trace_id": "TR-AA29698F653B",
+    "timestamp": "2026-09-05T20:01:34.117959",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-28",
@@ -2060,7 +2036,7 @@
       "order_0004"
     ],
     "gateway_payment_ids": [
-      "pay_6bc82352b6794a"
+      "pay_02a975c4ee0d4e"
     ],
     "gateway_utrs": [
       "BARB1034131647"
@@ -2082,8 +2058,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-C92AAE0A7CC4",
-    "timestamp": "2026-09-05T19:37:10.818943",
+    "trace_id": "TR-B997E6B48044",
+    "timestamp": "2026-09-05T20:01:34.117966",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-28",
@@ -2094,7 +2070,7 @@
       "order_0035"
     ],
     "gateway_payment_ids": [
-      "pay_9769a268400148"
+      "pay_7866264a1e174a"
     ],
     "gateway_utrs": [
       "SBIN0366909670"
@@ -2116,8 +2092,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-84C5F2CD9596",
-    "timestamp": "2026-09-05T19:37:10.818944",
+    "trace_id": "TR-8051A8D3588E",
+    "timestamp": "2026-09-05T20:01:34.117971",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-30",
@@ -2128,7 +2104,7 @@
       "order_0012"
     ],
     "gateway_payment_ids": [
-      "pay_e91f6bf12c0b49"
+      "pay_75480e8347254d"
     ],
     "gateway_utrs": [
       "SBIN1331509839"
@@ -2150,8 +2126,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-BF6CFC939EFD",
-    "timestamp": "2026-09-05T19:37:10.818946",
+    "trace_id": "TR-2084C4AA64DA",
+    "timestamp": "2026-09-05T20:01:34.117978",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-30",
@@ -2162,7 +2138,7 @@
       "order_0045"
     ],
     "gateway_payment_ids": [
-      "pay_ccb0a069821942"
+      "pay_1b86b355978447"
     ],
     "gateway_utrs": [
       "ICIC9578856855"
@@ -2184,8 +2160,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-C33C8741B0EA",
-    "timestamp": "2026-09-05T19:37:10.818947",
+    "trace_id": "TR-C53AB89B2A44",
+    "timestamp": "2026-09-05T20:01:34.117994",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,
@@ -2212,8 +2188,8 @@
     "suggested_step": "No action needed — settlement expected within normal processing window"
   },
   {
-    "trace_id": "TR-E75A42D5247B",
-    "timestamp": "2026-09-05T19:37:10.818949",
+    "trace_id": "TR-9EA1756E4BD1",
+    "timestamp": "2026-09-05T20:01:34.118003",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,
@@ -2240,8 +2216,8 @@
     "suggested_step": "No action needed — settlement expected within normal processing window"
   },
   {
-    "trace_id": "TR-E1AC9C5FEFDE",
-    "timestamp": "2026-09-05T19:37:10.818950",
+    "trace_id": "TR-254875491E6E",
+    "timestamp": "2026-09-05T20:01:34.118008",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,
@@ -2268,8 +2244,8 @@
     "suggested_step": "No action needed — settlement expected within normal processing window"
   },
   {
-    "trace_id": "TR-29056F11363D",
-    "timestamp": "2026-09-05T19:37:10.818951",
+    "trace_id": "TR-85599B4E8AF6",
+    "timestamp": "2026-09-05T20:01:34.118014",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,
@@ -2296,8 +2272,8 @@
     "suggested_step": "No action needed — settlement expected within normal processing window"
   },
   {
-    "trace_id": "TR-3805C91FB23F",
-    "timestamp": "2026-09-05T19:37:10.818952",
+    "trace_id": "TR-F4A177DB6EC9",
+    "timestamp": "2026-09-05T20:01:34.118019",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,

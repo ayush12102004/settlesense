@@ -10,9 +10,9 @@
     "total_bank_inflow": 1217818.1
   },
   "throughput": {
-    "records_per_second": 3.2,
-    "elapsed_seconds": 21.841,
-    "latency_per_record_ms": 316.53
+    "records_per_second": 3.3,
+    "elapsed_seconds": 21.22,
+    "latency_per_record_ms": 307.54
   },
   "with_llm": {
     "summary": {
@@ -30,14 +30,15 @@
         "llm_assisted": 2
       },
       "exception_reasons": {
-        "NO_CANDIDATE_IN_WINDOW": 3,
+        "NO_CANDIDATE_IN_WINDOW": 2,
+        "AMOUNT_MISMATCH_BEYOND_TOLERANCE": 1,
         "PENDING_NOT_YET_SETTLED": 5
       },
       "pending_count": 5
     },
     "evaluation": {
-      "total_evaluated": 73,
-      "correct": 73,
+      "total_evaluated": 74,
+      "correct": 74,
       "overall_accuracy": 1.0,
       "precision": 1.0,
       "recall": 0.9545,
@@ -50,7 +51,7 @@
         "true_positives": 63,
         "false_positives": 0,
         "false_negatives": 3,
-        "true_negatives": 5
+        "true_negatives": 6
       },
       "by_layer": {
         "exact": {
