@@ -31,6 +31,37 @@ def _load_json(filename: str) -> dict | list:
 def create_app() -> Flask:
     app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="")
 
+    # --- CORS Security & Cross-Origin Support ---------------------------------
+
+    @app.after_request
+    def add_cors_headers(response):
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+        return response
+
+    # --- Health & Liveness Probe ----------------------------------------------
+
+    @app.route("/health")
+    def health():
+        """Production health check endpoint for container probes and uptime monitors."""
+        from datetime import datetime, timezone
+        return jsonify({
+            "status": "healthy",
+            "service": "SettleSense AI Finance Controller",
+            "version": "1.0.0",
+            "model_info": get_active_model_info(),
+            "datasets": {
+                "dashboard_data": os.path.exists(os.path.join(DATA_DIR, "dashboard_data.json")),
+                "metrics": os.path.exists(os.path.join(DATA_DIR, "metrics.json")),
+                "tax_reconciliation": os.path.exists(os.path.join(DATA_DIR, "tax_reconciliation.json")),
+                "gateway_settlement": os.path.exists(os.path.join(DATA_DIR, "gateway_settlement.csv")),
+                "bank_statement": os.path.exists(os.path.join(DATA_DIR, "bank_statement.csv")),
+                "internal_ledger": os.path.exists(os.path.join(DATA_DIR, "internal_ledger.csv")),
+            },
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        })
+
     # --- Static frontend ------------------------------------------------------
 
     @app.route("/")
@@ -211,7 +242,12 @@ def create_app() -> Flask:
     return app
 
 
+# Module-level WSGI instance for production servers (gunicorn, waitress)
+app = create_app()
+
 if __name__ == "__main__":
-    app = create_app()
-    print("Starting SettleSense API server on http://localhost:5000")
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    host = os.environ.get("HOST", "0.0.0.0")
+    debug = os.environ.get("FLASK_DEBUG", "0") == "1"
+    print(f"Starting SettleSense production server on http://{host}:{port} (debug={debug})")
+    app.run(host=host, port=port, debug=debug)

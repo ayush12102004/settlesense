@@ -5,3 +5,5 @@ requests>=2.31
 openai>=1.40
 google-genai>=0.1
 tqdm>=4.66
+gunicorn>=22.0.0
+waitress>=3.0.0
