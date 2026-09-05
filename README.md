@@ -100,10 +100,16 @@ razorpay/
 │   ├── test_reconcile.py       # Engine accuracy, tolerance & exception tests
 │   ├── test_tax_matcher.py     # Tax invoice arithmetic and GSTR-2B match tests
 │   ├── test_edge_cases.py      # Precision/Recall/F1, guardrails & 3-way tax tests
-│   └── test_api.py             # REST API endpoint tests
+│   ├── test_api.py             # REST API endpoint tests
+│   ├── test_production_endpoints.py # Production health check & live endpoint tests
+│   └── test_failure_modes.py   # AI degradation & error handling tests
+├── Dockerfile                  # Production-hardened container spec
+├── Procfile                    # Declarative WSGI process for PaaS (Render / Railway)
+├── render.yaml                 # 1-click cloud infrastructure blueprint
+├── server.py                   # Multi-threaded production WSGI runner (Waitress)
 ├── CASE_STUDY.md               # Finance Ops Case Study
 ├── HOW_IT_WORKS.md             # Comprehensive Architecture & Guide
-└── requirements.txt
+└── requirements.txt            # Python dependencies (includes gunicorn & waitress)
 ```
 
 ---
@@ -132,8 +138,38 @@ LLM_PROVIDER=groq
 python -m pytest tests/ -v
 ```
 
-### 4. Run Pipeline & Launch Dashboard
+### 4. Run Pipeline & Launch Local Production Server
 ```bash
+# Windows / Cross-platform Production WSGI Server (Waitress)
+python server.py
+
+# Or classic development server:
 python src/main.py --serve
 ```
 Open **`http://localhost:5000`** in your browser.
+
+---
+
+## Production Cloud Deployment
+
+### Option 1: 1-Click Deploy on Render / Railway
+This repository contains a pre-configured [`render.yaml`](file:///render.yaml) and [`Procfile`](file:///Procfile).
+1. Connect your GitHub repository (`ayush12102004/settlesense`) to [Render](https://render.com) or [Railway](https://railway.app).
+2. Set build command: `pip install -r requirements.txt && python src/main.py`
+3. Set start command: `gunicorn src.wsgi:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120`
+4. Set health check path: `/health`
+
+### Option 2: Docker Container
+```bash
+# Build production image
+docker build -t settlesense .
+
+# Run container on port 5000
+docker run -p 5000:5000 -e PORT=5000 settlesense
+```
+
+### Option 3: Health & Liveness Probe
+SettleSense provides an automated health endpoint at `/health` returning status, active AI provider info, and file integrity flags:
+```bash
+curl http://localhost:5000/health
+```
