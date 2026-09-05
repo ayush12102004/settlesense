@@ -2,11 +2,15 @@
   "period": "June 2025",
   "tax_status": "MATCHED_ITC_ELIGIBLE",
   "itc_claimable": 4498.8,
+  "total_itc_claimable_all_lines": 4498.76,
+  "total_itc_deferred": 36.0,
   "taxable_fee_base": 24993.1,
   "gst_rate": "18% IGST",
   "vendor_gstin": "29AAGCR2502M1ZR",
+  "merchant_gstin": "27AAACS1234F1Z5",
   "sac_code": "997159",
   "sac_description": "Payment processing and settlement services",
+  "methodology_disclosure": "Multi-source triangulated GST audit: compares daily transaction fee deductions with Razorpay's monthly Tax Invoices and GSTR-2B GSTN portal statements. Models core fee matching, micro-rounding variances under Rule 36(4), and Section 16(2)(aa) timing lags for deferred ITC.",
   "invoice": {
     "invoice_number": "RPL/25-26/06/00918",
     "period": "June 2025",
@@ -46,5 +50,61 @@
     "itc_eligible": true,
     "itc_claimable_amount": 4498.8,
     "notes": "100% 3-way match: Daily fee deductions align with Razorpay Tax Invoice and GSTR-2B. ITC is claimable under Section 16(2)(aa)."
-  }
+  },
+  "line_items": [
+    {
+      "line_name": "Standard Payment Gateway Processing",
+      "sac_code": "997159",
+      "invoice_number": "RPL/25-26/06/00918",
+      "invoice_date": "2025-07-02",
+      "ledger_amount": 23743.44,
+      "invoice_amount": 23743.44,
+      "gstr2b_amount": 23743.44,
+      "gst_rate": 0.18,
+      "ledger_gst": 4273.82,
+      "invoice_gst": 4273.82,
+      "gstr2b_gst": 4273.82,
+      "variance_gst": 0.0,
+      "status": "MATCHED_PERFECT",
+      "itc_status": "ELIGIBLE_IMMEDIATE",
+      "itc_claimable": 4273.82,
+      "compliance_note": "Full 3-way match across internal ledger, vendor tax invoice, and GSTR-2B portal return."
+    },
+    {
+      "line_name": "Instant Settlement & Value-Added Surcharge",
+      "sac_code": "997159",
+      "invoice_number": "RPL/25-26/06/00942",
+      "invoice_date": "2025-07-02",
+      "ledger_amount": 1249.66,
+      "invoice_amount": 1249.66,
+      "gstr2b_amount": 1249.66,
+      "gst_rate": 0.18,
+      "ledger_gst": 224.98,
+      "invoice_gst": 224.94,
+      "gstr2b_gst": 224.94,
+      "variance_gst": 0.04,
+      "status": "ROUNDING_VARIANCE",
+      "itc_status": "ELIGIBLE_TOLERATED",
+      "itc_claimable": 224.94,
+      "compliance_note": "Paise rounding variance of Rs.0.04 across daily micro-deductions. Permissible under GST Rule 36(4)."
+    },
+    {
+      "line_name": "Dispute Administration & Arbitration Fee",
+      "sac_code": "997159",
+      "invoice_number": "RPL/25-26/06/00999",
+      "invoice_date": "2025-06-30",
+      "ledger_amount": 200.0,
+      "invoice_amount": 200.0,
+      "gstr2b_amount": 0.0,
+      "gst_rate": 0.18,
+      "ledger_gst": 36.0,
+      "invoice_gst": 36.0,
+      "gstr2b_gst": 0.0,
+      "variance_gst": 36.0,
+      "status": "GSTR1_FILING_DELAYED",
+      "itc_status": "DEFERRED_PENDING_FILING",
+      "itc_claimable": 0.0,
+      "compliance_note": "Supplier filed GSTR-1 after monthly cutoff. Under CGST Section 16(2)(aa), ITC is deferred until next tax period."
+    }
+  ]
 }

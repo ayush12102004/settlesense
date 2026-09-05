@@ -3,10 +3,16 @@
   "provider": "groq",
   "is_mock": false,
   "total_records_processed": 69,
+  "financial_amounts": {
+    "amount_reconciled": 1168000.2,
+    "amount_at_risk": 49817.9,
+    "pending_amount": 79683.48,
+    "total_bank_inflow": 1217818.1
+  },
   "throughput": {
-    "records_per_second": 2.4,
-    "elapsed_seconds": 28.962,
-    "latency_per_record_ms": 419.73
+    "records_per_second": 3.2,
+    "elapsed_seconds": 21.841,
+    "latency_per_record_ms": 316.53
   },
   "with_llm": {
     "summary": {
@@ -14,25 +20,38 @@
       "total_matched": 61,
       "total_exceptions": 8,
       "match_rate": 0.9531,
+      "amount_reconciled": 1168000.2,
+      "amount_at_risk": 49817.9,
+      "pending_amount": 79683.48,
+      "total_bank_inflow": 1217818.1,
       "by_layer": {
         "exact": 47,
         "tolerant": 12,
         "llm_assisted": 2
       },
       "exception_reasons": {
-        "NO_CANDIDATE_IN_WINDOW": 2,
-        "AMOUNT_MISMATCH_BEYOND_TOLERANCE": 1,
+        "NO_CANDIDATE_IN_WINDOW": 3,
         "PENDING_NOT_YET_SETTLED": 5
       },
       "pending_count": 5
     },
     "evaluation": {
-      "total_evaluated": 74,
-      "correct": 74,
+      "total_evaluated": 73,
+      "correct": 73,
       "overall_accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 0.9545,
+      "f1_score": 0.9767,
+      "specificity": 1.0,
       "auto_match_precision": 1.0,
       "auto_matched_count": 63,
       "reason_code_coverage": 1.0,
+      "confusion_matrix": {
+        "true_positives": 63,
+        "false_positives": 0,
+        "false_negatives": 3,
+        "true_negatives": 5
+      },
       "by_layer": {
         "exact": {
           "total": 47,
@@ -58,6 +77,10 @@
       "total_matched": 59,
       "total_exceptions": 10,
       "match_rate": 0.9219,
+      "amount_reconciled": 1133444.38,
+      "amount_at_risk": 84373.72,
+      "pending_amount": 79683.48,
+      "total_bank_inflow": 1217818.1,
       "by_layer": {
         "exact": 47,
         "tolerant": 12
@@ -73,9 +96,19 @@
       "total_evaluated": 73,
       "correct": 69,
       "overall_accuracy": 0.9452,
+      "precision": 1.0,
+      "recall": 0.8939,
+      "f1_score": 0.944,
+      "specificity": 1.0,
       "auto_match_precision": 1.0,
       "auto_matched_count": 59,
       "reason_code_coverage": 1.0,
+      "confusion_matrix": {
+        "true_positives": 59,
+        "false_positives": 0,
+        "false_negatives": 7,
+        "true_negatives": 5
+      },
       "by_layer": {
         "exact": {
           "total": 47,
@@ -93,6 +126,9 @@
   "ablation": {
     "accuracy_lift": 0.0548,
     "match_rate_lift": 0.0312,
+    "precision_lift": 0.0,
+    "recall_lift": 0.0606,
+    "f1_lift": 0.0327,
     "with_llm_match_rate": 0.9531,
     "without_llm_match_rate": 0.9219,
     "with_llm_matched": 61,

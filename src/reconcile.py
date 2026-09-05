@@ -614,11 +614,21 @@ def summarize(results: list[MatchResult]) -> dict:
     pending_count = exception_reasons.get(ReasonCode.PENDING_NOT_YET_SETTLED, 0)
     actionable_total = total - pending_count
 
+    # Financial rupee amount metrics (Finance Controller focus)
+    amount_reconciled = round(sum(r.bank_amount for r in matched), 2)
+    amount_at_risk = round(sum(r.bank_amount for r in exceptions if r.reason_code != ReasonCode.PENDING_NOT_YET_SETTLED), 2)
+    pending_amount = round(sum(sum(r.ledger_expected_amounts) for r in exceptions if r.reason_code == ReasonCode.PENDING_NOT_YET_SETTLED), 2)
+    total_bank_inflow = round(sum(r.bank_amount for r in results if r.bank_amount > 0), 2)
+
     return {
         "total_records": total,
         "total_matched": matched_count,
         "total_exceptions": len(exceptions),
         "match_rate": round(matched_count / actionable_total, 4) if actionable_total else 0.0,
+        "amount_reconciled": amount_reconciled,
+        "amount_at_risk": amount_at_risk,
+        "pending_amount": pending_amount,
+        "total_bank_inflow": total_bank_inflow,
         "by_layer": by_layer,
         "exception_reasons": exception_reasons,
         "pending_count": pending_count,

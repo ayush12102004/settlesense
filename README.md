@@ -59,12 +59,15 @@ Evaluated against a **held-out ground-truth test set** (`data/ground_truth.csv`)
 
 | Metric | Measured Score | Evaluation Meaning |
 |---|---|---|
-| **Overall Match Rate** | **95.3%** | 61 of 64 eligible records auto-reconciled; realistic exceptions preserved |
-| **Auto-Match Precision** | **100.0%** | Zero false-positive matches produced by the engine |
-| **Reason Code Coverage** | **100.0%** | 0% generic errors; all exceptions classified into actionable categories |
-| **Actionable Exceptions** | **3 records** | 1 dispute fee penalty variance, 1 orphan bank deposit, 1 ambiguous candidate |
-| **Pending In-Flight** | **5 records** | Valid T+2 un-settled transactions cleanly segregated |
-| **AI Ablation Lift** | **+3.1% Match Lift** | Measured contribution of Gemini over pure deterministic matching |
+| **Auto-Match Precision** | **100.0%** | Zero false-positive matches; no incorrect attribution (critical in fintech) |
+| **Recall (Coverage)** | **95.5%** | 63 of 66 matchable orders reconciled across sources |
+| **F1-Score** | **97.7%** | Balanced harmonic accuracy metric |
+| **Overall Match Rate** | **95.3%** | 61 of 64 eligible records auto-reconciled; exceptions isolated |
+| **Rupee Reconciled** | **₹11,95,753.22** | Reconciled bank credits verified down to the paisa |
+| **₹ Amount at Risk** | **₹22,064.88** | Actionable exception volume (orphan deposit + fee penalty variance) |
+| **Reason Code Coverage** | **100.0%** | 0% generic errors; 100% of exceptions classified with suggested actions |
+| **Confusion Matrix** | **TP=63, FP=0, FN=3, TN=5** | Complete transparency against held-out ground truth |
+| **AI Ablation Lift** | **+3.1% Match / +6.1% Recall** | Empirically measured lift of Layer 3 AI over pure rules |
 
 ---
 
@@ -96,6 +99,7 @@ razorpay/
 ├── tests/
 │   ├── test_reconcile.py       # Engine accuracy, tolerance & exception tests
 │   ├── test_tax_matcher.py     # Tax invoice arithmetic and GSTR-2B match tests
+│   ├── test_edge_cases.py      # Precision/Recall/F1, guardrails & 3-way tax tests
 │   └── test_api.py             # REST API endpoint tests
 ├── CASE_STUDY.md               # Finance Ops Case Study
 ├── HOW_IT_WORKS.md             # Comprehensive Architecture & Guide

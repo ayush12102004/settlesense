@@ -1,7 +1,7 @@
 [
   {
-    "trace_id": "TR-68D6ECBC5230",
-    "timestamp": "2026-09-04T18:04:08.473714",
+    "trace_id": "TR-A601A5228B4A",
+    "timestamp": "2026-09-05T19:37:10.818811",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-01",
@@ -34,8 +34,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-1BAA1B962E98",
-    "timestamp": "2026-09-04T18:04:08.473741",
+    "trace_id": "TR-20FB9E86D444",
+    "timestamp": "2026-09-05T19:37:10.818840",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-01",
@@ -68,8 +68,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-7B8E4DD38EC5",
-    "timestamp": "2026-09-04T18:04:08.473745",
+    "trace_id": "TR-188EE229BEB9",
+    "timestamp": "2026-09-05T19:37:10.818844",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-02",
@@ -102,8 +102,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-DEAF7780E358",
-    "timestamp": "2026-09-04T18:04:08.473747",
+    "trace_id": "TR-1698D9E159A0",
+    "timestamp": "2026-09-05T19:37:10.818847",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-03",
@@ -136,8 +136,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-114AE33B6A2D",
-    "timestamp": "2026-09-04T18:04:08.473750",
+    "trace_id": "TR-AD5D0BDC20DD",
+    "timestamp": "2026-09-05T19:37:10.818849",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-07-04",
@@ -170,8 +170,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-CE5A5CE3CD25",
-    "timestamp": "2026-09-04T18:04:08.473752",
+    "trace_id": "TR-63383DB20247",
+    "timestamp": "2026-09-05T19:37:10.818851",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-05",
@@ -204,8 +204,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-45EF8903037C",
-    "timestamp": "2026-09-04T18:04:08.473754",
+    "trace_id": "TR-750B2C057A7E",
+    "timestamp": "2026-09-05T19:37:10.818853",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-05",
@@ -238,8 +238,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-0D601D40986A",
-    "timestamp": "2026-09-04T18:04:08.473756",
+    "trace_id": "TR-91DBF9970284",
+    "timestamp": "2026-09-05T19:37:10.818855",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-05",
@@ -272,8 +272,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-E0AC245C0554",
-    "timestamp": "2026-09-04T18:04:08.473757",
+    "trace_id": "TR-D534CF9D9F56",
+    "timestamp": "2026-09-05T19:37:10.818857",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-07-05",
@@ -306,8 +306,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-AD7054A5DC24",
-    "timestamp": "2026-09-04T18:04:08.473759",
+    "trace_id": "TR-D305AE30F5C2",
+    "timestamp": "2026-09-05T19:37:10.818858",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-06",
@@ -340,8 +340,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-5655EE11A7DF",
-    "timestamp": "2026-09-04T18:04:08.473761",
+    "trace_id": "TR-9B79B958A555",
+    "timestamp": "2026-09-05T19:37:10.818860",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -374,8 +374,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-51DAEC78F90B",
-    "timestamp": "2026-09-04T18:04:08.473763",
+    "trace_id": "TR-3135069BCD10",
+    "timestamp": "2026-09-05T19:37:10.818862",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -408,8 +408,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-0DC9EF3E2A15",
-    "timestamp": "2026-09-04T18:04:08.473765",
+    "trace_id": "TR-CEF810B8AE51",
+    "timestamp": "2026-09-05T19:37:10.818863",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -442,8 +442,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-5B97F4CF8309",
-    "timestamp": "2026-09-04T18:04:08.473767",
+    "trace_id": "TR-6416FD1AC88C",
+    "timestamp": "2026-09-05T19:37:10.818865",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -476,8 +476,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-81220A9CA01D",
-    "timestamp": "2026-09-04T18:04:08.473769",
+    "trace_id": "TR-ECC61C997337",
+    "timestamp": "2026-09-05T19:37:10.818866",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-07",
@@ -510,8 +510,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-7FBD4C392D0E",
-    "timestamp": "2026-09-04T18:04:08.473771",
+    "trace_id": "TR-90432B533FB7",
+    "timestamp": "2026-09-05T19:37:10.818868",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-07",
@@ -544,8 +544,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-A64B81BAD76F",
-    "timestamp": "2026-09-04T18:04:08.473773",
+    "trace_id": "TR-00C30EF7A5A7",
+    "timestamp": "2026-09-05T19:37:10.818870",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-07",
@@ -578,8 +578,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-3F3C4DD42EA6",
-    "timestamp": "2026-09-04T18:04:08.473774",
+    "trace_id": "TR-C874B82BD2E1",
+    "timestamp": "2026-09-05T19:37:10.818871",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-07",
@@ -612,8 +612,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-532A379FF126",
-    "timestamp": "2026-09-04T18:04:08.473776",
+    "trace_id": "TR-90A0C008A461",
+    "timestamp": "2026-09-05T19:37:10.818873",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-08",
@@ -646,8 +646,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-4D9C22CE4B0A",
-    "timestamp": "2026-09-04T18:04:08.473777",
+    "trace_id": "TR-B79FEEAFA195",
+    "timestamp": "2026-09-05T19:37:10.818874",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-08",
@@ -680,8 +680,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-D102886FCCE3",
-    "timestamp": "2026-09-04T18:04:08.473779",
+    "trace_id": "TR-2444E714FCFE",
+    "timestamp": "2026-09-05T19:37:10.818876",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-09",
@@ -714,8 +714,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-A0BD2C73A0C0",
-    "timestamp": "2026-09-04T18:04:08.473781",
+    "trace_id": "TR-FEF0D0D1193F",
+    "timestamp": "2026-09-05T19:37:10.818877",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-07-11",
@@ -748,8 +748,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-583B01E53B95",
-    "timestamp": "2026-09-04T18:04:08.473782",
+    "trace_id": "TR-DBA035B13CF6",
+    "timestamp": "2026-09-05T19:37:10.818879",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-12",
@@ -782,8 +782,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-737A22139A7D",
-    "timestamp": "2026-09-04T18:04:08.473784",
+    "trace_id": "TR-79172C615CD6",
+    "timestamp": "2026-09-05T19:37:10.818880",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-13",
@@ -816,8 +816,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-77FA615BEA1D",
-    "timestamp": "2026-09-04T18:04:08.473786",
+    "trace_id": "TR-79182FA97572",
+    "timestamp": "2026-09-05T19:37:10.818882",
     "layer": "llm_assisted",
     "status": "matched",
     "bank_date": "2025-06-16",
@@ -856,14 +856,14 @@
       11485.41
     ],
     "amount_diff": 0.0,
-    "confidence": 0.97,
+    "confidence": 0.96,
     "reason_code": null,
-    "reason": "AI-assisted split match — UTR fragment '0053' and exact amount match sum of three orders sharing same UTR with 3‑day settlement lag. Arithmetic verified: diff ₹0.00",
+    "reason": "AI-assisted split match — UTR KKBK3618324210 matches three orders settled on 2025-06-13 and their net amounts sum to the ₹27,753.02 credit with a 3‑day lag; narration references order 0053. Arithmetic verified: diff ₹0.00",
     "suggested_step": "AI-matched and arithmetically verified — review if needed"
   },
   {
-    "trace_id": "TR-0691910A60C4",
-    "timestamp": "2026-09-04T18:04:08.473788",
+    "trace_id": "TR-73FC39DB900B",
+    "timestamp": "2026-09-05T19:37:10.818884",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-16",
@@ -896,8 +896,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-C34C0C3C95E0",
-    "timestamp": "2026-09-04T18:04:08.473790",
+    "trace_id": "TR-AB9918274EAA",
+    "timestamp": "2026-09-05T19:37:10.818886",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-17",
@@ -930,8 +930,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-ED38EB9A7182",
-    "timestamp": "2026-09-04T18:04:08.473792",
+    "trace_id": "TR-AAA317A5D912",
+    "timestamp": "2026-09-05T19:37:10.818888",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-19",
@@ -964,8 +964,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-DF2E94723928",
-    "timestamp": "2026-09-04T18:04:08.473794",
+    "trace_id": "TR-18F7276FE34B",
+    "timestamp": "2026-09-05T19:37:10.818890",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-19",
@@ -998,8 +998,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-E03DAE7C8526",
-    "timestamp": "2026-09-04T18:04:08.473797",
+    "trace_id": "TR-4D1321A51DA9",
+    "timestamp": "2026-09-05T19:37:10.818892",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-05",
@@ -1032,8 +1032,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-535BB26243C2",
-    "timestamp": "2026-09-04T18:04:08.473798",
+    "trace_id": "TR-DE9A33F644DB",
+    "timestamp": "2026-09-05T19:37:10.818893",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-05",
@@ -1066,8 +1066,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-9275F4428208",
-    "timestamp": "2026-09-04T18:04:08.473800",
+    "trace_id": "TR-1A372D2EDE31",
+    "timestamp": "2026-09-05T19:37:10.818895",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-06",
@@ -1100,8 +1100,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-BB98F90BF865",
-    "timestamp": "2026-09-04T18:04:08.473802",
+    "trace_id": "TR-9C707DC2A3C6",
+    "timestamp": "2026-09-05T19:37:10.818897",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-09",
@@ -1134,8 +1134,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-533739F3560A",
-    "timestamp": "2026-09-04T18:04:08.473805",
+    "trace_id": "TR-8CCDF97D7E8A",
+    "timestamp": "2026-09-05T19:37:10.818899",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-10",
@@ -1168,8 +1168,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-05A1BE4D19D6",
-    "timestamp": "2026-09-04T18:04:08.473807",
+    "trace_id": "TR-7967F803967C",
+    "timestamp": "2026-09-05T19:37:10.818901",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-14",
@@ -1202,8 +1202,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-97948C50BEF4",
-    "timestamp": "2026-09-04T18:04:08.473808",
+    "trace_id": "TR-3F9A6E2F0278",
+    "timestamp": "2026-09-05T19:37:10.818903",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-17",
@@ -1236,8 +1236,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-EBFB40531432",
-    "timestamp": "2026-09-04T18:04:08.473810",
+    "trace_id": "TR-0AAEA0B6E1B2",
+    "timestamp": "2026-09-05T19:37:10.818904",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-18",
@@ -1270,8 +1270,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-66FF47CE4FBB",
-    "timestamp": "2026-09-04T18:04:08.473812",
+    "trace_id": "TR-4215190C6894",
+    "timestamp": "2026-09-05T19:37:10.818906",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-20",
@@ -1304,8 +1304,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-304BAA10472C",
-    "timestamp": "2026-09-04T18:04:08.473814",
+    "trace_id": "TR-D75F37725C81",
+    "timestamp": "2026-09-05T19:37:10.818907",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-22",
@@ -1338,8 +1338,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-E2A1AA66155B",
-    "timestamp": "2026-09-04T18:04:08.473815",
+    "trace_id": "TR-AFEB66733656",
+    "timestamp": "2026-09-05T19:37:10.818909",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-22",
@@ -1372,8 +1372,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-6DFA01E0D024",
-    "timestamp": "2026-09-04T18:04:08.473817",
+    "trace_id": "TR-426DE38EAD43",
+    "timestamp": "2026-09-05T19:37:10.818910",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-23",
@@ -1406,8 +1406,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-6DAD9D70CDD4",
-    "timestamp": "2026-09-04T18:04:08.473819",
+    "trace_id": "TR-989942D11D37",
+    "timestamp": "2026-09-05T19:37:10.818912",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-26",
@@ -1440,8 +1440,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-FD7B792E9ECF",
-    "timestamp": "2026-09-04T18:04:08.473821",
+    "trace_id": "TR-9AF9B5D65B35",
+    "timestamp": "2026-09-05T19:37:10.818913",
     "layer": "llm_assisted",
     "status": "matched",
     "bank_date": "2025-06-28",
@@ -1476,12 +1476,12 @@
     "amount_diff": 0.0,
     "confidence": 0.98,
     "reason_code": null,
-    "reason": "AI-assisted split match — UTR UTIB9065940139 matches both orders and their net amounts sum to the bank credit, indicating a split settlement. Arithmetic verified: diff ₹0.00",
+    "reason": "AI-assisted split match — UTR UTIB9065940139 matches both orders and their net amounts sum to the bank credit, with 3‑day lag and order ID in narration. Arithmetic verified: diff ₹0.00",
     "suggested_step": "AI-matched and arithmetically verified — review if needed"
   },
   {
-    "trace_id": "TR-AEB41C88B43C",
-    "timestamp": "2026-09-04T18:04:08.473823",
+    "trace_id": "TR-2AEDB038C16D",
+    "timestamp": "2026-09-05T19:37:10.818915",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-03",
@@ -1514,8 +1514,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-87C736CCC327",
-    "timestamp": "2026-09-04T18:04:08.473825",
+    "trace_id": "TR-3631FFBE670D",
+    "timestamp": "2026-09-05T19:37:10.818917",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-04",
@@ -1548,8 +1548,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-6309F97B19F0",
-    "timestamp": "2026-09-04T18:04:08.473826",
+    "trace_id": "TR-B67B630E3819",
+    "timestamp": "2026-09-05T19:37:10.818918",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-07-04",
@@ -1582,8 +1582,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-5A6364F97C9B",
-    "timestamp": "2026-09-04T18:04:08.473828",
+    "trace_id": "TR-7E8A00619315",
+    "timestamp": "2026-09-05T19:37:10.818920",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-04",
@@ -1616,8 +1616,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-617B4184E4CA",
-    "timestamp": "2026-09-04T18:04:08.473830",
+    "trace_id": "TR-A860591027EA",
+    "timestamp": "2026-09-05T19:37:10.818921",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-09",
@@ -1650,8 +1650,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-FA5820BFFC00",
-    "timestamp": "2026-09-04T18:04:08.473831",
+    "trace_id": "TR-D77B7CE23DCB",
+    "timestamp": "2026-09-05T19:37:10.818923",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-07-12",
@@ -1684,8 +1684,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-880556CFDB41",
-    "timestamp": "2026-09-04T18:04:08.473833",
+    "trace_id": "TR-4C161AE47E11",
+    "timestamp": "2026-09-05T19:37:10.818924",
     "layer": "llm_assisted",
     "status": "matched",
     "bank_date": "2025-06-21",
@@ -1720,12 +1720,12 @@
     "amount_diff": 0.0,
     "confidence": 0.97,
     "reason_code": null,
-    "reason": "AI-assisted split match — Bank amount equals sum of net amounts for order_0057 and order_0058 with same UTR and 3‑day lag, indicating a split settlement. Arithmetic verified: diff ₹0.00",
+    "reason": "AI-assisted split match — Narration mentions order_0057, amount equals sum of order_0057 and order_0058 net amounts, same UTR and 3‑day lag indicate a split settlement. Arithmetic verified: diff ₹0.00",
     "suggested_step": "AI-matched and arithmetically verified — review if needed"
   },
   {
-    "trace_id": "TR-D0E8B291C240",
-    "timestamp": "2026-09-04T18:04:08.473835",
+    "trace_id": "TR-75A99942C376",
+    "timestamp": "2026-09-05T19:37:10.818926",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-21",
@@ -1758,8 +1758,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-9E71F5245FEF",
-    "timestamp": "2026-09-04T18:04:08.473836",
+    "trace_id": "TR-4DCA527D8213",
+    "timestamp": "2026-09-05T19:37:10.818927",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-21",
@@ -1792,8 +1792,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-ECF2F1D20BB8",
-    "timestamp": "2026-09-04T18:04:08.473838",
+    "trace_id": "TR-A3B51D6FDB78",
+    "timestamp": "2026-09-05T19:37:10.818929",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-22",
@@ -1826,8 +1826,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-BD2921CF5EE7",
-    "timestamp": "2026-09-04T18:04:08.473840",
+    "trace_id": "TR-381128C3B0B2",
+    "timestamp": "2026-09-05T19:37:10.818930",
     "layer": "exception",
     "status": "exception",
     "bank_date": "2025-06-22",
@@ -1856,8 +1856,8 @@
     "suggested_step": "Verify fee computation or check for partial refund not reflected in gateway"
   },
   {
-    "trace_id": "TR-61E17F489B77",
-    "timestamp": "2026-09-04T18:04:08.473841",
+    "trace_id": "TR-1A3D3520098B",
+    "timestamp": "2026-09-05T19:37:10.818932",
     "layer": "exception",
     "status": "exception",
     "bank_date": "2025-06-22",
@@ -1878,8 +1878,8 @@
     "suggested_step": "Check gateway dashboard for settlement status of this order"
   },
   {
-    "trace_id": "TR-048BA4F349E2",
-    "timestamp": "2026-09-04T18:04:08.473843",
+    "trace_id": "TR-7A6EEADA6239",
+    "timestamp": "2026-09-05T19:37:10.818934",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-23",
@@ -1912,8 +1912,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-EAB19CECC043",
-    "timestamp": "2026-09-04T18:04:08.473845",
+    "trace_id": "TR-83E2CBB39C73",
+    "timestamp": "2026-09-05T19:37:10.818936",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-25",
@@ -1946,8 +1946,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-BBFC25B032B4",
-    "timestamp": "2026-09-04T18:04:08.473846",
+    "trace_id": "TR-41EA7BF47474",
+    "timestamp": "2026-09-05T19:37:10.818937",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-26",
@@ -1980,8 +1980,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-C979553D1CF9",
-    "timestamp": "2026-09-04T18:04:08.473848",
+    "trace_id": "TR-8C30569B2068",
+    "timestamp": "2026-09-05T19:37:10.818938",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-26",
@@ -2014,8 +2014,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-E0BDF4AD1DDE",
-    "timestamp": "2026-09-04T18:04:08.473850",
+    "trace_id": "TR-6B3659E3E954",
+    "timestamp": "2026-09-05T19:37:10.818940",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-26",
@@ -2048,8 +2048,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-725599A098E6",
-    "timestamp": "2026-09-04T18:04:08.473851",
+    "trace_id": "TR-5FC6E6A3821E",
+    "timestamp": "2026-09-05T19:37:10.818941",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-28",
@@ -2082,8 +2082,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-7E7640DED05A",
-    "timestamp": "2026-09-04T18:04:08.473853",
+    "trace_id": "TR-C92AAE0A7CC4",
+    "timestamp": "2026-09-05T19:37:10.818943",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-28",
@@ -2116,8 +2116,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-B0D56B1E9C91",
-    "timestamp": "2026-09-04T18:04:08.473854",
+    "trace_id": "TR-84C5F2CD9596",
+    "timestamp": "2026-09-05T19:37:10.818944",
     "layer": "tolerant",
     "status": "matched",
     "bank_date": "2025-06-30",
@@ -2150,8 +2150,8 @@
     "suggested_step": "No action needed — matched within tolerance"
   },
   {
-    "trace_id": "TR-5800B436A66A",
-    "timestamp": "2026-09-04T18:04:08.473856",
+    "trace_id": "TR-BF6CFC939EFD",
+    "timestamp": "2026-09-05T19:37:10.818946",
     "layer": "exact",
     "status": "matched",
     "bank_date": "2025-06-30",
@@ -2184,8 +2184,8 @@
     "suggested_step": "No action needed — fully reconciled"
   },
   {
-    "trace_id": "TR-54A0A471CFAB",
-    "timestamp": "2026-09-04T18:04:08.473857",
+    "trace_id": "TR-C33C8741B0EA",
+    "timestamp": "2026-09-05T19:37:10.818947",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,
@@ -2212,8 +2212,8 @@
     "suggested_step": "No action needed — settlement expected within normal processing window"
   },
   {
-    "trace_id": "TR-74E5BAC4697C",
-    "timestamp": "2026-09-04T18:04:08.473859",
+    "trace_id": "TR-E75A42D5247B",
+    "timestamp": "2026-09-05T19:37:10.818949",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,
@@ -2240,8 +2240,8 @@
     "suggested_step": "No action needed — settlement expected within normal processing window"
   },
   {
-    "trace_id": "TR-FBEEE90AA535",
-    "timestamp": "2026-09-04T18:04:08.473861",
+    "trace_id": "TR-E1AC9C5FEFDE",
+    "timestamp": "2026-09-05T19:37:10.818950",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,
@@ -2268,8 +2268,8 @@
     "suggested_step": "No action needed — settlement expected within normal processing window"
   },
   {
-    "trace_id": "TR-633F0AE63712",
-    "timestamp": "2026-09-04T18:04:08.473862",
+    "trace_id": "TR-29056F11363D",
+    "timestamp": "2026-09-05T19:37:10.818951",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,
@@ -2296,8 +2296,8 @@
     "suggested_step": "No action needed — settlement expected within normal processing window"
   },
   {
-    "trace_id": "TR-9643D72787E3",
-    "timestamp": "2026-09-04T18:04:08.473863",
+    "trace_id": "TR-3805C91FB23F",
+    "timestamp": "2026-09-05T19:37:10.818952",
     "layer": "exception",
     "status": "exception",
     "bank_date": null,

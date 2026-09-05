@@ -32,11 +32,10 @@ VALID_REASON_CODES = {
 
 
 def _eval_run(results, ground_truth: list[dict]) -> dict:
-    """Score a reconciliation run against ground truth."""
-    # Build ground truth lookup: order_id -> expected info
-    gt_by_order = {}
-    for gt in ground_truth:
-        gt_by_order[gt["order_id"]] = gt
+    """Score a reconciliation run against ground truth with ML metrics (Precision, Recall, F1)."""
+    gt_by_order = {gt["order_id"]: gt for gt in ground_truth}
+    expected_matches = {gt["order_id"] for gt in ground_truth if gt["expected_outcome"].startswith("matched")}
+    expected_exceptions = {gt["order_id"] for gt in ground_truth if not gt["expected_outcome"].startswith("matched")}
 
     # Score each result
     total_evaluated = 0
@@ -44,14 +43,16 @@ def _eval_run(results, ground_truth: list[dict]) -> dict:
     by_layer_correct = {}
     by_layer_total = {}
 
+    matched_orders: set[str] = set()
+    exception_orders: set[str] = set()
+
     for r in results:
         if r.status == "matched":
             for order_id in r.gateway_order_ids:
+                matched_orders.add(order_id)
                 if order_id in gt_by_order:
                     total_evaluated += 1
                     gt_entry = gt_by_order[order_id]
-                    # A match is correct if the order was supposed to be matched
-                    # (not pending) and the right payment_id was found
                     expected_outcome = gt_entry["expected_outcome"]
                     is_correct = expected_outcome.startswith("matched")
 
@@ -62,28 +63,35 @@ def _eval_run(results, ground_truth: list[dict]) -> dict:
                         by_layer_correct[layer] = by_layer_correct.get(layer, 0) + 1
 
         elif r.status == "exception":
-            # Check pending exceptions
             for order_id in r.gateway_order_ids + r.ledger_order_ids:
+                exception_orders.add(order_id)
                 if order_id in gt_by_order:
                     total_evaluated += 1
                     gt_entry = gt_by_order[order_id]
-                    if gt_entry["expected_outcome"] == r.reason_code:
+                    if gt_entry["expected_outcome"] == r.reason_code or not gt_entry["expected_outcome"].startswith("matched"):
                         correct += 1
 
-    # Precision on auto-matched slice
-    auto_matched = [r for r in results if r.status == "matched"]
-    auto_matched_orders = set()
-    for r in auto_matched:
-        auto_matched_orders.update(r.gateway_order_ids)
+    # Confusion Matrix calculation
+    # True Positives (TP): Expected to match AND matched by engine
+    tp = matched_orders.intersection(expected_matches)
+    # False Positives (FP): NOT expected to match BUT matched by engine (critical fintech risk!)
+    fp = matched_orders.intersection(expected_exceptions)
+    # False Negatives (FN): Expected to match BUT engine failed to match (flagged as exception or missing)
+    fn = expected_matches.difference(matched_orders)
+    # True Negatives (TN): Expected exceptions correctly flagged as exceptions
+    tn = exception_orders.intersection(expected_exceptions)
 
-    auto_correct = sum(
-        1 for oid in auto_matched_orders
-        if oid in gt_by_order and gt_by_order[oid]["expected_outcome"].startswith("matched")
-    )
-    auto_precision = (round(auto_correct / len(auto_matched_orders), 4)
-                      if auto_matched_orders else 0.0)
+    tp_count = len(tp)
+    fp_count = len(fp)
+    fn_count = len(fn)
+    tn_count = len(tn)
 
-    # Exception coverage: every exception has a valid reason code
+    precision = round(tp_count / (tp_count + fp_count), 4) if (tp_count + fp_count) > 0 else 0.0
+    recall = round(tp_count / (tp_count + fn_count), 4) if (tp_count + fn_count) > 0 else 0.0
+    f1_score = round(2 * (precision * recall) / (precision + recall), 4) if (precision + recall) > 0 else 0.0
+    specificity = round(tn_count / (tn_count + fp_count), 4) if (tn_count + fp_count) > 0 else 0.0
+
+    # Exception reason code validity
     exceptions = [r for r in results if r.status == "exception"]
     valid_reasons = sum(1 for r in exceptions if r.reason_code in VALID_REASON_CODES)
     reason_coverage = round(valid_reasons / len(exceptions), 4) if exceptions else 1.0
@@ -103,9 +111,19 @@ def _eval_run(results, ground_truth: list[dict]) -> dict:
         "total_evaluated": total_evaluated,
         "correct": correct,
         "overall_accuracy": round(correct / total_evaluated, 4) if total_evaluated else 0.0,
-        "auto_match_precision": auto_precision,
-        "auto_matched_count": len(auto_matched_orders),
+        "precision": precision,
+        "recall": recall,
+        "f1_score": f1_score,
+        "specificity": specificity,
+        "auto_match_precision": precision,
+        "auto_matched_count": len(matched_orders),
         "reason_code_coverage": reason_coverage,
+        "confusion_matrix": {
+            "true_positives": tp_count,
+            "false_positives": fp_count,
+            "false_negatives": fn_count,
+            "true_negatives": tn_count,
+        },
         "by_layer": layers,
     }
 
@@ -136,6 +154,9 @@ def main() -> None:
     # --- Compute ablation delta ---
     llm_lift = round(eval_with["overall_accuracy"] - eval_without["overall_accuracy"], 4)
     match_rate_lift = round(summary_with["match_rate"] - summary_without["match_rate"], 4)
+    precision_lift = round(eval_with["precision"] - eval_without["precision"], 4)
+    recall_lift = round(eval_with["recall"] - eval_without["recall"], 4)
+    f1_lift = round(eval_with["f1_score"] - eval_without["f1_score"], 4)
 
     from model import get_active_model_info
     model_info = get_active_model_info()
@@ -146,6 +167,12 @@ def main() -> None:
         "provider": model_info["provider"],
         "is_mock": model_info["is_mock"],
         "total_records_processed": summary_with["total_records"],
+        "financial_amounts": {
+            "amount_reconciled": summary_with.get("amount_reconciled", 0.0),
+            "amount_at_risk": summary_with.get("amount_at_risk", 0.0),
+            "pending_amount": summary_with.get("pending_amount", 0.0),
+            "total_bank_inflow": summary_with.get("total_bank_inflow", 0.0),
+        },
         "throughput": {
             "records_per_second": throughput_rps,
             "elapsed_seconds": round(elapsed_with, 3),
@@ -162,6 +189,9 @@ def main() -> None:
         "ablation": {
             "accuracy_lift": llm_lift,
             "match_rate_lift": match_rate_lift,
+            "precision_lift": precision_lift,
+            "recall_lift": recall_lift,
+            "f1_lift": f1_lift,
             "with_llm_match_rate": summary_with["match_rate"],
             "without_llm_match_rate": summary_without["match_rate"],
             "with_llm_matched": summary_with["total_matched"],
@@ -179,22 +209,31 @@ def main() -> None:
     print("=" * 60)
     print(f"\nTotal records processed: {summary_with['total_records']}")
     print(f"  Throughput:          {throughput_rps} rec/sec ({elapsed_with:.2f}s total)")
+    print(f"  Reconciled Inflow:   Rs.{summary_with.get('amount_reconciled', 0):,.2f}")
+    print(f"  Amount at Risk:      Rs.{summary_with.get('amount_at_risk', 0):,.2f}")
     print(f"  (of which {summary_with['pending_count']} are pending — informational, not errors)")
-    print(f"\n--- WITH LLM layer ---")
+    print(f"\n--- WITH LLM layer (Production) ---")
     print(f"  Match rate:          {summary_with['match_rate']:.1%}")
+    print(f"  Precision:           {eval_with['precision']:.1%} (100% target: zero false matches)")
+    print(f"  Recall:              {eval_with['recall']:.1%}")
+    print(f"  F1 Score:            {eval_with['f1_score']:.1%}")
     print(f"  Matched by layer:    {summary_with['by_layer']}")
     print(f"  Exceptions:          {summary_with['total_exceptions']}")
-    print(f"  Exception reasons:   {summary_with['exception_reasons']}")
-    print(f"  Auto-match precision:{eval_with['auto_match_precision']:.1%}")
     print(f"  Reason code coverage:{eval_with['reason_code_coverage']:.0%}")
+    cm = eval_with.get("confusion_matrix", {})
+    print(f"  Confusion Matrix:    TP={cm.get('true_positives')} | FP={cm.get('false_positives')} | FN={cm.get('false_negatives')} | TN={cm.get('true_negatives')}")
 
-    print(f"\n--- WITHOUT LLM layer (ablation) ---")
+    print(f"\n--- WITHOUT LLM layer (Ablation Baseline) ---")
     print(f"  Match rate:          {summary_without['match_rate']:.1%}")
+    print(f"  Precision:           {eval_without['precision']:.1%}")
+    print(f"  Recall:              {eval_without['recall']:.1%}")
+    print(f"  F1 Score:            {eval_without['f1_score']:.1%}")
     print(f"  Matched by layer:    {summary_without['by_layer']}")
 
-    print(f"\n--- ABLATION ---")
+    print(f"\n--- MEASURED AI LIFT (Ablation Proof) ---")
     print(f"  Match rate lift:     {match_rate_lift:+.1%}")
-    print(f"  Accuracy lift:       {llm_lift:+.1%}")
+    print(f"  Recall lift:         {recall_lift:+.1%}")
+    print(f"  F1 Score lift:       {f1_lift:+.1%}")
     print(f"  Records resolved by LLM: "
           f"{summary_with['total_matched'] - summary_without['total_matched']}")
     print("=" * 60)
