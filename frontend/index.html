@@ -67,6 +67,16 @@
     .markdown-body code { background: #f4f4f5; padding: 0.1rem 0.3rem; border-radius: 3px; font-family: monospace; font-size: 0.85em; }
     .markdown-body pre { background: #18181b; color: #f4f4f5; padding: 0.75rem; border-radius: 6px; overflow-x: auto; margin-bottom: 0.75rem; font-size: 0.85em; }
     .markdown-body hr { border: none; border-top: 1px solid #E5E5E7; margin: 0.75rem 0; }
+    .markdown-body strong { font-weight: 600; }
+    .markdown-body em { font-style: italic; }
+    .markdown-body blockquote { border-left: 3px solid #3A5DFF; padding-left: 0.75rem; margin: 0.5rem 0; color: #6E6E73; font-style: italic; }
+    .markdown-body table { width: 100%; border-collapse: collapse; margin: 0.5rem 0; font-size: 0.8rem; table-layout: auto; }
+    .markdown-body thead { background: #F5F5F4; }
+    .markdown-body th { text-align: left; padding: 0.4rem 0.5rem; font-weight: 600; color: #1C1C1E; border-bottom: 2px solid #E5E5E7; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.02em; }
+    .markdown-body td { padding: 0.35rem 0.5rem; border-bottom: 1px solid #E5E5E7; color: #1C1C1E; vertical-align: top; overflow-wrap: break-word; }
+    .markdown-body tr:last-child td { border-bottom: none; }
+    .markdown-body tr:hover { background: #FAFAF9; }
+    .markdown-body .table-wrap { overflow-x: auto; max-width: 100%; }
   </style>
 </head>
 <body class="min-h-screen bg-[#FAFAF9] text-[#1C1C1E]">
@@ -1037,7 +1047,7 @@
                           <div className="whitespace-pre-wrap">{item.content}</div>
                         ) : (
                           <div
-                            className="markdown-body leading-relaxed"
+                            className="markdown-body leading-relaxed overflow-x-auto"
                             dangerouslySetInnerHTML={{
                               __html: marked.parse(
                                 (item.content || '').replace(
@@ -1160,7 +1170,7 @@
                     {diagnosisResult ? (
                       <div className="mt-3 text-xs text-[#1C1C1E] bg-white p-3 rounded border border-[#E5E5E7] space-y-2">
                         <div
-                          className="markdown-body"
+                          className="markdown-body overflow-x-auto"
                           dangerouslySetInnerHTML={{ __html: marked.parse(diagnosisResult) }}
                         />
                         <div className="pt-2 border-t border-[#E5E5E7] flex justify-end">
