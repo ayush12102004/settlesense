@@ -108,6 +108,17 @@ def create_app() -> Flask:
             data = compute_tax_reconciliation()
         return jsonify(data)
 
+    @app.route("/api/tax/report")
+    def tax_report():
+        """Download complete GSTR-2B ITC reconciliation report."""
+        data = _load_json("tax_reconciliation.json")
+        if not data:
+            from tax_matcher import compute_tax_reconciliation
+            data = compute_tax_reconciliation()
+        response = jsonify(data)
+        response.headers["Content-Disposition"] = "attachment; filename=gstr2b_tax_reconciliation.json"
+        return response
+
     @app.route("/api/cash-position/simulate", methods=["POST"])
     def cash_simulate():
         """Simulate cash position under settlement lag scenarios."""

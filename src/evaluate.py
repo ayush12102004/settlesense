@@ -111,18 +111,25 @@ def _eval_run(results, ground_truth: list[dict]) -> dict:
 
 
 def main() -> None:
+    import time
     ground_truth = load_ground_truth()
     print(f"Ground truth: {len(ground_truth)} records\n")
 
     # --- Run WITH LLM layer ---
     print("Running reconciliation WITH LLM layer...")
+    start_with = time.perf_counter()
     results_with = reconcile(use_llm=True)
+    elapsed_with = time.perf_counter() - start_with
     summary_with = summarize(results_with)
     eval_with = _eval_run(results_with, ground_truth)
 
+    throughput_rps = round(summary_with["total_records"] / max(elapsed_with, 0.001), 1)
+
     # --- Run WITHOUT LLM layer (ablation) ---
     print("Running reconciliation WITHOUT LLM layer (ablation)...")
+    start_without = time.perf_counter()
     results_without = reconcile(use_llm=False)
+    elapsed_without = time.perf_counter() - start_without
     summary_without = summarize(results_without)
     eval_without = _eval_run(results_without, ground_truth)
 
@@ -139,6 +146,11 @@ def main() -> None:
         "provider": model_info["provider"],
         "is_mock": model_info["is_mock"],
         "total_records_processed": summary_with["total_records"],
+        "throughput": {
+            "records_per_second": throughput_rps,
+            "elapsed_seconds": round(elapsed_with, 3),
+            "latency_per_record_ms": round((elapsed_with / max(summary_with["total_records"], 1)) * 1000, 2),
+        },
         "with_llm": {
             "summary": summary_with,
             "evaluation": eval_with,
@@ -166,6 +178,7 @@ def main() -> None:
     print("RECONCILIATION EVALUATION RESULTS")
     print("=" * 60)
     print(f"\nTotal records processed: {summary_with['total_records']}")
+    print(f"  Throughput:          {throughput_rps} rec/sec ({elapsed_with:.2f}s total)")
     print(f"  (of which {summary_with['pending_count']} are pending — informational, not errors)")
     print(f"\n--- WITH LLM layer ---")
     print(f"  Match rate:          {summary_with['match_rate']:.1%}")

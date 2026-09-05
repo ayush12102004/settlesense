@@ -53,3 +53,12 @@ def test_chat_endpoint(client):
     data = res.get_json()
     assert "response" in data
     assert len(data["response"]) > 20
+
+
+def test_tax_report_download_endpoint(client):
+    """Verify that /api/tax/report returns attachment header and valid JSON."""
+    res = client.get("/api/tax/report")
+    assert res.status_code == 200
+    assert "attachment" in res.headers.get("Content-Disposition", "")
+    data = res.get_json()
+    assert "reconciliation" in data

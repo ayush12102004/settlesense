@@ -341,6 +341,8 @@ def _try_llm_match(
     if not candidates:
         return None
 
+    import time
+    time.sleep(0.2)
     from model import propose_match
     proposal = propose_match(
         narration=bank.narration,

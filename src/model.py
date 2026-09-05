@@ -446,7 +446,7 @@ def _mock_chat_controller(message: str, context: dict) -> str:
 
     if "ticket" in msg_lower or "dispute" in msg_lower or "draft" in msg_lower or "email" in msg_lower:
         sample_exc = real_exceptions[0] if real_exceptions else (exceptions[0] if exceptions else {})
-        order_ref = ", ".join(sample_exc.get("gateway_order_ids", []) or sample_exc.get("ledger_order_ids", [])) or "ORD-8829"
+        order_ref = ", ".join(sample_exc.get("gateway_order_ids", []) or sample_exc.get("ledger_order_ids", [])) or "order_0070"
         pay_id = sample_exc.get("gateway_payment_ids", ["pay_sample"])[0] if sample_exc.get("gateway_payment_ids") else "pay_sample"
         return (
             f"### Draft Merchant Dispute / Inquiry Ticket\n\n"

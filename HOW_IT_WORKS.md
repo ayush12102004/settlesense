@@ -208,15 +208,17 @@ Finance controllers must forecast cash availability for vendor payouts and payro
 
 #### Interactive Settlement Q&A Agent
 - An on-dashboard chat interface connected to `POST /api/chat`.
+- Supported by high-speed Groq LPUs (`openai/gpt-oss-120b` or `llama-3.3-70b-versatile`) as well as Google Gemini, with automatic graceful fallback.
 - The user can ask high-level or granular questions:
-  - *"Why is Order 8829 pending?"*
+  - *"Why is order_0070 pending?"*
   - *"What is our cash forecast for the next 7 days?"*
   - *"Reconcile Tax Invoice under SAC 997159"*
+  - *"Draft merchant dispute ticket"*
 - **Grounded System Prompt:** The agent injects the live summary, all exception records, cash projections, and tax status into the prompt context.
 - **Clickable Citations:** When the agent mentions a record (e.g. `[TR-6F3D9EB001CC]`), the frontend automatically renders it as an interactive button. Clicking it instantly opens that exact record's audit drawer.
 
 #### AI Deep Exception Diagnosis & Ticket Drafting
-- In the Audit Drawer for any exception, clicking **"Run Root-Cause Diagnosis"** (`POST /api/agent/diagnose`) triggers Gemini to generate:
+- In the Audit Drawer for any exception, clicking **"Run Root-Cause Diagnosis"** (`POST /api/agent/diagnose`) triggers the AI controller to generate:
   1. A root-cause breakdown of the variance or delay.
   2. A ready-to-send, professionally formatted **Razorpay Merchant Support Dispute Ticket** with order IDs, payment IDs, bank UTRs, and exact variance math.
   3. A 1-click **"Copy Ticket Draft"** button for immediate submission.
@@ -229,8 +231,11 @@ Built following high-performance, single-file frontend principles:
 - **React 18 & ReactDOM** with Babel Standalone.
 - **Tailwind CSS** with custom finance color tokens (e.g. `#1F8A5F` matched green, `#C4462B` exception red, `#3A5DFF` brand accent).
 - **Recharts:** Interactive SVG line chart showing cumulative liquidity projection with custom hover tooltips.
-- **Marked:** Markdown parser rendering Gemini's analytical responses with headers, tables, code blocks, and clickable trace badges.
-- **Dual Export:** Direct browser downloads for `audit_trail.json` and `audit_trail.csv`.
+- **Marked:** Markdown parser rendering AI controller responses with headers, tables, code blocks, and clickable trace badges.
+- **Exception Resolution & Filtering:** Multi-state filter tabs (`All`, `Exceptions`, `Pending`, `Resolved`), instant search input across order IDs and UTRs, and 1-click `Mark as Resolved / Adjusted` in the audit drawer.
+- **GSTR-2B Tax Report Export:** 1-click download of the complete 3-way tax reconciliation breakdown (`GET /api/tax/report`).
+- **Throughput & Latency Display:** Live engine throughput (rec/s) and latency metrics rendered in Zone 5.
+- **Dual Audit Export:** Direct browser downloads for `audit_trail.json` and `audit_trail.csv`.
 - **Keyboard Accessible & Motion Safe:** Modal drawers support `Escape` key close and maintain focus trapping.
 
 ---
@@ -244,9 +249,10 @@ Evaluated against a held-out ground truth benchmark (`data/ground_truth.csv`) wi
 | **Overall Match Rate** | **95.3%** | 61 of 64 eligible records auto-reconciled; preserves realistic exceptions |
 | **Auto-Match Precision** | **100.0%** | Zero false-positive matches (no wrong reconciliations) |
 | **Reason Code Coverage** | **100.0%** | All exceptions have actionable diagnostic codes; zero unclassified drops |
+| **Engine Throughput** | **Benchmarked live** | Measures processing throughput (rec/sec) and engine latency down to the millisecond |
 | **Actionable Exceptions** | **3 records** | 1 dispute fee penalty, 1 orphan bank deposit, 1 ambiguous candidate |
 | **Pending In-Flight** | **5 records** | Normal T+2 un-settled transactions cleanly segregated |
-| **AI Ablation Lift** | **+3.1% Match Lift** | Measured accuracy increase provided by Gemini over pure deterministic matching |
+| **AI Ablation Lift** | **+3.1% Match Lift** | Measured accuracy increase provided by AI over pure deterministic matching |
 
 ---
 
@@ -254,7 +260,7 @@ Evaluated against a held-out ground truth benchmark (`data/ground_truth.csv`) wi
 
 ### Prerequisites
 - Python 3.10+ (Tested on Python 3.13)
-- Internet connection (for Google Gemini API and frontend CDNs)
+- Internet connection (for Groq / Gemini API and frontend CDNs)
 
 ### Step 1: Install Dependencies
 ```bash
@@ -266,9 +272,13 @@ Copy the example environment file:
 ```bash
 cp .env.example .env
 ```
-Open `.env` and add your Google Gemini API key:
+Open `.env` and add your Groq or Google Gemini API key:
 ```env
-GEMINI_API_KEY=your_gemini_api_key_here
+# Groq LPU Engine (Recommended for ultra-low latency)
+GROQ_API_KEY=gsk_...
+
+# Or Google Gemini
+GEMINI_API_KEY=...
 ```
 *(Note: If no key is provided, the system falls back gracefully to its grounded offline mock engine).*
 
@@ -276,7 +286,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
 ```bash
 python -m pytest tests/ -v
 ```
-All 9 unit and integration tests should pass with code 0.
+All 10 unit and integration tests should pass with code 0.
 
 ### Step 4: Run Pipeline & Start Web Server
 ```bash
@@ -288,7 +298,7 @@ This orchestrates the full pipeline:
 3. Executes the 4-layer reconciliation engine.
 4. Performs the SAC 997159 tax reconciliation.
 5. Computes the 14-day cash forecast.
-6. Evaluates against ground truth.
+6. Evaluates against ground truth with live throughput benchmarking.
 7. Launches the Flask server on **`http://localhost:5000`**.
 
 Open **`http://localhost:5000`** in your browser to view and interact with the controller.

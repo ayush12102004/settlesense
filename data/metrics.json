@@ -3,6 +3,11 @@
   "provider": "groq",
   "is_mock": false,
   "total_records_processed": 69,
+  "throughput": {
+    "records_per_second": 2.4,
+    "elapsed_seconds": 28.962,
+    "latency_per_record_ms": 419.73
+  },
   "with_llm": {
     "summary": {
       "total_records": 69,
@@ -15,14 +20,15 @@
         "llm_assisted": 2
       },
       "exception_reasons": {
-        "NO_CANDIDATE_IN_WINDOW": 3,
+        "NO_CANDIDATE_IN_WINDOW": 2,
+        "AMOUNT_MISMATCH_BEYOND_TOLERANCE": 1,
         "PENDING_NOT_YET_SETTLED": 5
       },
       "pending_count": 5
     },
     "evaluation": {
-      "total_evaluated": 73,
-      "correct": 73,
+      "total_evaluated": 74,
+      "correct": 74,
       "overall_accuracy": 1.0,
       "auto_match_precision": 1.0,
       "auto_matched_count": 63,
