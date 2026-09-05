@@ -1,7 +1,12 @@
 # SettleSense — AI Finance Controller
 
-**Razorpay AI Buildathon — Track 04: AI Finance Controller**  
-*Closes the multi-source settlement loop across gateway, bank feed, and internal ledger, with cash position rollup and an interactive Settlement Q&A Agent.*
+**Razorpay AI Buildathon — Track 04: AI Finance Controller ("Run the books and the cash position")**  
+*Closes the multi-source settlement loop across gateway, bank feed, and internal ledger, with cash position rollup, 3-way GST audit, and an interactive Settlement Q&A Agent.*
+
+🚀 **Live Production Application:** [https://settlesense-k8lf.onrender.com](https://settlesense-k8lf.onrender.com)  
+🩺 **Production Health Probe:** [https://settlesense-k8lf.onrender.com/health](https://settlesense-k8lf.onrender.com/health)  
+📦 **GitHub Repository:** [https://github.com/ayush12102004/settlesense](https://github.com/ayush12102004/settlesense)
+
 
 ---
 
